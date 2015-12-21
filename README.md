@@ -9,7 +9,7 @@ Have you ever thought, wow, I would love to make dinner for my female friend? ..
 
   - Product Owner: Robert Cardiff
   - Scrum Master: Tim Steele
-  - Development Team Members: Tyler Ferrier, Lagasse
+  - Development Team Members: Tyler Ferrier, Joe Lagasse
 
 #### Table of Contents:
   - Usage
