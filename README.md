@@ -1,17 +1,17 @@
-NodetoJoy
-Project description
+#### NodetoJoy
+#### Project description
 
 roomTap is a simple web application allowing roommates to reserve a room within their house and notify all roommates of why, when and where in order to avoid scheduling conflicts.
 
 Have you ever thought, wow, I would love to make dinner for my female friend? ...the day finally arrives and the kitchen is filthy and/or your roommates are busy playing drinking games! Boom... roomTap!  
 
-Team
+#### Team
 
   - Product Owner: Robert Cardiff
   - Scrum Master: Tim Steele
   - Development Team Members: Tyler Ferrier, Lagasse
 
-Table of Contents
+#### Table of Contents
   - Usage
   - Requirements
   - Development
@@ -23,16 +23,15 @@ Table of Contents
 
 Some usage instructions
 
-Requirements
-
+#### Requirements
  - Node
  - SQLite
  - AngularJS
  - Bootstrap
 
-Development
+#### Development
 
-Installing Dependencies
+#### Installing Dependencies
 
   From within the root directory:
     - TBD
@@ -60,11 +59,11 @@ RULES
   - Use message body to explain what and why (Not How!)
 
 
-#### We will use CRUD (Create Read Update Delete) followed by the area.
-#### [CRUD] Area-What and Why-filename(s)
-#### Ex.[Create] Server-Built Node Server-server.js 
+### We will use CRUD (Create Read Update Delete) followed by the area.
+# [CRUD] Area-What and Why-filename(s)
+# Ex.[Create] Server-Built Node Server-server.js 
 
-####Area
+### Area
   * server
   * client
   * database
