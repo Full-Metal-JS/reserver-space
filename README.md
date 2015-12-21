@@ -1,5 +1,5 @@
-#### NodetoJoy
-#### Project description
+### NodetoJoy
+## Project description
 
 roomTap is a simple web application allowing roommates to reserve a room within their house and notify all roommates of why, when and where in order to avoid scheduling conflicts.
 
@@ -60,8 +60,8 @@ RULES
 
 
 ### We will use CRUD (Create Read Update Delete) followed by the area.
-# [CRUD] Area-What and Why-filename(s)
-# Ex.[Create] Server-Built Node Server-server.js 
+##### [CRUD] Area-What and Why-filename(s)
+##### Ex.[Create] Server-Built Node Server-server.js 
 
 ### Area
   * server
