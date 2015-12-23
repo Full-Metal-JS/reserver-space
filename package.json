@@ -2,7 +2,8 @@
   "name": "nodetojoy",
   "version": "1.0.0",
   "description": "Room Collision web application",
-  "main": "server.js",
+
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
@@ -16,5 +17,9 @@
   "bugs": {
     "url": "https://github.com/nodetojoy/nodetojoy/issues"
   },
-  "homepage": "https://github.com/nodetojoy/nodetojoy#readme"
+
+  "homepage": "https://github.com/nodetojoy/nodetojoy#readme",
+  "dependencies": {
+    "express": "^4.13.3"
+  }
 }
