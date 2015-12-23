@@ -4,7 +4,12 @@ var bodyParser = require('body-parser'),
 
 
 module.exports = function(app, express) {
-  app.get('/home', function (req, res) {
+  app.get('/', function (req, res) {
+    // TODO: change res.end to point to your ap directory
+    /**
+     * something like:
+     * res.end('../../app/');
+     */
     res.end('<h1>roomTap...using express</h1>');
   });
 
