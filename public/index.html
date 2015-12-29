@@ -1,15 +1,25 @@
  <!-- public/views/index.html -->
 <!doctype html>
-<html lang="en">
+<html ng-app="dibs">
 <head>
     <meta charset="UTF-8">
-
-    <title>Starter MEAN Single Page Application</title>
-
+    <link rel="stylesheet" type="text/css" href="/css/styles.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"/>
+    <title>Dibs helping make roommates happy</title>
 </head>
 <body>
-
-    <h1>roomTap!!!</h1>
-
+    <h1>Dibs!!</h1>
+      <div ng-view>      
+      </div>
+      <a href="#/dashboard">ReRoute</a>
+   
+    <script src="/lib/angular/angular.min.js"></script>
+    <script src="/lib/angular-route/angular-route.min.js"></script>
+    <script src="/js/appRoutes.js"></script>
+    
+    <script src="/js/modules/events.js"></script>
+    <script src="/js/modules/signup.js"></script>
+    <script src="/js/factories/eventFactory.js"></script>
+    <script src="/js/factories/signupFactory.js"></script>
 </body>
 </html>
