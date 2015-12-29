@@ -1,8 +1,4 @@
-<h2>Testing</h2>
-
-<!-- 
-
-       <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default">
       <div class="navbar-brand">Dibs</div>
       <a class="navbar-brand logout"><strong>Logout</strong></a>
     </nav>
@@ -13,10 +9,10 @@
           <div class="nav nav-list">
             <div class="sideBar">
               <h4>Pick a day</h4>
-              <form name="dateForm" ng-controller="eventsController">
-              <input type="datetime-local" ng-model="eventDate"
-              name="input" placeholder="yyyy-MM-dd" min="2016-01-01" max="2017-01-01" required />
-              </form>
+                <form name="dateForm" ng-controller="eventsController">
+                <input type="datetime-local" ng-model="eventDate"
+                name="input" placeholder="yyyy-MM-dd" min="2016-01-01" max="2017-01-01" required />
+                </form>
               </br>
 
               <div>
@@ -33,13 +29,10 @@
                   <label class="btn btn-success" ng-model="roomName" uib-btn-radio="'Living Room'" uncheckable>Living Room</label>
                   <label class="btn btn-success" ng-model="roomName" uib-btn-radio="'Entire House'" uncheckable>Entire House</label>
                 </div>
-  
-           
               </form>
 
               <div>
                 <h4>Alert Roommates</h4>
-           
                 <input type="checkbox" ng-model="eventAlert">Please Alert Roommates</input>
               </div>
 
@@ -50,12 +43,9 @@
       <div class="col-md-1"></div> 
 
       <div class="col-md-7">
-   
           <div class="dashboard">
-            <ng-view>
-            </ng-view>
           </div>
       </div>
     </div>
   </div>
- -->
+

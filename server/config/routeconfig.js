@@ -3,36 +3,20 @@ var helpers = require('./helpers.js');
 
 
 module.exports = function(app, express) {
-  //creating routes for each individual moduels (groups of routes)
-  //require('./config/roomRouter.js')(app, express);
-  var userRouter = express.Router();
-  //any middle wear we want the router to have
+  app.use(bodyParser.json());
   
+  //creating routes for each individual moduels (groups of routes)
+  
+  var userRouter = express.Router();
   require(__dirname + '/../users/userRoutes.js')(userRouter);
   app.use('/api/users', userRouter);
 
+  var roomRouter = express.Router();
+  require(__dirname + '/../rooms/roomRoutes.js')(roomRouter);
+  app.use('/api/rooms', roomRouter);
 
-  // app.get('/', function (req, res) {
-  //   // TODO: change res.end to point to your ap directory
-  //   /**
-  //    * something like:
-  //    * res.end('../../app/');
-  //    */
-  //    console.log("/");
-  //   // res.end();
-  // });
+  var eventRouter = express.Router();
+  require(__dirname + '/../events/eventRoutes.js')(eventRouter);
+  app.use('/api/events', eventRouter);
 
-  // app.get('/kitchen', function (req, res) {
-  //   // res.end();
-  // });
-
-  // app.get('/familyRoom', function (req, res) {
-  //   // res.end();
-  // });
-
-  // app.get('/pillowRoom', function (req, res) {
-  //  // res.end();
-  // });
-
-  // TODO: require('../rooms/roomRoutes.js');
 };

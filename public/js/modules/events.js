@@ -4,7 +4,6 @@ angular.module('eventsInfo', [])
     $scope.eventToBook = '';
     $scope.roomName = '';
     $scope.eventAlert = '';
-    // For boolean or non typed events do I still use ''
 
     $scope.finalizeEvent = function(){
       Eventstored.eventData($scope.eventDate, $scope.eventToBook, $scope.roomName, $scope.eventAlert);

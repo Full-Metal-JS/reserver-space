@@ -1,5 +1,6 @@
 angular.module('userInfo', [])
   .controller('userSignUp', function($scope, SignUpFactory) {
+    $scope.user = {};
     $scope.user.firstName = '';
     $scope.user.lastName = '';
     $scope.user.email = '';

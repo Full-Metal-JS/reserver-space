@@ -1,11 +1,11 @@
 angular.module('userFactory', [])
 .factory('SignUpFactory', function($http) {
   var userSignIn = function(userData) {
-    $http({
+    return $http({
       method: 'POST',
-      url: '/tbd',
+      url: '/api/users/signup',
       data: userData
-   });
+    });
   };
 
   return {

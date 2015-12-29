@@ -1,9 +1,9 @@
 angular.module('eventsInfoFactory', [])
 .factory('Eventstored', function($http) {
   var eventData = function(data) {
-    $http({
+    return $http({
       method: 'POST',
-      url: '/tbd',
+      url: '/api/events/booked',
       data: data
     });
   };
