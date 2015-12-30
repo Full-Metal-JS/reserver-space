@@ -8,7 +8,7 @@ module.exports = {
         else stay at signup page
       else redirect to login page
     */
-
+  
     console.log(req.body);
     res.send(200);
   },

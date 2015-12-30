@@ -1,21 +1,34 @@
 //parent module
 // inject children modules for access
-angular.module('dibs', ['ngRoute','eventsInfo', 'eventsInfoFactory', 'userInfo', 'userFactory'])
-  .config(function($routeProvider){
-    $routeProvider
-      .when('/dashboard', {
-        templateUrl : 'views/dashboard.html',
-        controller : 'eventsController'
-      })
-      
-      // .when('/login', {
-      //   templateUrl : 'public/views/login.html',
-      //   controller :
-      // })
+angular.module('dibs', ['ui.router','eventsInfo', 'eventsInfoFactory', 'userInfo', 'userFactory'])
+  .config(function($stateProvider, $urlRouterProvider){
+    $urlRouterProvider.otherwise('/signup');
 
-      .when('/signup', {
-        templateUrl : 'views/signup.html',
-        controller : 'userSignUp'
+    $stateProvider 
+      .state('signupPage', {
+        url : '/', 
+        views: {
+          'indexPage' : {
+            templateUrl : 'views/signup.html',
+            controller : 'userSignUp'
+          }         
+        }
+      })
+      .state('dashboardPage', {
+        url : '/dashboard',
+        views: {
+          'indexPage' : {
+            templateUrl : 'views/dashboard.html',
+            controller : 'eventsController'
+          }
+        }
+      })
+      .state('dashboardPage.events', {
+        url : '/events',
+          templateUrl : 'views/login.html',
+          controller : 'eventsController'
       });
-      // .otherwise('/signup');
 });
+
+
+         
