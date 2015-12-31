@@ -1,5 +1,5 @@
 angular.module('userInfo', [])
-  .controller('userSignUp', function($scope, SignUpFactory) {
+  .controller('userSignUp', function($scope, $location, SignUpFactory) {
     $scope.user = {};
     $scope.user.firstName = '';
     $scope.user.lastName = '';
@@ -7,6 +7,7 @@ angular.module('userInfo', [])
     $scope.user.password = '';
 
     $scope.signUp = function(){
-      SignUpFactory.signUpData($scope.user);
+        $location.path('/dashboard');	
+        SignUpFactory.signUpData($scope.user);
     };
 });
