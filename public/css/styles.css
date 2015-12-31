@@ -29,6 +29,7 @@ html {
   padding: 15px;
   padding-bottom: 35px;
   margin-top: 20px;
+/*  text-align:center;*/
 }
 
 .dashboard {
@@ -48,8 +49,21 @@ html {
 #pillow{
   background: green
   text: blue;
-
 }
 
+
+/*
+FIND OUT WHAT THESE DO
+
+.full button span {
+    background-color: limegreen;
+    border-radius: 32px;
+    color: black;
+  }
+  .partially button span {
+    background-color: orange;
+    border-radius: 32px;
+    color: black;
+  }*/
 
 

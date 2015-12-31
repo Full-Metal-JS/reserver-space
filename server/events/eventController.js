@@ -3,7 +3,7 @@ module.exports = {
   postEvent: function(req, res) {
 
     console.log(req.body);
-    res.send(200);
+    res.sendStatus(200);
   }
-
+  //7-8?
 };

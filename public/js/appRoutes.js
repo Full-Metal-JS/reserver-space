@@ -2,11 +2,11 @@
 // inject children modules for access
 angular.module('dibs', ['ui.router','eventsInfo', 'eventsInfoFactory', 'userInfo', 'userFactory'])
   .config(function($stateProvider, $urlRouterProvider){
-    $urlRouterProvider.otherwise('/signup');
+    $urlRouterProvider.otherwise('signup');
 
     $stateProvider 
       .state('signupPage', {
-        url : '/', 
+        url : '/signup', 
         views: {
           'indexPage' : {
             templateUrl : 'views/signup.html',
@@ -25,7 +25,7 @@ angular.module('dibs', ['ui.router','eventsInfo', 'eventsInfoFactory', 'userInfo
       })
       .state('dashboardPage.events', {
         url : '/events',
-          templateUrl : 'views/login.html',
+          templateUrl : 'views/eventListEmbedded.html',
           controller : 'eventsController'
       });
 });
