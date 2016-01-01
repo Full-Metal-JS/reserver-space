@@ -8,8 +8,12 @@
     <title>Dibs helping make roommates happy</title>
 </head>
 <body>
-      <div ui-view="indexPage">      
-      </div>
+    <nav class="navbar navbar-default">
+        <div class="navbar-brand">Dibs</div>
+        <a class="navbar-brand logout"><strong>Logout</strong></a>
+    </nav>
+    
+    <div ui-view="indexPage"></div>
 
     <script src="/lib/angular/angular.min.js"></script>
     
