@@ -1,15 +1,17 @@
-// TODO: db schema
-
 var mongoose = require('mongoose');
-
 var Schema = mongoose.Schema;
 
-var Event = mongoose.model('Event', new Schema({
-	eventDate: [Date],
-	//6 do we need a seperate key/val for time?
-  eventToBook: String,
-  roomName: String,
-  eventAlert: Boolean 
-}));
+var db = mongoose.connection;
 
-//6 export this?
+mongoose.connect('mongodb://localhost/test');
+
+var eventSchema = new Schema({
+	eventDate: [Date],
+  eventToBook: String,
+  eventAlert: Boolean,
+  eTime: '',
+  roomName: String,
+  eventTime: [Date]
+});
+
+module.exports = mongoose.model('Event', eventSchema);
