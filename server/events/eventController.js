@@ -4,6 +4,7 @@ module.exports = {
   postEvent: function(req,res){
     new Event({
       eventDate: req.body.eventDate,
+      eventTime: req.body.eventTime,
       eventDescription: req.body.eventDescription,
       roomName: req.body.roomName,
       houseName: req.body.houseName,

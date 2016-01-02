@@ -1,11 +1,11 @@
-angular.module('eventsInfo', ['ngAnimate', 'ui.bootstrap'])
-  .controller('eventsController', function($scope, $state, $log, Eventstored) {
+angular.module('eventsInfo', [])
+  .controller('eventsController', function($scope, $state, Eventstored) {
     $scope.eve = {};
     $scope.eve.eventDate = '';
     $scope.eve.eventDescription = '';
     $scope.eve.eventAlert = '';
-    $scope.eve.eTime = '';
-    $scope.eve.roomName = 'Kitchen';
+    $scope.eve.eventTime = '';
+    $scope.eve.roomName = '';
     $scope.eve.houseName = 'Hacker House';
 
     $scope.eventSubmit = function(){
@@ -53,35 +53,9 @@ angular.module('eventsInfo', ['ngAnimate', 'ui.bootstrap'])
       d.setMinutes( 0 );
       $scope.eve.eventTime = d;
     };
-    ///////////END/////////////
 
-    ////////BUTTONS////////////
-    // $scope.singleModel = 1;
-
-    // $scope.radioModel = 'Middle';
-
-    // $scope.checkModel = {
-    //   left: false,
-    //   middle: false,
-    //   right: false
-    // };
-
-    $scope.$watchCollection('checkModel', function () {
-      $scope.checkResults = [];
-
-      angular.forEach($scope.checkModel, function (value, key) {
-        if (value) {
-          $scope.checkResults.push(key);
-        }
-      });
-    });
-
-    $scope.eve.roomName = [];
-    $scope.$watchCollection('checkResults', function(){
-      console.log('this fired!');
-      $scope.eve.roomName = $scope.checkResults;
-    });
-    ////////////////////////////////
+    // used to help render the date
+    $scope.dt = + new Date();
 
     $scope.today = function() {
     $scope.eve.eventDate = new Date();
@@ -90,11 +64,6 @@ angular.module('eventsInfo', ['ngAnimate', 'ui.bootstrap'])
 
     $scope.clear = function () {
       $scope.eve.eventDate = null;
-    };
-
-    // Disable weekend selection
-    $scope.disabled = function(date, mode) {
-      return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
     };
 
     $scope.toggleMin = function() {
