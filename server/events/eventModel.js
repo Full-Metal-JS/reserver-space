@@ -6,7 +6,7 @@ var db = mongoose.connection;
 mongoose.connect('mongodb://localhost/test');
 
 var eventSchema = new Schema({
-	eventDate: [Date],
+  eventDate: [Date],
   eventToBook: String,
   eventAlert: Boolean,
   eTime: '',
