@@ -1,17 +1,22 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-5">
       <div class="nav nav-list">
         <div class="sideBar">
 
           <!-- Angular datePicker -->
-          <div ng-controller="eventsController">
-             <uib-datepicker ng-model="eve.eventDate" min-date="minDate" show-weeks="true" class="well well-sm" custom-class="getDayClass(date, mode)"></uib-datepicker>
-          </div>
+            <div>             
+              <p class="input-group">               
+                <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="status.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />                              
+                <span class="input-group-btn">                 
+                  <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>               
+                </span>             
+              </p>           
+            </div>
           <!-- Angular datePicker End -->
 
           <!-- Angular TimePicker -->
-          <div ng-controller="eventsController" >
+          <div>
             <uib-timepicker ng-model="eve.eventTime" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian" class='centerTime'></uib-timepicker>
             <pre class="alert alert-info">Time is: {{eve.eventTime  | date:'shortTime' }}</pre>
           </div>
@@ -26,10 +31,10 @@
           </br>
             <h4>Pick a room</h4>
            
-          <div class="btn-group" ng-controller="eventsController">
-              <label class="btn btn-primary" ng-model="checkModel.left" uib-btn-checkbox>Left</label>
-              <label class="btn btn-primary" ng-model="checkModel.middle" uib-btn-checkbox>Middle</label>
-              <label class="btn btn-primary" ng-model="checkModel.right" uib-btn-checkbox>Right</label>
+          <div class="btn-group">
+              <label class="btn btn-success" ng-model="eve.roomName" uib-btn-radio="'kitchen'" uncheckable>Kitchen</label>
+              <label class="btn btn-success" ng-model="eve.roomName" uib-btn-radio="'livingRoom'" uncheckable>Living Room</label>
+              <label class="btn btn-success" ng-model="eve.roomName" uib-btn-radio="'house'" uncheckable>Entire House</label>
           </div>
 
 
@@ -38,7 +43,7 @@
             <input type="checkbox" ng-model="eve.eventAlert">Please Alert Roommates</input>
           </div>
 
-          <button class="eventSubmitBtn" type="submit" ng-click="eventSubmit()">Submit</button>
+          <button class="eventSubmitBtn" type="submit" ng-click="eventSubmit()">Dibs!!!</button>
           <!--3DONE ^ what are we going to do with this data -->
         </div>
       </div>

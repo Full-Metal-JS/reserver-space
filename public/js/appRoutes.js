@@ -1,6 +1,6 @@
 //parent module
 // inject children modules for access
-angular.module('dibs', ['ui.router','eventsInfo', 'eventsInfoFactory', 'userInfo', 'userFactory'])
+angular.module('dibs', ['ngAnimate', 'ui.bootstrap','ui.router','eventsInfo', 'eventsInfoFactory', 'userInfo', 'userFactory'])
   .config(function($stateProvider, $urlRouterProvider){
     $urlRouterProvider.otherwise('signup');
 

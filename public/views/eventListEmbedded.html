@@ -1,11 +1,16 @@
-<div ng-controller="eventsController">
+<div ng-controller="eventsController" class="panel panel-default" style="background-color: #f7f7f9; border-color: #fff; padding: 15px; margin-top: 20px">
+	<h3 style="text-align: center;">Daily Dibs</h3>
 	<ul>
-  	<li ng-repeat='event in events'>
-  		<!-- <p>{{event.name}}</p> -->
-  		<!-- <p>{{event.eventDate}}</p> -->
-  		<!-- <p>{{event.time}}</p> -->
-  		<!-- <p>{{event.room}}</p> -->
-  		<!-- <p>{{event.description}}</p> -->
-  	</li>
+  	<div ng-repeat='event in events'>
+      <div class="panel panel-default" style="background-color: #fff; border-color: #fff; margin-right: 10px;">
+        <div>
+  				<p>{{event.name}}</p>
+		  		<p>{{event.eventDate}}</p>
+		  		<p>{{event.time}}</p>
+		  		<p>{{event.room}}</p>
+		  		<p>{{event.description}}</p>
+        </div>
+      </div>   
+  	</div>
 	</ul>
 </div>
