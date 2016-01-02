@@ -9,6 +9,23 @@ angular.module('eventsInfo', ['ngAnimate', 'ui.bootstrap'])
 
     $scope.eventSubmit = function(){
       Eventstored.eventData($scope.eve);
+      
+      Eventstored.getData()
+      //[README] - DATA
+      /**
+        * Here, each 'event' a user books is accounted for & logged in the browser's console. 
+        * This is currently our endpoint for the data being returned from the server.
+        * Currently, our data is retrieved only when someone submits a new 'event' & 
+        * every time that someone submits an event. This will need to change.
+        *
+        * We will need to change where we retrieve data & create a method to do so.
+        * Finally, we will have to append it to one of our views.
+        */
+        .then(function(events){
+          events.data.forEach(function(event){
+            console.log(event);
+          });
+        });
     };
 
     $scope.renderSideDashboard = function(){

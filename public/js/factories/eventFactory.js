@@ -8,7 +8,15 @@ angular.module('eventsInfoFactory', [])
     });
   };
 
+  var getData = function() {
+    return $http({
+      method: 'GET',
+      url: '/api/events/events'
+    });
+  };
+
   return {
-    eventData : eventData
+    eventData : eventData,
+    getData : getData
   };
 });
