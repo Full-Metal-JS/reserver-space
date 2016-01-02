@@ -11,6 +11,7 @@ var eventSchema = new Schema({
   eventAlert: Boolean,
   eTime: '',
   roomName: String,
+  houseName: String,
   eventTime: [Date]
 });
 

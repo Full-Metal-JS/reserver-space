@@ -5,7 +5,8 @@ angular.module('eventsInfo', ['ngAnimate', 'ui.bootstrap'])
     $scope.eve.eventDescription = '';
     $scope.eve.eventAlert = '';
     $scope.eve.eTime = '';
-    $scope.eve.roomName = 'kitchen';
+    $scope.eve.roomName = 'Kitchen';
+    $scope.eve.houseName = 'Hacker House';
 
     $scope.eventSubmit = function(){
       Eventstored.eventData($scope.eve);

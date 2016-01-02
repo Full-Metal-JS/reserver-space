@@ -6,6 +6,7 @@ module.exports = {
       eventDate: req.body.eventDate,
       eventDescription: req.body.eventDescription,
       roomName: req.body.roomName,
+      houseName: req.body.houseName,
       eventAlert: req.body.eventAlert
     })
     .save(function(err, doc){
