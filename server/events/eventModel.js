@@ -9,7 +9,6 @@ var eventSchema = new Schema({
   eventDate: [Date],
   eventDescription: String,
   eventAlert: Boolean,
-  eTime: '',
   roomName: String,
   houseName: String,
   eventTime: [Date]
