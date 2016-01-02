@@ -24,18 +24,26 @@ Have you ever thought, wow, I would love to make dinner for my female friend? ..
 Some usage instructions
 
 #### Requirements:
- - Node
- - SQLite
- - AngularJS
- - Bootstrap
+ - node
+ - express
+ - mongoose
+ - mongodb
+ - angular
+ - angular-route
+ - angular-ui-router
+ - angular-animate
+ - angular-bootstrap
+ - bootstrap
 
 #### Development:
 
 #### Installing Dependencies:
 
   From within the root directory:
-    - TBD
-
+    - npm install
+    - bower install
+    - To run local database refer to (https://scotch.io/tutorials/an-introduction-to-mongodb)
+    
 View the project roadmap here
 
 ## Contributing
