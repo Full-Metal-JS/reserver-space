@@ -4,15 +4,16 @@ module.exports = {
   postEvent: function(req,res){
     new Event({
       eventDate: req.body.eventDate,
-      eventToBook: req.body.eventToBook,
+      eventDescription: req.body.eventDescription,
       roomName: req.body.roomName,
+      houseName: req.body.houseName,
       eventAlert: req.body.eventAlert
     })
     .save(function(err, doc){
       if(err){
 	      res.json(err);
       } else {
-        res.send(doc.eventToBook);
+        res.send(doc.eventDescription);
       }
     });
   },

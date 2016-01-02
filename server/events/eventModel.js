@@ -7,10 +7,11 @@ mongoose.connect('mongodb://localhost/test');
 
 var eventSchema = new Schema({
   eventDate: [Date],
-  eventToBook: String,
+  eventDescription: String,
   eventAlert: Boolean,
   eTime: '',
   roomName: String,
+  houseName: String,
   eventTime: [Date]
 });
 
