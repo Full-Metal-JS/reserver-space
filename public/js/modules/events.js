@@ -2,7 +2,7 @@ angular.module('eventsInfo', ['ngAnimate', 'ui.bootstrap'])
   .controller('eventsController', function($scope, $state, $log, Eventstored) {
     $scope.eve = {};
     $scope.eve.eventDate = '';
-    $scope.eve.eventToBook = '';
+    $scope.eve.eventDescription = '';
     $scope.eve.eventAlert = '';
     $scope.eve.eTime = '';
     $scope.eve.roomName = 'kitchen';
