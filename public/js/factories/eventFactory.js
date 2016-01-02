@@ -11,5 +11,4 @@ angular.module('eventsInfoFactory', [])
   return {
     eventData : eventData
   };
-  //5 what do we do with this page?
 });
