@@ -1,22 +1,40 @@
-<div id='bodyWrapper'>
-  <div id='homeWrapper'>
-    <div id='mainBody'>
-      <div id='pitch'>
-        <h1>Claim the space you need with Dibs</h1>
-        <h3>Easy scheduler that communicates with everyone in your place</h3>
-      </div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-5">
+      <div class="nav nav-list">
+        <div class="sideBar">
+          <h3>Signup/Login</h3>
+          <div id='signup'>
+            <form name='signinForm'>
+               <div class="input-group margin-bottom-sm input-padding">
+                 <span class="input-group-addon"><i class="fa fa-pencil fa-fw"></i></span>
+                 <input class="form-control" ng-model="user.lastName" type="text" placeholder="User name">
+               </div>
 
-      <div id='signup'>
-        <form name='signinForm'>
-          <div id='name'>
-            <input type='text' ng-model='user.firstName' placeholder="First Name">
-            <input type='text' ng-model='user.lastName' placeholder="Last Name"></br>
-            <input type='text' ng-model='user.email' style="width: 290px;" placeholder="Email"></br>
-            <input type='password' ng-model='user.password' style="width: 290px;" placeholder='Password'></br>
-            <button ng-click="signUp()">Sign up for free!</button>
+               <div class="input-group margin-bottom-sm input-padding">
+                 <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
+                 <input class="form-control" ng-model="user.email" type="text" placeholder="Email address">
+               </div>
+
+               <div class="input-group input-padding">
+                 <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+                 <input class="form-control" ng-model="user.password" type="password" placeholder="Password">
+               </div>
+               
+               <div class="tosandSubmit">
+                 <input type="checkbox" id="pyxl6750" name="tos_agree" /><label for="pyxl6750"><span id="terms-padding">I agree to <a href="/terms" target="_blank"> Dibs Terms & Conditions</a></span></label>
+                 <button class="submit-btn" ng-click="signUp()">Sign up for free!</button>
+               </div>
+             </form>
           </div>
-        </form>
+        </div>
       </div>
+    </div>
+    <div class="col-md-1"></div>
+    <div class="col-md-6" id="bannerText">
+      <h2>Call <i>dibs</i> on a room, notify your roommates, disater averted.</h2>
     </div>
   </div>
 </div>
+
+
