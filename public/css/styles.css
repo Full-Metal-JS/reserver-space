@@ -1,15 +1,43 @@
-html {
+/*html {
   background-color: #fff;
 }
-
+*/
 body {
+  background-color: #FFF;
   height: 100%;
+}
+
+h3 {
+  text-align: center;
+  margin-top: 5px;
+  margin-bottom: 20px;
+}
+
+#h3-wrapper {
+  padding-top: 20px;  
+}
+
+.seperator {
+  border-top: 1px dotted #ccc;
+  margin: 10px 0 30px 0;
 }
 
 .container {
   padding-left: 15%;
   padding-right: 15%;
+}
 
+#signup-container {
+  margin-top: 50px;
+  padding-left: 15%;
+  padding-right: 15%;
+}
+
+#nav-container {
+  background-color: #FF4A00;
+  height: 75px;
+  width: 100%;
+  margin-bottom: 25px;
 }
 
 #bannerText {
@@ -17,21 +45,78 @@ body {
   text-align: center;
 }
 
-#copyright {
-  margin-top: 15px;
-  color: #969EA2;
+#logo-orange-image {
+  height: 200px;
+  display: block;
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto
 }
 
-.logout {
+#logo-image {
+  height:50px;
+  display: block;
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto
+}
+
+#copyright-text {
+  color: #969EA2;
+  display: inline-block;
+  margin-top: 15px;
+  }
+
+#logout-btn {
+  width: 100px;
+  height:30px;
+  display: inline-block;
   float: right;
+  margin-top: 10px;
+  background: #FF4A00;
+  border-radius: 3px;
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 400;
+  padding: 0.25em 0.9em 0.75em 0.9em;
+}
+
+#logout-btn:hover {
+  background: #CF2A00 !important; 
 }
 
 .sideBar {
+  background-color: #f7f7f9;
   border: 1px solid #DADFE2;     
   border-radius: 3px;
-  padding: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
   padding-bottom: 20px;
   margin-top: 20px;
+}
+
+#events-sidebar {
+  background-color: #f7f7f9;
+  border: 1px solid #DADFE2; 
+  border-color: black; 
+  padding: 20px; 
+  margin-top: 20px;
+  height: 410px;
+}
+
+#event-wrapper {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-right: 30px;
+  overflow: scroll;
+  height: 100%;
+  margin: 10px;
+}
+
+.event-block {
+  background-color: #fff; 
+  border-color: #fff; 
 }
 
 .dashboard {
@@ -46,6 +131,7 @@ body {
   height: 34px;
   padding: 6px 12px;
   font-size: 14px;
+  font-weight: 400;
   line-height: 1.42857143;
   color: #555;
   background-color: #fff;
@@ -55,7 +141,6 @@ body {
 }
 
 .submit-btn {
-  border-radius: 5px;
   padding: 10px;
   margin-top: 10px;
   margin-left: 0px;
@@ -64,28 +149,31 @@ body {
   border-radius: 3px;
   border: none;
   color: #fff;
-  font-size: 0.9em;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 400;
   padding: 0.78em 0.9em 0.75em 0.9em;
 }
-/*
-#room-btn {
-  background-color: #FF4A00;
-  border-color: #FF4A00;
-}*/
+
+.submit-btn:hover {
+  background: #CF2A00 !important; 
+}
+
+.btn-primary {
+  background: #FF4A00 !important;
+  border-color: black !important;
+}
+
+.room-btn {
+  background: #FF4A00 !important;
+  border-color: black !important;
+}
+
+.room-btn:hover {
+  background: #CF2A00 !important; 
+}
 
 .timePicker{
   width: 100%;
-  float: left;
-}
-
-.timePicker{
-  width: 45%;
-  float: left;
-
-}
-.timePicker{
-  width: 45%;
   float: left;
 }
 
@@ -94,6 +182,10 @@ body {
 }
 
 #terms-padding {
+  padding-left: 10px;
+}
+
+#alert-roommates-padding {
   padding-left: 10px;
 }
 
