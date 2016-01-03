@@ -15,8 +15,30 @@ angular.module('eventsInfoFactory', [])
     });
   };
 
+  var formatData = function(events){
+    var eventsCollection = events.data,
+        eventDates,
+        formattedDate,
+        eventTimes;
+
+    eventsCollection.forEach(function(event){
+      //dibs date
+      eventDates = event.eventDate;
+      formattedDate = moment(eventDates).format("dddd, MMMM Do YYYY");
+      event.eventDate = formattedDate;
+      //dibs time
+      eventTimes = event.eventTime;
+      formattedTime = moment(eventTimes).local().format('h:mmA');
+      event.eventTime = formattedTime;
+    });
+
+    return eventsCollection;
+
+  };
+
   return {
     eventData : eventData,
-    getData : getData
+    getData : getData,
+    formatData : formatData
   };
 });

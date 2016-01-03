@@ -9,31 +9,19 @@ angular.module('eventsInfo', [])
     $scope.eve.roomName = '';
     $scope.eve.houseName = 'Hacker House';
 
+    $scope.renderSideDashboard = function(){
+      $state.go('dashboardPage.events');
+      Eventstored.getData().then(function(events){
+        var formattedEvents = Eventstored.formatData(events);
+        $scope.bookedEvents = formattedEvents;
+      });
+    };
+
     $scope.eventSubmit = function(){
       var $events = $scope.eve
       Eventstored.eventData($events);
-      console.log($events);
-      Eventstored.getData()
-        .then(function(events){
-          // console.log('date output from server: ', events.data)
-          // events.data.forEach(function(event){
-          // });
-        });
-    };
+      $scope.renderSideDashboard();
 
-    $scope.renderSideDashboard = function(){
-      $state.go('dashboardPage.events');
-      Eventstored.getData().then(function(e){
-        
-        // console.log('entries from our db', e.data)
-
-        // e.data.forEach(function(event){
-        //   var eventDate = moment(event.eventDate);
-        //   $scope.ev = eventDate.format('MM/DD/YYYY');
-        //   console.log($scope.ev);
-        // });
-        $scope.ev = e.data;
-      })
     };
 
     //TIME ADDON
