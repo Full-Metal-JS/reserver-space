@@ -1,8 +1,11 @@
 var express = require('express');
+var mongoose = require('mongoose');
+var app = express();
 
 // initialize express
+// Mongoose DB Connection
 
-var app = express();
+mongoose.connect('mongodb://nodetojoy:nodetojoy@ds037165.mongolab.com:37165/nodetojoy');
 
 //http is for any network protocal
 

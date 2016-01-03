@@ -18,9 +18,11 @@
   },
   "homepage": "https://github.com/nodetojoy/nodetojoy#readme",
   "dependencies": {
+    "bluebird": "^3.1.1",
     "body-parser": "^1.14.2",
     "express": "^4.13.3",
     "gulp": "^3.9.0",
+    "jwt-simple": "^0.4.0",
     "moment": "^2.11.0",
     "mongoose": "^4.3.4"
   }

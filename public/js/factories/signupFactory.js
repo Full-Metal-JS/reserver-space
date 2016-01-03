@@ -4,12 +4,21 @@ angular.module('userFactory', [])
     return $http({
       method: 'POST',
       url: '/api/users/signup',
-      data: userData
+      data: { userData: userData }
+    })
+    .then(function(token){
+      console.log(token, "string in factory Function");
+      return token;
     });
   };
 
+  var authenticationChecker = function(){
+    return !!$window.localStorage.getItem('dibsToken');
+  };
+
   return {
-    signUpData : userSignIn
+    signUpData : userSignIn,
+    validToken: authenticationChecker 
   };
 
 });

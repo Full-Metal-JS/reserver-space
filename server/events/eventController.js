@@ -17,6 +17,7 @@ module.exports = {
       }
     });
   },
+
   getEvent: function(req,res){
     Event.find({})
       .sort({eventDate: -1})
@@ -24,6 +25,6 @@ module.exports = {
         console.log(booked);
         if(err) return console.error(err);
         return res.json(booked);
-      })
+      });
   }
 };

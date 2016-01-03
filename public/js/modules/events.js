@@ -11,6 +11,7 @@ angular.module('eventsInfo', [])
 
     $scope.renderSideDashboard = function(){
       $state.go('dashboardPage.events');
+
       Eventstored.getData().then(function(events){
         var formattedEvents = Eventstored.formatData(events);
         $scope.bookedEvents = formattedEvents;
@@ -18,10 +19,23 @@ angular.module('eventsInfo', [])
     };
 
     $scope.eventSubmit = function(){
-      var $events = $scope.eve
+      var $events = $scope.eve;
       Eventstored.eventData($events);
       $scope.renderSideDashboard();
+    };
 
+    $scope.eventSubmit = function(){
+      var $events = $scope.eve;
+      Eventstored.eventData($events);
+      console.log($events);
+      Eventstored.getData()
+        .then(function(events){
+          
+          // console.log('date output from server: ', events.data)
+          // events.data.forEach(function(event){
+          // });
+        });
+        $scope.renderSideDashboard();
     };
 
     //TIME ADDON
@@ -110,6 +124,4 @@ angular.module('eventsInfo', [])
       }
       return '';
     };
-
-    // console.log($scope);
   });

@@ -1,13 +1,16 @@
 angular.module('userInfo', [])
-  .controller('userSignUp', function($scope, $state, SignUpFactory) {
+  .controller('userSignUp', function($scope, $window, $state, SignUpFactory) {
     $scope.user = {};
-    $scope.user.firstName = '';
-    $scope.user.lastName = '';
+    $scope.user.username = '';
     $scope.user.email = '';
     $scope.user.password = '';
 
     $scope.signUp = function(){
         $state.go('dashboardPage');	
-        SignUpFactory.signUpData($scope.user);
+        SignUpFactory.signUpData($scope.user)
+        .then(function(token){
+            $window.localStorage
+            .setItem('dibsToken', token.data);
+        });
     };
 });
