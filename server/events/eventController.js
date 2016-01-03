@@ -1,14 +1,8 @@
 var Event = require('./eventModel.js');
-var moment = require('moment');
-
 module.exports = {
   postEvent: function(req,res){
-    // changing the date to readable format
-    var eventDate = moment(req.body.eventDate);
-    console.log('req.body in server:', eventDate.format('MM/DD/YYYY'));
-
     new Event({
-      eventDate: eventDate.format('MM/DD/YYYY'),
+      eventDate: req.body.eventDate,
       eventTime: req.body.eventTime,
       eventDescription: req.body.eventDescription,
       roomName: req.body.roomName,
