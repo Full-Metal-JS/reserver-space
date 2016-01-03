@@ -1,5 +1,6 @@
 angular.module('eventsInfo', [])
-  .controller('eventsController', function($scope, $state, Eventstored) {
+  .constant('moment', moment)
+  .controller('eventsController', function($scope, $state, Eventstored, moment) {
     $scope.eve = {};
     $scope.eve.eventDate = '';
     $scope.eve.eventDescription = '';
@@ -9,18 +10,28 @@ angular.module('eventsInfo', [])
     $scope.eve.houseName = 'Hacker House';
 
     $scope.eventSubmit = function(){
-      Eventstored.eventData($scope.eve);
-      
+      var $events = $scope.eve
+      Eventstored.eventData($events);
+      console.log($events);
       Eventstored.getData()
         .then(function(events){
-          events.data.forEach(function(event){
-          });
+          // console.log('date output from server: ', events.data)
+          // events.data.forEach(function(event){
+          // });
         });
     };
 
     $scope.renderSideDashboard = function(){
       $state.go('dashboardPage.events');
       Eventstored.getData().then(function(e){
+        
+        // console.log('entries from our db', e.data)
+
+        // e.data.forEach(function(event){
+        //   var eventDate = moment(event.eventDate);
+        //   $scope.ev = eventDate.format('MM/DD/YYYY');
+        //   console.log($scope.ev);
+        // });
         $scope.ev = e.data;
       })
     };
@@ -41,7 +52,7 @@ angular.module('eventsInfo', [])
 
     $scope.update = function() {
       var d = new Date();
-      d.setHours( 14 );
+      d.setHours( 15 );
       d.setMinutes( 0 );
       $scope.eve.eventTime = d;
     };
@@ -52,6 +63,7 @@ angular.module('eventsInfo', [])
     $scope.today = function() {
     $scope.eve.eventDate = new Date();
     };
+
     $scope.today();
 
     $scope.clear = function () {
@@ -110,4 +122,6 @@ angular.module('eventsInfo', [])
       }
       return '';
     };
+
+    // console.log($scope);
   });
