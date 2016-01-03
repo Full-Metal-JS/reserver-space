@@ -10,9 +10,9 @@ angular.module('eventsInfo', [])
     $scope.eve.houseName = 'Hacker House';
 
     $scope.eventSubmit = function(){
-      // console.log('date input from user: ', $scope.eve);
-      Eventstored.eventData($scope.eve);
-      
+      var $events = $scope.eve
+      Eventstored.eventData($events);
+      console.log($events);
       Eventstored.getData()
         .then(function(events){
           // console.log('date output from server: ', events.data)

@@ -24,11 +24,12 @@ module.exports = {
     });
   },
   getEvent: function(req,res){
-    Event.find(function(err, doc){
-      if(err){ 
-        return console.error(err);
-      }
-      return res.json(doc);
-    });
+    Event.find({})
+      .sort({eventDate: -1})
+      .exec(function(err, booked){
+        console.log(booked);
+        if(err) return console.error(err);
+        return res.json(booked);
+      })
   }
 };
