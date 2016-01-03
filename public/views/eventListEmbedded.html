@@ -1,11 +1,11 @@
-<div ng-controller="eventsController" class="panel panel-default" style="background-color: #f7f7f9; border-color: #fff; padding: 15px; margin-top: 20px">
+<div ng-controller="eventsController" class="panel panel-default" style="background-color: #f7f7f9; border-color: #fff; height: 412px; padding-bottom: 20px; overflow: scroll; padding: 15px; margin-top: 20px">
 	<h3 style="text-align: center;">Daily Dibs</h3>
 	<ul>
-	  	<li ng-repeat='event in ev track by $index'>
-	  		User Name: , </br>
-	  		Room Name: {{event.roomName}}, </br>
-	  		Date: {{event.eventDate}}, </br>
-	  		Time: {{event.eventTime}},</br>
+	  	<li ng-repeat='event in bookedEvents track by $index'>
+	  		User Name:  </br>
+	  		Room Name: {{event.roomName}} </br>
+	  		Dibs Date: {{event.eventDate}} </br>
+	  		Time: {{event.eventTime}}</br>
 	  		Event Description: {{event.eventDescription}}</br>
 	  	</li>
 		</ul>
