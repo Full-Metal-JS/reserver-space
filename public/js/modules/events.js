@@ -9,9 +9,9 @@ angular.module('eventsInfo', [])
     $scope.eve.roomName = '';
     $scope.eve.houseName = 'Hacker House';
 
-    $scope.refreshEvents = function(){
+    $scope.refreshEvents = function() {
       $interval(function(){
-        Eventstored.getData().then(function(events){
+        Eventstored.getData().then(function(events) {
           console.log('hello');
           var formattedEvents = Eventstored.formatData(events);
           $scope.bookedEvents = formattedEvents;
@@ -19,7 +19,7 @@ angular.module('eventsInfo', [])
       }, 500);
     };
 
-    $scope.renderSideDashboard = function(){
+    $scope.renderSideDashboard = function() {
       $state.go('dashboardPage.events');
 
       Eventstored.getData().then(function(events) {
@@ -31,10 +31,10 @@ angular.module('eventsInfo', [])
       $scope.refreshEvents();
     };
 
-    $scope.eventSubmit = function(){
+    $scope.eventSubmit = function() {
       var $events = $scope.eve;
       Eventstored.eventData($events)
-      .then(function(message){
+      .then(function(message) {
         if(!message.data.result){
           alert('Someone else called Dibs!');
         }

@@ -19,10 +19,10 @@ module.exports = {
     });
   },
 
-  getEvent: function(req,res){
+  getEvent: function(req,res) {
     eventModel.find({'eventDate' : { $gte : new Date()} })
       .sort({eventDate: 1})
-      .then(function(booked){
+      .then(function(booked) {
         console.log(booked);
         return res.json(booked);
       });
