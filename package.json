@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server/server.js"
   },
   "repository": {
     "type": "git",
@@ -24,6 +24,10 @@
     "gulp": "^3.9.0",
     "jwt-simple": "^0.4.0",
     "moment": "^2.11.0",
-    "mongoose": "^4.3.4"
+    "mongoose": "^4.3.4",
+    "bower": "0.6.x"
+  },
+  "scripts": {
+    "postinstall": "./node_modules/bower/bin/bower install"
   }
 }
