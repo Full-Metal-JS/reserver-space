@@ -21,6 +21,5 @@ angular.module('userInfo', [])
             .setItem('dibsToken', token.data);
           });
       }
-
     };
 });

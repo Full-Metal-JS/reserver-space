@@ -24,5 +24,4 @@ require('./config/routeconfig.js')(app, express);
   
 app.use(express.static(__dirname +  "/../public"));
 
-
 server.listen(port);

@@ -21,9 +21,9 @@ angular.module('eventsInfoFactory', [])
 
   var formatData = function(events) {
     var eventsCollection = events.data,
-        eventDates,
-        formattedDate,
-        eventTimes;
+      eventDates,
+      formattedDate,
+      eventTimes;
 
     eventsCollection.forEach(function(event) {
       eventDates = event.eventDate;

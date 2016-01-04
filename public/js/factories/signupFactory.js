@@ -22,5 +22,4 @@ angular.module('userFactory', [])
     signUpData : userSignIn,
     validToken: authenticationChecker 
   };
-
 });

@@ -15,19 +15,17 @@ module.exports = {
     //only looking for this schema in the database
 
     check({ 'username' : req.body.userData.username })
-      .then(function(user){
-        console.log("User in then", user);
+      .then(function(user) {
         if(user){ 
           throw new Error('User Exists');
         } else {
           return storeUser(req.body.userData);
         }
       })
-      .then(function(createdUser){
-        console.log("CreatedUser in token", createdUser);
+      .then(function(createdUser) {
         var token = jwt.encode(createdUser, 'WILDCARD');
         res.json(token);
-      })
+      });
   },
 
   login: function(req, res) {

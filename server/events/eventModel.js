@@ -9,5 +9,4 @@ var eventSchema = new Schema({
   houseName: String,
 });
 
-
 module.exports = mongoose.model('Event', eventSchema);
