@@ -1,13 +1,18 @@
 angular.module('eventsInfoFactory', [])
 .factory('Eventstored', function($http) {
-  var eventData = function(data) {
+  //posts events to database
+  var eventData = function(dibEvent) {
     return $http({
       method: 'POST',
       url: '/api/events/booked',
-      data: data
+      data: { dibEvent : dibEvent }
+    }).then(function(responseObj){
+      console.log(responseObj);
+      return responseObj;
     });
   };
 
+  //retrieves events
   var getData = function() {
     return $http({
       method: 'GET',
@@ -22,13 +27,10 @@ angular.module('eventsInfoFactory', [])
         eventTimes;
 
     eventsCollection.forEach(function(event){
-      //dibs date
       eventDates = event.eventDate;
       formattedDate = moment(eventDates).format("dddd, MMMM Do YYYY");
+      formattedTime = moment(eventDates).format('h:mmA');
       event.eventDate = formattedDate;
-      //dibs time
-      eventTimes = event.eventTime;
-      formattedTime = moment(eventTimes).local().format('h:mmA');
       event.eventTime = formattedTime;
     });
 

@@ -22,11 +22,11 @@
           <!-- Angular TimePicker -->
           <div class="timePicker">
             <div class="timePickerLeft">
-              <uib-timepicker ng-model="eve.eventTime" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian" class='centerTime'></uib-timepicker>
+              <uib-timepicker ng-model="eve.eventDate" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian" class='centerTime'></uib-timepicker>
             </div> 
 
             <div class="timePickerRight">
-              <pre class="alert alert-info">Dibs on: {{eve.eventDate  | date:'shortDate' }} | {{eve.eventTime  | date:'shortTime' }}</pre>
+              <pre class="alert alert-info">Dibs on: {{eve.eventDate  | date:'shortDate' }} | {{eve.eventDate  | date:'shortTime' }}</pre>
             </div>
           </div>
           <!-- Angular TimePicker End -->

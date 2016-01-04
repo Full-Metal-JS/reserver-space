@@ -20,28 +20,20 @@ angular.module('eventsInfo', [])
 
     $scope.eventSubmit = function(){
       var $events = $scope.eve;
-      Eventstored.eventData($events);
+      Eventstored.eventData($events)
+      .then(function(message){
+        if(!message.data.result){
+          alert('Someone else called Dibs!');
+        }
+      });
+      Eventstored.getData();
       $scope.renderSideDashboard();
     };
 
-    $scope.eventSubmit = function(){
-      var $events = $scope.eve;
-      Eventstored.eventData($events);
-      console.log($events);
-      Eventstored.getData()
-        .then(function(events){
-          
-          // console.log('date output from server: ', events.data)
-          // events.data.forEach(function(event){
-          // });
-        });
-        $scope.renderSideDashboard();
-    };
-
     //TIME ADDON
-    $scope.eve.eventTime = new Date();
+    $scope.eve.eventDate = new Date();
     $scope.hstep = 1;
-    $scope.mstep = 15;
+    $scope.mstep = 1;
     $scope.options = {
       hstep: [1, 2, 3],
       mstep: [1, 5, 10, 15, 25, 30]
@@ -53,10 +45,10 @@ angular.module('eventsInfo', [])
     };
 
     $scope.update = function() {
-      var d = new Date();
+      var d = $scope.eve.eventDate;
       d.setHours( 15 );
       d.setMinutes( 0 );
-      $scope.eve.eventTime = d;
+      // $scope.eve.eventDate = d;
     };
 
     // used to help render the date

@@ -1,29 +1,28 @@
-var Event = require('./eventModel.js');
+var eventModel = require('./eventModel.js');
+var Promise = require('bluebird');
+Promise.promisifyAll(require('mongoose'));
+
 module.exports = {
   postEvent: function(req,res){
-    new Event({
-      eventDate: req.body.eventDate,
-      eventTime: req.body.eventTime,
-      eventDescription: req.body.eventDescription,
-      roomName: req.body.roomName,
-      houseName: req.body.houseName,
-      eventAlert: req.body.eventAlert
-    })
-    .save(function(err, doc){
-      if(err){
-	      res.json(err);
+    //checks if event already exists
+    eventModel.findOne({ 
+      'eventDate': req.body.dibEvent.eventDate,
+      'roomName': req.body.dibEvent.roomName
+    }).then(function(result){
+      if(result){
+        res.json({ result: false });
       } else {
-        res.send(doc.eventDescription);
+        var storeEvent = eventModel.create.bind(eventModel);
+        storeEvent(req.body.dibEvent);
+        res.json({ result: true });
       }
     });
   },
 
   getEvent: function(req,res){
-    Event.find({})
-      .sort({eventDate: -1})
-      .exec(function(err, booked){
-        console.log(booked);
-        if(err) return console.error(err);
+    eventModel.find({})
+      .sort({eventDate: 1})
+      .then(function(booked){
         return res.json(booked);
       });
   }

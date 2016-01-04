@@ -14,17 +14,17 @@
             <form name='signinForm'>
                <div class="input-group margin-bottom-sm input-padding">
                  <span class="input-group-addon"><i class="fa fa-pencil fa-fw"></i></span>
-                 <input class="form-control" ng-model="user.username" type="text" placeholder="User name">
+                 <input class="form-control" ng-model="user.username" type="text" placeholder="User name" required = "required">
                </div>
 
                <div class="input-group margin-bottom-sm input-padding">
                  <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
-                 <input class="form-control" ng-model="user.email" type="text" placeholder="Email address">
+                 <input class="form-control" ng-model="user.email" type="text" placeholder="Email address" required>
                </div>
 
                <div class="input-group input-padding">
                  <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
-                 <input class="form-control" ng-model="user.password" type="password" placeholder="Password">
+                 <input class="form-control" ng-model="user.password" type="password" placeholder="Password" required>
                </div>
                
                <div class="tosandSubmit">

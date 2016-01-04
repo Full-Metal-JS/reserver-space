@@ -7,7 +7,7 @@ var eventSchema = new Schema({
   eventAlert: Boolean,
   roomName: String,
   houseName: String,
-  eventTime: Date
 });
+
 
 module.exports = mongoose.model('Event', eventSchema);

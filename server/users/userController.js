@@ -1,11 +1,13 @@
 var userModel = require('./userModel.js');
 var jwt = require('jwt-simple');
-var Promise = require("bluebird");
-Promise.promisifyAll(require("mongoose"));
+var Promise = require('bluebird');
+Promise.promisifyAll(require('mongoose'));
 
 module.exports = {
   signup: function(req, res) {
     var storeUser = userModel.create.bind(userModel);
+    //Since all mongoose functions are promises,
+    //we need to set the this context of promise function.
     //creating promise to create new user
 
     var check = userModel.findOne.bind(userModel);
@@ -26,10 +28,6 @@ module.exports = {
         var token = jwt.encode(createdUser, 'WILDCARD');
         res.json(token);
       })
-      // .catch(function(err){
-      //   console.log(err, "error in catch in userController");
-      //   res.status(404).send(err.message);
-      // });
   },
 
   login: function(req, res) {
