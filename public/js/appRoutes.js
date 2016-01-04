@@ -1,7 +1,7 @@
 //parent module
 // inject children modules for access
 angular.module('dibs', ['ngAnimate', 'ui.bootstrap','ui.router','eventsInfo', 'eventsInfoFactory', 'userInfo', 'userFactory'])
-  .config(function($stateProvider, $urlRouterProvider, $httpProvider){
+  .config(function($stateProvider, $urlRouterProvider, $httpProvider) {
     $urlRouterProvider.otherwise('signup');
     $httpProvider.interceptors.push('AttachToken');
     //runs before reaching server and 
@@ -34,7 +34,7 @@ angular.module('dibs', ['ngAnimate', 'ui.bootstrap','ui.router','eventsInfo', 'e
         controller : 'eventsController',
         data : { authenticate: true }
       });
-}).factory('AttachToken', function($window){
+  }).factory('AttachToken', function($window) {
   return { 
     request : function(http){
       var token = $window.localStorage.getItem('dibsToken');

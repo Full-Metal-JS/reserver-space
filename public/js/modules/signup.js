@@ -5,18 +5,18 @@ angular.module('userInfo', [])
     $scope.user.email = '';
     $scope.user.password = '';
 
-    $scope.signUp = function(){
+    $scope.signUp = function() {
       console.log($scope.user);
-      if($scope.user.username === ''){
+      if($scope.user.username === '') {
         alert("Must Enter User Name");
-      } else if($scope.user.email === ''){
+      } else if($scope.user.email === '') {
         alert("Must Enter Valid Email");
-      } else if($scope.user.password === ''){
+      } else if($scope.user.password === '') {
         alert("Must Enter Password");
       } else {
         $state.go('dashboardPage');	
         SignUpFactory.signUpData($scope.user)
-          .then(function(token){
+          .then(function(token) {
             $window.localStorage
             .setItem('dibsToken', token.data);
           });

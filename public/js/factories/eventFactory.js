@@ -7,7 +7,6 @@ angular.module('eventsInfoFactory', [])
       url: '/api/events/booked',
       data: { dibEvent : dibEvent }
     }).then(function(responseObj){
-      console.log(responseObj);
       return responseObj;
     });
   };
@@ -20,13 +19,13 @@ angular.module('eventsInfoFactory', [])
     });
   };
 
-  var formatData = function(events){
+  var formatData = function(events) {
     var eventsCollection = events.data,
         eventDates,
         formattedDate,
         eventTimes;
 
-    eventsCollection.forEach(function(event){
+    eventsCollection.forEach(function(event) {
       eventDates = event.eventDate;
       formattedDate = moment(eventDates).format("dddd, MMMM Do YYYY");
       formattedTime = moment(eventDates).format('h:mmA');
@@ -35,7 +34,6 @@ angular.module('eventsInfoFactory', [])
     });
 
     return eventsCollection;
-
   };
 
   return {

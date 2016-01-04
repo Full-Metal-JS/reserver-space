@@ -30,6 +30,10 @@ angular.module('eventsInfo', [])
       $scope.renderSideDashboard();
     };
 
+    $scope.signout = function(){
+      $state.go('signupPage');
+    }
+
     //TIME ADDON
     $scope.eve.eventDate = new Date();
     $scope.hstep = 1;
