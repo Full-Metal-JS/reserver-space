@@ -4,7 +4,6 @@ var utility = require(__dirname + '/../utility/utility.js');
 
 module.exports = function(app, express) {
   app.use(bodyParser.json());
-  
   //creating routes for each individual moduels (groups of routes)
   
   var userRouter = express.Router();

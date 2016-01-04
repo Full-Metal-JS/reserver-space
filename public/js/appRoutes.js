@@ -1,6 +1,7 @@
 //parent module
+
 // inject children modules for access
-angular.module('dibs', ['ngAnimate', 'ui.bootstrap','ui.router','eventsInfo', 'eventsInfoFactory', 'userInfo', 'userFactory'])
+angular.module('dibs', ['ngAnimate', 'ui.bootstrap','ui.router','eventsInfo', 'eventsInfoFactory', 'userInfo', 'userFactory', 'loginInfo', 'userloginFactory'])
   .config(function($stateProvider, $urlRouterProvider, $httpProvider) {
     $urlRouterProvider.otherwise('signup');
     $httpProvider.interceptors.push('AttachToken');
@@ -33,6 +34,16 @@ angular.module('dibs', ['ngAnimate', 'ui.bootstrap','ui.router','eventsInfo', 'e
         templateUrl : 'views/eventListEmbedded.html',
         controller : 'eventsController',
         data : { authenticate: true }
+      })
+      .state('loginupPage', {
+        url : '/login', 
+        views: {
+          'indexPage' : {
+            templateUrl : 'views/login.html',
+            controller : 'userLogin'
+          }         
+        },
+        data : { authenticate: false }
       });
     })
   
