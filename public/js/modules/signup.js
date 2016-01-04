@@ -6,11 +6,21 @@ angular.module('userInfo', [])
     $scope.user.password = '';
 
     $scope.signUp = function(){
-      $state.go('dashboardPage');	
-      SignUpFactory.signUpData($scope.user)
-        .then(function(token){
-          $window.localStorage
-          .setItem('dibsToken', token.data);
-        });
+      console.log($scope.user);
+      if($scope.user.username === ''){
+        alert("Must Enter User Name");
+      } else if($scope.user.email === ''){
+        alert("Must Enter Valid Email");
+      } else if($scope.user.password === ''){
+        alert("Must Enter Password");
+      } else {
+        $state.go('dashboardPage');	
+        SignUpFactory.signUpData($scope.user)
+          .then(function(token){
+            $window.localStorage
+            .setItem('dibsToken', token.data);
+          });
+      }
+
     };
 });
