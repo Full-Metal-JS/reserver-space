@@ -12,7 +12,6 @@ angular.module('eventsInfo', [])
     $scope.refreshEvents = function() {
       $interval(function(){
         Eventstored.getData().then(function(events) {
-          console.log('hello');
           var formattedEvents = Eventstored.formatData(events);
           $scope.bookedEvents = formattedEvents;
         });
