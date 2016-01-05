@@ -206,3 +206,7 @@ h3 {
     border-radius: 32px;
     color: black;
 }
+
+.add-oppacity {
+    background-color: #ffe4b2 !important;
+}

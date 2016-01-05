@@ -6,7 +6,7 @@ var eventSchema = new Schema({
   eventDescription: String,
   eventAlert: Boolean,
   roomName: String,
-  houseName: String,
+  houseName: String
 });
 
 module.exports = mongoose.model('Event', eventSchema);
