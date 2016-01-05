@@ -23,7 +23,6 @@ angular.module('eventsInfo', [])
             allEvents[i].diff = diff;
             console.log('This is the flag', diff);
           }
-
           var formattedEvents = Eventstored.formatData(events);
           $scope.bookedEvents = formattedEvents;
         });

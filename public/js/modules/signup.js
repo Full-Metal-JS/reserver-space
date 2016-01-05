@@ -6,7 +6,6 @@ angular.module('userInfo', [])
     $scope.user.password = '';
 
     $scope.signUp = function() {
-      console.log($scope.user);
       if($scope.user.username === '') {
         alert("Must Enter User Name");
       } else if($scope.user.email === '') {

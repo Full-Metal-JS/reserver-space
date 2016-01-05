@@ -29,7 +29,20 @@ module.exports = {
   },
 
   login: function(req, res) {
-    res.send(200);
-  }
+    var check = userModel.findOne.bind(userModel);
 
+    check({ 'username': req.body.loginData.username,
+        'password': req.body.loginData.password })
+      .then(function(result) {
+        if(result){
+          return res.json({ result: true });
+          //Users exists and password matches
+            //pass them through. 
+        } else {
+          return res.json({ result: false });
+          //Users info doesn't match
+            //keep them on page.
+      }
+    });
+  }
 };

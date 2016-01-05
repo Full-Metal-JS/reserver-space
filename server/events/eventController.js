@@ -23,7 +23,6 @@ module.exports = {
     eventModel.find({'eventDate' : { $gte : new Date()} })
       .sort({eventDate: 1})
       .then(function(booked) {
-        console.log(booked);
         return res.json(booked);
       });
   }

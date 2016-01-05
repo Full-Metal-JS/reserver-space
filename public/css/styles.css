@@ -160,15 +160,6 @@ h3 {
     border-color: black !important;
 }
 
-.room-btn {
-    background: #FF4A00 !important;
-    border-color: black !important;
-}
-
-.room-btn:hover {
-    background: #CF2A00 !important;
-}
-
 .timePicker {
     width: 100%;
     float: left;

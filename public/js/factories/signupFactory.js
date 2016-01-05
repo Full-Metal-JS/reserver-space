@@ -9,7 +9,6 @@ angular.module('userFactory', [])
       //we don't have to access every value we want on the server side
     })
     .then(function(token) {
-      console.log(token, "string in factory Function");
       return token;
     });
   };
