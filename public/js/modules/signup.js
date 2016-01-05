@@ -20,5 +20,9 @@ angular.module('userInfo', [])
             .setItem('dibsToken', token.data);
           });
       }
+    },
+
+    $scope.loginPage = function() {
+      $state.go('loginupPage');      
     };
 });
