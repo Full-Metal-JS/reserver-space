@@ -3,7 +3,8 @@ var jwt = require('jwt-simple');
 
 module.exports = {
   signup: function(req, res, next) {
-    var username = req.body.username;
+    var username = req.body.userData.email;
+    console.log(username);
     var password = req.body.password;
 
     models.User.findAll({
@@ -12,7 +13,8 @@ module.exports = {
       }
     })
     .then(function(user) {
-      if (user) {
+      console.log('this is the user: ', user);
+      if (user.length > 0) {
         res.status(403).send({error: 'User already exist!'});
         next(new Error('User already exist!'));
       } else {
@@ -27,14 +29,14 @@ module.exports = {
       var token = jwt.encode(user, 'secret');
       res.json({token: token});
     })
-    .fail(function(error) {
-      next(error);
-    });
+    // .fail(function(error) {
+    //   next(error);
+    // });
   },
   signin: function(req, res, next) {
-    var username = req.body.username;
-    var password = req.body.password;
-
+    var username = req.body.loginData.username;
+    var password = req.body.loginData.password;
+ 
     models.User.findAll({
       where: {
         username: username
@@ -45,7 +47,8 @@ module.exports = {
         res.status(401).send({error: 'User does not exist'});
         next(new Error('User does not exist'));
       } else {
-        return model.User.checkPassword(password)
+        console.log('this is the user: ', user);
+        return user.checkPassword(password)
           .then(function(foundUser) {
             if (foundUser) {
               var token = jwt.encode(user, 'secret');
@@ -80,9 +83,9 @@ module.exports = {
             res.status(401).send();
           }
         })
-        .fail(function(error) {
-          next(error);
-        });
+        // .fail(function(error) {
+        //   next(error);
+        // });
     }
   }
 }

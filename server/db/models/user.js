@@ -32,7 +32,7 @@ module.exports = function(sequelize, DataTypes) {
   })
   User.beforeCreate(function(model, next) {
     model.generateHash(model.password, function(err, hash) {
-      if (err) return next(err);
+      if (err) return err;
       model.password = hash;
       next();
     })
