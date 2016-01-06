@@ -8,7 +8,8 @@ module.exports = function(app, express) {
   
   var userRouter = express.Router();
   var eventRouter = express.Router();
-  require(__dirname + '/../users/userRoutes.js')(userRouter);
+  require(__dirname + '/../db/routes/index.js')(userRouter);
+
   // app.use('/api/users', utility.decode);
   // This won't work at this point because there is no login;
   app.use('/api/users', userRouter);
