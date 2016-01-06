@@ -12,7 +12,7 @@ angular.module('signin', [])
       } else {
         LoginFactory.userLoginIn($scope.loginUser)
           .then(function(finalResult) {
-            if(finalResult.data.result){
+            if(finalResult){
               $state.go('dashboard'); 
             } else {
               alert("Incorrect Username or Password");              

@@ -1,5 +1,5 @@
 'use strict';
-var bcrypt = require('bcrypt');
+var bcrypt = require('bcrypt-nodejs');
 var Q = require('q');
 
 module.exports = function(sequelize, DataTypes) {
@@ -21,7 +21,6 @@ module.exports = function(sequelize, DataTypes) {
     },
     instanceMethods: {
       checkPassword: function(password) {
-        bcrypt.genSalt(10, function(err, salt) {});
         var defer = Q.defer();
         var savedPW = this.password;
         bcrypt.compare(password, savedPW, function(err, isMatch) {
@@ -29,27 +28,19 @@ module.exports = function(sequelize, DataTypes) {
             defer.reject(err);
           } else {
             defer.resolve(isMatch);
+            // console.log(isMatch);
           }
         });
         return defer.promise;
-        // var user = this;
-        // console.log(user.password);
-        // bcrypt.compare(password, user.password, function(err, isMatch) {
-        //   return isMatch;
-        // });
       },
       generateHash: function(password, done) {
         bcrypt.genSalt(10, function(err, salt) {
-          bcrypt.hash(password, salt, done);
+          bcrypt.hash(password, salt, null, done);
         });
       }
     }
   })
   User.beforeCreate(function(model, options, done) {
-    // if (!model.isModified('password')) {
-    //   return done();
-    // }
-    //console.log('this is model.password: ', model.password);
     model.generateHash(model.password, function(err, hash) {
       if (err) {
         return done(err);
