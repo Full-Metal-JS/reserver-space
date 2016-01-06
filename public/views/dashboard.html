@@ -1,46 +1,52 @@
 <div class="row">
-  <div class="col-md-5">
-    <div class="nav nav-list">
-            <div class="sideBar">
-                <!-- Angular datePicker -->
-                <h3>Create Dibs</h3>
-                <div class="input-group">
-                    <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="eve.eventDate" is-open="status.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
-                    <span class="input-group-btn">
-            <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-          </span>
-                </div>
-                <!-- Angular datePicker End -->
-                <!-- Angular TimePicker -->
-                <div class="timePicker">
-                    <div class="timePickerLeft">
-                        <uib-timepicker ng-model="eve.eventDate" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian" class='centerTime'></uib-timepicker>
-                    </div>
-                    <div class="timePickerRight">
-                        <pre class="alert alert-info">Dibs on: {{eve.eventDate  | date:'shortDate' }} | {{eve.eventDate  | date:'shortTime' }}</pre>
-                    </div>
-                </div>
-                <!-- Angular TimePicker End -->
-                <div>
-                    <input class="standardInputStyling" ng-model="eve.eventDescription" placeholder="Dibs description..."></input>
-                </div>
-                <h4>Pick a room</h4>
-                <div class="btn-group">
-                    <label class="btn btn-success room-btn" ng-model="eve.roomName" uib-btn-radio="'Kitchen'" uncheckable>Kitchen</label>
-                    <label class="btn btn-success room-btn" ng-model="eve.roomName" uib-btn-radio="'Living Room'" uncheckable>Living Room</label>
-                    <label class="btn btn-success room-btn" ng-model="eve.roomName" uib-btn-radio="'Entire House'" uncheckable>Entire House</label>
-                </div>
-                <div>
-                    <h4>Alert Roommates</h4>
-                    <input type="checkbox" ng-model="eve.eventAlert"><span id="alert-roommates-padding">Please Alert Roommates</span></input>
-                </div>
-                <button class="submit-btn" type="submit" ng-click="eventSubmit()">Set Room Dibs!!!</button>
-                <!--3DONE ^ what are we going to do with this data -->
-            </div>
+  <div class="col-sm-3 col-md-2 sidebar">
+    <ul class="nav nav-sidebar">
+      <li class="active"><a href="#">Locations <span class="sr-only">(current)</span></a></li>
+      <li><a href="#">Location 1</a></li>
+      <li><a href="#">Location 2</a></li>
+      <li><a href="#">Location 3</a></li>
+      </ul>
+    </ul>
+  </div>
+  <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2">
+    <div class="main">
+      <!-- Angular datePicker -->
+      <h3>Create Dibs</h3>
+      <div class="input-group">
+        <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="eve.eventDate" is-open="status.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+        <span class="input-group-btn">
+          <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i>
+          </button>
+        </span>
+      </div>
+
+      <!-- Angular TimePicker -->
+      <div class="timePicker">
+        <div class="timePickerLeft">
+          <uib-timepicker ng-model="eve.eventDate" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian" class='centerTime'></uib-timepicker>
         </div>
+      <div class="timePickerRight">
+        <pre class="alert alert-info">Dibs on: {{eve.eventDate  | date:'shortDate' }} | {{eve.eventDate  | date:'shortTime' }}</pre>
+      </div>
     </div>
-    <div class="col-md-1"></div>
-    <div class="col-md-6" ng-init="renderSideDashboard()" ui-view>
+
+    <div>
+      <input class="standardInputStyling" ng-model="eve.eventDescription" placeholder="Dibs description..."></input>
+    </div>
+    <h4>Pick a room</h4>
+    <div class="btn-group">
+      <label class="btn btn-default room-btn" ng-model="eve.roomName" uib-btn-radio="'Kitchen'" uncheckable>Kitchen</label>
+      <label class="btn btn-default room-btn" ng-model="eve.roomName" uib-btn-radio="'Living Room'" uncheckable>Living Room</label>
+      <label class="btn btn-default room-btn" ng-model="eve.roomName" uib-btn-radio="'Entire House'" uncheckable>Entire House</label>
+    </div>
+    <div>
+      <h4>Alert Roommates</h4>
+      <input type="checkbox" ng-model="eve.eventAlert"><span id="alert-roommates-padding">Please Alert Roommates</span></input>
+    </div>
+    <button class="btn btn-primary" type="submit" ng-click="eventSubmit()">Set Room Dibs!!!</button>
+
+    <div ng-init="renderSideDashboard()" ui-view>
         <!--9 make it for now that each event saved is displayed to this view  -->
     </div>
+  </div>
 </div>
