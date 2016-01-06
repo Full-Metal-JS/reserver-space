@@ -21,6 +21,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     instanceMethods: {
       checkPassword: function(password) {
+        bcrypt.genSalt(10, function(err, salt) {});
         var defer = Q.defer();
         var savedPW = this.password;
         bcrypt.compare(password, savedPW, function(err, isMatch) {
@@ -45,15 +46,15 @@ module.exports = function(sequelize, DataTypes) {
     }
   })
   User.beforeCreate(function(model, options, done) {
-    if (!model.isModified('password')) {
-      return done();
-    }
+    // if (!model.isModified('password')) {
+    //   return done();
+    // }
+    //console.log('this is model.password: ', model.password);
     model.generateHash(model.password, function(err, hash) {
       if (err) {
         return done(err);
       }
       model.password = hash;
-      model.save();
       return done(null, options);
     });
   });

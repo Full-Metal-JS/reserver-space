@@ -4,7 +4,6 @@ var jwt = require('jwt-simple');
 module.exports = {
   signup: function(req, res, next) {
     var username = req.body.userData.email;
-    console.log(username);
     var password = req.body.userData.password;
 
     models.User.findAll({
@@ -13,7 +12,6 @@ module.exports = {
       }
     })
     .then(function(user) {
-      console.log('this is the user: ', user);
       if (user.length > 0) {
         res.status(403).send({error: 'User already exist!'});
         next(new Error('User already exist!'));
@@ -49,7 +47,6 @@ module.exports = {
       } else {
         return user.checkPassword(password)
           .then(function(foundUser) {
-            console.log('this is founduser: ', foundUser);
             if (foundUser) {
               var token = jwt.encode(user, 'secret');
               res.json({
