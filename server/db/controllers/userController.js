@@ -3,8 +3,9 @@ var jwt = require('jwt-simple');
 
 module.exports = {
   signup: function(req, res, next) {
-    var username = req.body.username;
-    var password = req.body.password;
+    var username = req.body.userData.email;
+    console.log(username);
+    var password = req.body.userData.password;
 
     models.User.findAll({
       where: {
@@ -12,41 +13,43 @@ module.exports = {
       }
     })
     .then(function(user) {
-      if (user) {
+      console.log('this is the user: ', user);
+      if (user.length > 0) {
         res.status(403).send({error: 'User already exist!'});
         next(new Error('User already exist!'));
       } else {
-        return models.User.create({
+        models.User.create({
           username: username,
           password: password,
           registered: true
-        });
+        })
       }
     })
     .then(function(user) {
       var token = jwt.encode(user, 'secret');
       res.json({token: token});
     })
-    .fail(function(error) {
+    .catch(function(error) {
       next(error);
     });
   },
   signin: function(req, res, next) {
-    var username = req.body.username;
-    var password = req.body.password;
-
+    var username = req.body.loginData.username;
+    var password = req.body.loginData.password;
+ 
     models.User.findAll({
       where: {
         username: username
       }
     })
-    .then(function(user) {
+    .spread(function(user) {
       if (!user) {
         res.status(401).send({error: 'User does not exist'});
         next(new Error('User does not exist'));
       } else {
-        return model.User.checkPassword(password)
+        return user.checkPassword(password)
           .then(function(foundUser) {
+            console.log('this is founduser: ', foundUser);
             if (foundUser) {
               var token = jwt.encode(user, 'secret');
               res.json({
@@ -57,6 +60,9 @@ module.exports = {
               res.status(401).send('User or password is incorrect');
               next(new Error('User or password is incorrect'));
             }
+          })
+          .catch(function(error) {
+            next(error);
           });
       }
     })
@@ -80,9 +86,9 @@ module.exports = {
             res.status(401).send();
           }
         })
-        .fail(function(error) {
+        .catch(function(error) {
           next(error);
-        });
+        })
     }
   }
 }

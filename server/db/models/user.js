@@ -1,5 +1,6 @@
 'use strict';
 var bcrypt = require('bcrypt');
+var Q = require('q');
 
 module.exports = function(sequelize, DataTypes) {
   var User = sequelize.define('User', {
@@ -19,23 +20,42 @@ module.exports = function(sequelize, DataTypes) {
       }
     },
     instanceMethods: {
-      checkPassword: function(password, next) {
+      checkPassword: function(password) {
+        var defer = Q.defer();
         var savedPW = this.password;
-        bcrypt.compare(password, savedPW, next);
+        bcrypt.compare(password, savedPW, function(err, isMatch) {
+          if (err) {
+            defer.reject(err);
+          } else {
+            defer.resolve(isMatch);
+          }
+        });
+        return defer.promise;
+        // var user = this;
+        // console.log(user.password);
+        // bcrypt.compare(password, user.password, function(err, isMatch) {
+        //   return isMatch;
+        // });
       },
-      generateHash: function(password, next) {
+      generateHash: function(password, done) {
         bcrypt.genSalt(10, function(err, salt) {
-          bcrypt.hash(password, salt, next);
+          bcrypt.hash(password, salt, done);
         });
       }
     }
   })
-  User.beforeCreate(function(model, next) {
+  User.beforeCreate(function(model, options, done) {
+    if (!model.isModified('password')) {
+      return done();
+    }
     model.generateHash(model.password, function(err, hash) {
-      if (err) return next(err);
+      if (err) {
+        return done(err);
+      }
       model.password = hash;
-      next();
-    })
-  })
+      model.save();
+      return done(null, options);
+    });
+  });
   return User;
 };
