@@ -1,4 +1,29 @@
+
 <div class="jumbotron text-center">
   <h1>Find Your Space</h1>
-  <a class="btn btn-primary btn-xlg" href="#" ui-sref="signup" role="button">Get Started</a>
+  <button type="button" class="btn btn-primary btn-xlg" ng-click="open('sm')">Get Started</button>
+</div>
+
+<div ng-controller="LandingController">
+    <script type="text/ng-template" id="myModalContent.html">
+        <div class="modal-header">
+            <h3 class="modal-title">"Sign Up"</h3>
+        </div>
+        <div class="modal-body">
+            <ul>
+                <li ng-repeat="item in items">
+                    <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
+                </li>
+            </ul>
+            Selected: <b>{{ selected.item }}</b>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button"href="#" ui-sref="signup" ng-click="ok()">OK</button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+        </div>
+    </script>
+
+   
+    
+    
 </div>
