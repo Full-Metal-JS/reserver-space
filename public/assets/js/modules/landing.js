@@ -6,11 +6,11 @@ angular.module('landing', ['ngAnimate', 'ui.bootstrap'])
   $scope.animationsEnabled = true;
 
   $scope.open = function (size) {
-  	
+
     var modalInstance = $uibModal.open({
       animation: $scope.animationsEnabled,
       templateUrl: 'myModalContent.html',
-      controller: 'ModalInstanceCtrl',
+      controller: 'SignupController',
       size: size,
       resolve: {
         items: function () {
@@ -32,12 +32,16 @@ angular.module('landing', ['ngAnimate', 'ui.bootstrap'])
 
 });
 
-angular.module('ui.bootstrap').controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, items) {
+angular.module('ui.bootstrap').controller('SignupController', function ($scope, $uibModalInstance, items) {
 
   $scope.items = items;
   $scope.selected = {
     item: $scope.items[0]
   };
+  	$scope.user = {};
+    $scope.user.username = '';
+    $scope.user.email = '';
+    $scope.user.password = '';
 
   $scope.ok = function () {
     $uibModalInstance.close($scope.selected.item);
@@ -46,4 +50,21 @@ angular.module('ui.bootstrap').controller('ModalInstanceCtrl', function ($scope,
   $scope.cancel = function () {
     $uibModalInstance.dismiss('cancel');
   };
+
+  $scope.signUp = function() {
+      if($scope.user.username === '') {
+        alert("Must Enter User Name");
+      } else if($scope.user.email === '') {
+        alert("Must Enter Valid Email");
+      } else if($scope.user.password === '') {
+        alert("Must Enter Password");
+      } else {
+        $state.go('dashboard');	
+        SignUpFactory.signUpData($scope.user)
+          .then(function(token) {
+            $window.localStorage
+            .setItem('dibsToken', token.data);
+          });
+      }
+    };
 });

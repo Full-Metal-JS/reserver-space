@@ -7,20 +7,32 @@
 <div ng-controller="LandingController">
     <script type="text/ng-template" id="myModalContent.html">
         <div class="modal-header">
-            <h3 class="modal-title">"Sign Up"</h3>
+            <h3 class="modal-title">Sign Up</h3>
         </div>
-        <div class="modal-body">
-            <ul>
-                <li ng-repeat="item in items">
-                    <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
-                </li>
-            </ul>
-            Selected: <b>{{ selected.item }}</b>
-        </div>
-        <div class="modal-footer">
-            <button class="btn btn-primary" type="button"href="#" ui-sref="signup" ng-click="ok()">OK</button>
-            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
-        </div>
+        
+       
+        <div class="sideBar">
+                    
+                    <div id='signup'>
+                        <form name='signinForm'>
+                            
+                            <div class="input-group margin-bottom-sm input-padding">
+                                <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
+                                <input class="form-control" ng-model="user.email" type="text" placeholder="Email address" required>
+                            </div>
+                            <div class="input-group input-padding">
+                                <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+                                <input class="form-control" ng-model="user.password" type="password" placeholder="Password">
+                            </div>
+                            <div class="modal-footer">
+                            <div class="tosandSubmit"> 
+                                <button class="submit-btn" ng-click="signUp()">Sign up!</button>
+                                <button class="submit-btn" ng-click="loginPage()">Already a member? Login Here!</button>
+                            </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
     </script>
 
    
