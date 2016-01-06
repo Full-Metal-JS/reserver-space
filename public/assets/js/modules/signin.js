@@ -1,5 +1,5 @@
-angular.module('loginInfo', [])
-  .controller('userLogin', function($scope, $window, $state, LoginFactory) {
+angular.module('signin', [])
+  .controller('SigninController', function($scope, $window, $state, LoginFactory) {
     $scope.loginUser = {};
     $scope.loginUser.username = '';
     $scope.loginUser.password = '';
@@ -13,7 +13,7 @@ angular.module('loginInfo', [])
         LoginFactory.userLoginIn($scope.loginUser)
           .then(function(finalResult) {
             if(finalResult.data.result){
-              $state.go('dashboardPage'); 
+              $state.go('dashboard'); 
             } else {
               alert("Incorrect Username or Password");              
             }
