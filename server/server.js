@@ -1,19 +1,15 @@
 var express = require('express');
-var mongoose = require('mongoose');
 var app = express();
-
-// initialize express
-// Mongoose DB Connection
-
-mongoose.connect('mongodb://nodetojoy:nodetojoy@ds037165.mongolab.com:37165/nodetojoy');
-
-//http is for any network protocal
+var models = require('./db/models');
 
 var server = require('http').createServer(app);
 
+var port = process.env.PORT || 3000;
+app.set('port', port);
+
 //checking to see if PORT# is defined otherwise use 3000
 
-var port = process.env.PORT || 3000;
+
 
 require('./config/routeconfig.js')(app, express);
 
@@ -24,4 +20,9 @@ require('./config/routeconfig.js')(app, express);
   
 app.use(express.static(__dirname +  "/../public"));
 
-server.listen(port);
+models.sequelize.sync().then(function() {
+  server.listen(port, function() {
+    console.log('server running on port: ', port);
+  });
+});
+

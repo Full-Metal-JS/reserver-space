@@ -1,15 +1,15 @@
 {
-  "name": "nodetojoy",
+  "name": "reserver.space",
   "description": "Room Collision web application",
   "main": "index.js",
   "authors": [
-    "Joe Lagasse",
-    "Time Steele",
-    "Tyler Ferrier",
-    "Robert Cardiff"
+    "Elliot Chi",
+    "Ian B.",
+    "Sean Gibson",
+    "Peter Kaiser"
   ],
   "license": "ISC",
-  "homepage": "https://github.com/nodetojoy/nodetojoy",
+  "homepage": "https://github.com/Full-Metal-JS/reserver-space",
   "moduleType": [],
   "private": true,
   "ignore": [
