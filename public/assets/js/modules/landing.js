@@ -1,7 +1,7 @@
 angular.module('landing', ['ngAnimate', 'ui.bootstrap'])
   .controller('LandingController', function ($scope, $uibModal, $log) {
 
-  $scope.items = ['item1', 'item2', 'item3'];
+  
 
   $scope.animationsEnabled = true;
 
