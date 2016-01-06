@@ -1,6 +1,6 @@
-angular.module('eventsInfo', [])
+angular.module('events', [])
   .constant('moment', moment)
-  .controller('eventsController', function($scope, $state, Eventstored, moment, $interval) {
+  .controller('EventsController', function($scope, $state, Eventstored, moment, $interval) {
     $scope.eve = {};
     $scope.eve.eventDate = '';
     $scope.eve.eventDescription = '';
@@ -30,7 +30,7 @@ angular.module('eventsInfo', [])
     };
 
     $scope.renderSideDashboard = function() {
-      $state.go('dashboardPage.events');
+      $state.go('dashboard.events');
       Eventstored.getData().then(function(events) {
           var allEvents = events.data;
           console.log(allEvents);
@@ -75,7 +75,7 @@ angular.module('eventsInfo', [])
     };
 
     $scope.signout = function() {
-      $state.go('signupPage');
+      $state.go('signup');
     };
 
     //TIME ADDON

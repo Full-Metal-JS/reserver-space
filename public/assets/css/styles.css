@@ -1,66 +1,6 @@
-body {
-    background-color: #FFF;
-    height: 100%;
-}
-
-h3 {
-    text-align: center;
-    margin-top: 5px;
-    margin-bottom: 20px;
-}
-
-#h3-wrapper {
-    padding-top: 20px;
-}
-
 .seperator {
     border-top: 1px dotted #ccc;
     margin: 10px 0 30px 0;
-}
-
-.container {
-    padding-left: 15%;
-    padding-right: 15%;
-}
-
-#signup-container {
-    margin-top: 50px;
-    padding-left: 15%;
-    padding-right: 15%;
-}
-
-#nav-container {
-    background-color: #FF4A00;
-    height: 75px;
-    width: 100%;
-    margin-bottom: 25px;
-}
-
-#bannerText {
-    color: #FF4A00;
-    text-align: center;
-}
-
-#logo-orange-image {
-    height: 200px;
-    display: block;
-    margin-top: 10px;
-    margin-left: auto;
-    margin-right: auto
-}
-
-#logo-image {
-    height: 50px;
-    display: block;
-    margin-top: 10px;
-    margin-left: auto;
-    margin-right: auto
-}
-
-#copyright-text {
-    color: #969EA2;
-    display: inline-block;
-    margin-top: 15px;
 }
 
 #logout-btn {
@@ -151,15 +91,6 @@ h3 {
     padding: 0.78em 0.9em 0.75em 0.9em;
 }
 
-.submit-btn:hover {
-    background: #CF2A00 !important;
-}
-
-.btn-primary {
-    background: #FF4A00 !important;
-    border-color: black !important;
-}
-
 .timePicker {
     width: 100%;
     float: left;
@@ -201,3 +132,122 @@ h3 {
 .add-oppacity {
     background-color: #ffe4b2 !important;
 }
+
+/*
+/* Scaffolding
+/* -------------------------------------------------- */
+
+body.landing { 
+  background: url('../img/landing-bkg.png') no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+/*
+/* Navbar
+/* -------------------------------------------------- */
+
+.navbar > .container .navbar-brand,
+.navbar > .container-fluid .navbar-brand {
+  margin-left: 0; 
+} 
+
+.navbar-default {
+  border: none;
+}
+
+.navbar-default .navbar-brand {
+  font-size: 28px;
+  padding-left: 0;
+  padding-top: 5px;
+}
+
+.navbar-brand .logo {
+  display: inline-block;
+  padding-right: 5px;
+}
+
+.navbar-default .navbar-nav a {
+  font-size: 18px; 
+  padding-left: 30px;
+}
+
+.landing .navbar-default .navbar-nav > li > a:hover, 
+.landing .navbar-default .navbar-nav > li > a:focus {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.navbar-default .navbar-nav a:last-child {
+  padding-right: 0;
+}
+
+.landing .navbar {
+  background-color: rgba(36,36,36,.5);
+}
+
+.landing .navbar-default .navbar-brand,
+.landing .navbar-default .navbar-nav a {
+  color: #fff;
+}
+
+/*
+/* Jumbotron
+/* -------------------------------------------------- */
+
+.landing .jumbotron {
+  background: transparent;
+  padding-top: 130px;
+  padding-bottom: 60px;
+}
+
+.jumbotron h1 {
+  margin-bottom: 40px;
+  color: #fff;
+}
+
+/*
+/* Buttons
+/* -------------------------------------------------- */
+
+.btn-primary {
+  background-color: #0047c5;
+  border-color: #0047c5;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active {
+  background-color: #003eac;
+  border-color: #003592;
+}
+
+.btn-primary.disabled:hover,
+.btn-primary.disabled:focus,
+.btn-primary.disabled:active,
+.btn-primarydisabled.active,
+.btn-primary[disabled]:hover,
+.btn-primary[disabled]:focus,
+.btn-primary[disabled]:active,
+.btn-primary[disabled].active,
+fieldset[disabled] .btn-primary:hover,
+fieldset[disabled] .btn-primary:focus,
+fieldset[disabled] .btn-primary:active,
+fieldset[disabled] .btn-primary.active {
+  background-color: #0047c5;
+  border-color: #0047c5;
+}
+
+.btn-xlg {
+  font-size: 2em;
+  padding: 10px 40px;
+}
+
+
+
+
+
+
