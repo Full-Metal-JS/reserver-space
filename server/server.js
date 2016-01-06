@@ -4,7 +4,7 @@ var models = require('./db/models');
 
 var server = require('http').createServer(app);
 
-var port = process.env.PORT || 4000;
+var port = process.env.PORT || 3000;
 app.set('port', port);
 
 //checking to see if PORT# is defined otherwise use 3000
