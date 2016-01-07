@@ -12,19 +12,19 @@ module.exports = {
       }
     })
     .spread(function(user) {
-      console.log(user);
       if (user) {
         if (user.registered) {
           res.status(403).send({error: 'User already exist!'});
           next(new Error('User already exist!'));
-        } else {
+        } 
+        else {
           user.update({
             password: password,
             registered: true
           })
         }
       } else {
-        models.User.create({
+        return models.User.create({
           username: username,
           password: password,
           registered: true

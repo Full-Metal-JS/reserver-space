@@ -28,7 +28,6 @@ module.exports = function(sequelize, DataTypes) {
             defer.reject(err);
           } else {
             defer.resolve(isMatch);
-            // console.log(isMatch);
           }
         });
         return defer.promise;
