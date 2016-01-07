@@ -1,5 +1,6 @@
 angular.module('authFactory', [])
-.factory('AuthFactory', function($http, $window, $state) {
+.factory('AuthFactory', ['$http', '$window', '$state', 'UserFactory', function($http, $window, $state, UserFactory)  {
+
   var signin = function(user) {
     return $http({
       method: 'POST',
@@ -7,6 +8,7 @@ angular.module('authFactory', [])
       data: user
     })
     .then(function(res) {
+      UserFactory = res.data;
       return res.data;
     });
   };
@@ -41,4 +43,4 @@ angular.module('authFactory', [])
     signout: signout,
     isAuth: isAuth 
   };
-});
+}]);
