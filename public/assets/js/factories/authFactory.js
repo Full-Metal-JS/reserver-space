@@ -8,7 +8,7 @@ angular.module('authFactory', [])
       data: user
     })
     .then(function(res) {
-      UserFactory = res.data;
+      UserFactory.data = res.data;
       return res.data;
     });
   };
@@ -20,6 +20,7 @@ angular.module('authFactory', [])
       data: user
     })
     .then(function(res) {
+      UserFactory.data = res.data;
       return res.data.token;
     })
     .catch(function (error) {
