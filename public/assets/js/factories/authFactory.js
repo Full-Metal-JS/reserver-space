@@ -9,6 +9,9 @@ angular.module('authFactory', [])
     })
     .then(function(res) {
       UserFactory.data = res.data;
+
+      console.log('user: ', res.data);
+
       return res.data;
     });
   };
