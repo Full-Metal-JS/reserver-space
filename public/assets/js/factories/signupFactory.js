@@ -8,8 +8,8 @@ angular.module('userFactory', [])
       //using object so that data is organized and 
       //we don't have to access every value we want on the server side
     })
-    .then(function(token) {
-      return token;
+    .then(function(res) {
+      return res.data.token;
     });
   };
 

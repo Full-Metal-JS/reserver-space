@@ -3,18 +3,26 @@ var jwt = require('jwt-simple');
 
 module.exports = {
   signup: function(req, res, next) {
-    var username = req.body.userData.email;
-    var password = req.body.userData.password;
+    var username = req.body.email;
+    var password = req.body.password;
 
     models.User.findAll({
       where: {
         username: username
       }
     })
-    .then(function(user) {
-      if (user.length > 0) {
-        res.status(403).send({error: 'User already exist!'});
-        next(new Error('User already exist!'));
+    .spread(function(user) {
+      console.log(user);
+      if (user) {
+        if (user.registered) {
+          res.status(403).send({error: 'User already exist!'});
+          next(new Error('User already exist!'));
+        } else {
+          user.update({
+            password: password,
+            registered: true
+          })
+        }
       } else {
         models.User.create({
           username: username,
@@ -32,8 +40,8 @@ module.exports = {
     });
   },
   signin: function(req, res, next) {
-    var username = req.body.loginData.username;
-    var password = req.body.loginData.password;
+    var username = req.body.email;
+    var password = req.body.password;
  
     models.User.findAll({
       where: {
@@ -76,7 +84,7 @@ module.exports = {
           username: user.username
         }
       })
-        .then(function(foundUser) {
+        .spread(function(foundUser) {
           if (foundUser) {
             res.status(200).send();
           } else {
@@ -85,7 +93,35 @@ module.exports = {
         })
         .catch(function(error) {
           next(error);
-        })
+        });
     }
+  },
+  addPendingUser: function(req, res, next) {
+    var username = req.body.email;
+
+    models.User.findAll({
+      where: {
+        username: username
+      }
+    })
+    .spread(function(user) {
+      if (user) {
+        if (user.registered) {
+          res.status(403).send({error: 'User is already registered!'});
+          next(new Error('User already registered!'));
+        } else {
+          res.status(403).send({error: 'User is already pending'});
+          next(new Error('User is already pending'));
+          }
+        } else {
+          models.User.create({
+            username: username,
+            registered: false
+          });
+        }
+      })
+    .catch(function(error) {
+      next(error);
+    });
   }
 }
