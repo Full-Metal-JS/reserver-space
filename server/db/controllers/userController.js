@@ -4,8 +4,8 @@ var helpers = require('../../config/helpers.js');
 
 module.exports = {
   signup: function(req, res, next) {
-    var username = req.body.userData.email;
-    var password = req.body.userData.password;
+    var username = req.body.email;
+    var password = req.body.password;
 
     models.User.findAll({
       where: {
