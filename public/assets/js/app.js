@@ -9,6 +9,7 @@ angular.module('reserverSpace', [
   'events', 
   'eventsFactory', 
   'authFactory',
+  'userFactory',
   'navbarDirectives'
 ])
 
