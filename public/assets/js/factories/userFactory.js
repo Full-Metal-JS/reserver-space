@@ -2,15 +2,13 @@ angular.module('userFactory', [])
   .factory('UserFactory', ['$http', function($http) {
     var user = {};
 
-    user.data = {
-      locations: {}
-    };
+    user.currentUser = {};
 
-    user.savelocations = function () {
+    user.savelocation = function (location) {
       return $http({
         method: 'POST',
         url: '/api/users/locations',
-        data: user.data
+        data: location
       })
       .then(function (res) {
         return res.data;
@@ -20,9 +18,7 @@ angular.module('userFactory', [])
     };
 
     user.clearUser = function () {
-      user.data = {
-        locations: {}
-      };
+      user.currentUser = {};
     };
 
     return user;
