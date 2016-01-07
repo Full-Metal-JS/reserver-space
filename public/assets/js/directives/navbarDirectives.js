@@ -13,7 +13,7 @@ angular.module('navbarDirectives', ['ngAnimate', 'ui.bootstrap'])
         $scope.open = function(size) {
           var modalInstance = $uibModal.open({
             animation: $scope.animationsEnabled,
-            templateUrl: 'myModalContent.html',
+            templateUrl: 'modal.html',
             controller: 'AuthController',
             size: size
           });
