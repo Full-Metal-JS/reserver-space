@@ -17,7 +17,7 @@ module.exports = function(app, express) {
     res.status(404).send('404: Page not found');
   });
 
-  require('../db/routes/index.js')(userRouter);
+  require('../db/routes/userRoutes.js')(userRouter);
   // require('../events/eventRoutes.js')(eventRouter);
 
   app.use(utils.logError);
