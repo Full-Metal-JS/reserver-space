@@ -1,26 +1,25 @@
 angular.module('authFactory', [])
-.factory('AuthFactory', ['$http', '$window', '$state', 'UserFactory', function($http, $window, $state, UserFactory)  {
-
-  var signin = function(user) {
+.factory('AuthFactory', ['$http', '$window', '$state', 'UserFactory', function($http, $window, $state, UserFactory) {
+  var signin = function (user) {
     return $http({
       method: 'POST',
       url: '/api/users/signin',
       data: user
     })
-    .then(function(res) {
-      UserFactory.data = res.data;
+    .then(function (res) {
+      UserFactory.currentUser = res.data;
       return res.data;
     });
   };
 
-  var signup = function(user) {
+  var signup = function (user) {
     return $http({
       method: 'POST',
       url: '/api/users/signup',
       data: user
     })
-    .then(function(res) {
-      UserFactory.data = res.data;
+    .then(function (res) {
+      UserFactory.currentUser = res.data;
       return res.data.token;
     })
     .catch(function (error) {
@@ -33,7 +32,7 @@ angular.module('authFactory', [])
   };
 
   var signout = function () {
-    //User.clearUser();
+    UserFactory.clearUser();
     $window.localStorage.removeItem('space.reserver');
     $state.go('landing');
   };

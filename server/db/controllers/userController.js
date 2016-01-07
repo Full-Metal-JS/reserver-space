@@ -2,6 +2,7 @@ var models = require('../models');
 var jwt = require('jwt-simple');
 var helpers = require('../../config/helpers.js');
 var sendGrid = require('../../email/sendGrid.js');
+var data = require('../../data.js');
 
 module.exports = {
   signup: function(req, res, next) {
@@ -64,7 +65,8 @@ module.exports = {
               console.log(allData);
               res.json({
                 username: user.username,
-                token: token
+                token: token,
+                data: data.user.data
               });
             } else {
               res.status(401).send('User or password is incorrect');
