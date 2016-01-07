@@ -5,37 +5,28 @@
 </div>
 
 <div ng-controller="LandingController">
-    <script type="text/ng-template" id="myModalContent.html">
-        <div class="modal-header">
-            <h3 class="modal-title">Sign Up</h3>
-        </div>
-        
-       
-        <div class="sideBar">
-                    
-                    <div id='signup'>
-                        <form name='signinForm'>
-                            
-                            <div class="input-group margin-bottom-sm input-padding">
-                                <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
-                                <input class="form-control" ng-model="user.email" type="text" placeholder="Email address" required>
-                            </div>
-                            <div class="input-group input-padding">
-                                <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
-                                <input class="form-control" ng-model="user.password" type="password" placeholder="Password">
-                            </div>
-                            <div class="modal-footer">
-                            <div class="tosandSubmit"> 
-                                <button class="btn btn-primary btn-block" ng-click="signUp()">Sign up!</button>
-                                <button class="btn btn-primary btn-block" ng-click="login()">Already a member? Login Here!</button>
-                            </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-    </script>
-
-   
-    
-    
+  <script type="text/ng-template" id="modal.html">
+    <div class="modal-content modal-auth">
+      <div class="modal-header">
+        <h3 class="modal-title">Welcome!</h3>
+      </div>
+      <div class="modal-body">
+        <p class="text-danger" ng-show="error">{{error.data.error}}</p>
+        <form class="form-auth" name="signinForm" ng-submit="signinForm.$valid && signin()" novalidate>
+          <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
+            <input class="form-control" ng-model="user.email" type="email" placeholder="Email" required>
+          </div>
+          <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+            <input class="form-control" ng-model="user.password" type="password" placeholder="Password" required>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-primary btn-block" ng-click="signup()">Sign Up!</button>
+            <button class="btn btn-primary btn-block" ng-click="signin()">Already a member? Sign In Here</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </script>
 </div>
