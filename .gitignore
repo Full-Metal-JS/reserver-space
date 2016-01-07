@@ -42,4 +42,6 @@ server/db/config/config.json
 ehthumbs.db
 Thumbs.db
 
-
+# Api Config #
+##############
+sendGrid-config.js
