@@ -1,6 +1,7 @@
 var models = require('../models');
 var jwt = require('jwt-simple');
 var helpers = require('../../config/helpers.js');
+var data = require('../../data.js');
 
 module.exports = {
   signup: function(req, res, next) {
@@ -33,7 +34,7 @@ module.exports = {
       }
     })
     .then(function(user) {
-      var token = jwt.encode(user, 'secret');
+      var token = jwt.encode(user, 'secret'); 
       res.json({token: token});
     })
     .catch(function(error) {
@@ -59,12 +60,14 @@ module.exports = {
             if (foundUser) {
               var token = jwt.encode(user, 'secret');
               // compile locations, rooms, reservations
-              var allData = helpers.getAllData(user);
-              console.log(allData);
-              res.json({
-                username: user.username,
-                token: token
-              });
+              //var userData = helpers.getAllData(user);
+
+              // res.json({
+              //   username: user.username,
+              //   token: token,
+              //   locations: data.user
+              // });
+              res.json(data.user);
             } else {
               res.status(401).send('User or password is incorrect');
               next(new Error('User or password is incorrect'));

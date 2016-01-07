@@ -18,8 +18,6 @@ angular.module('auth', [])
     $scope.signin = function() {
       AuthFactory.signin($scope.user)
         .then(function (user) { 
-          // User.data = user;
-
           $window.localStorage.setItem('space.reserver', user.token);
           $uibModalInstance.dismiss();
           $state.go('dashboard');
