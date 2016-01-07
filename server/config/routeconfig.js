@@ -1,6 +1,6 @@
 var bodyParser = require('body-parser');
 var path = require('path');
-var helpers = require('./helpers.js');
+var utils = require('./utils.js');
 
 module.exports = function(app, express) {
   var userRouter = express.Router();
@@ -17,9 +17,9 @@ module.exports = function(app, express) {
     res.status(404).send('404: Page not found');
   });
 
-  require('../db/routes/index.js')(userRouter);
+  require('../db/routes/userRoutes.js')(userRouter);
   // require('../events/eventRoutes.js')(eventRouter);
 
-  app.use(helpers.logError);
-  app.use(helpers.handleError);
+  app.use(utils.logError);
+  app.use(utils.handleError);
 };
