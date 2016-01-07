@@ -1,5 +1,6 @@
 var models = require('../models');
 var jwt = require('jwt-simple');
+var helpers = require('../../config/helpers.js');
 
 module.exports = {
   signup: function(req, res, next) {
@@ -57,6 +58,9 @@ module.exports = {
           .then(function(foundUser) {
             if (foundUser) {
               var token = jwt.encode(user, 'secret');
+              // compile locations, rooms, reservations
+              var allData = helpers.getAllData(user);
+              console.log(allData);
               res.json({
                 username: user.username,
                 token: token

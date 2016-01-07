@@ -31,6 +31,7 @@
     "sendgrid": "^2.0.0",
     "sequelize": "^3.16.0",
     "sequelize-cli": "^2.2.1",
-    "sqlite3": "^3.1.1"
+    "sqlite3": "^3.1.1",
+    "underscore": "^1.8.3"
   }
 }
