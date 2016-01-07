@@ -4,8 +4,8 @@ module.exports = function(sequelize, DataTypes) {
     reservation_name: DataTypes.STRING,
     room_id: DataTypes.INTEGER,
     user_id: DataTypes.INTEGER,
-    date: DataTypes.DATE,
-    time: DataTypes.TIME
+    start_time: DataTypes.STRING,
+    end_time: DataTypes.STRING
   }, {
     classMethods: {
       associate: function(models) {
