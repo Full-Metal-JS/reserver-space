@@ -1,7 +1,6 @@
 var bodyParser = require('body-parser');
 var path = require('path');
 var helpers = require('./helpers.js');
-var utility = require(__dirname + '/../utility/utility.js');
 
 module.exports = function(app, express) {
   var userRouter = express.Router();
@@ -13,10 +12,14 @@ module.exports = function(app, express) {
 
   app.use('/api/users', userRouter);
   app.use('/api/events', eventRouter);
+
   app.use('*', function(req, res) {
     res.status(404).send('404: Page not found');
   });
 
-  require(__dirname + '/../db/routes/index.js')(userRouter);
-  require(__dirname + '/../events/eventRoutes.js')(eventRouter);
+  require('../db/routes/index.js')(userRouter);
+  require('../events/eventRoutes.js')(eventRouter);
+
+  app.use(helpers.logError);
+  app.use(helpers.handleError);
 };
