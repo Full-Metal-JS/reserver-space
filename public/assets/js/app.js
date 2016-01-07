@@ -6,7 +6,9 @@ angular.module('reserverSpace', [
   'ui.bootstrap',
   'landing',
   'auth', 
+  'dashboard',
   'events', 
+  'dashboardFactory',
   'eventsFactory', 
   'authFactory',
   'userFactory',
@@ -26,7 +28,7 @@ angular.module('reserverSpace', [
     .state('dashboard', {
       url : '/dashboard',
       templateUrl : 'views/dashboard.html',
-      controller : 'EventsController',
+      controller : 'DashboardController',
       authenticate: true 
     })
     .state('dashboard.events', {
