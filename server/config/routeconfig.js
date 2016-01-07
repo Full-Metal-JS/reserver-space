@@ -11,14 +11,14 @@ module.exports = function(app, express) {
   app.use(express.static(path.join(__dirname, '/../../public')));
 
   app.use('/api/users', userRouter);
-  app.use('/api/events', eventRouter);
+  // app.use('/api/events', eventRouter);
 
   app.use('*', function(req, res) {
     res.status(404).send('404: Page not found');
   });
 
   require('../db/routes/index.js')(userRouter);
-  require('../events/eventRoutes.js')(eventRouter);
+  // require('../events/eventRoutes.js')(eventRouter);
 
   app.use(helpers.logError);
   app.use(helpers.handleError);
