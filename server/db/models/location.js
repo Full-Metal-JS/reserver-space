@@ -7,7 +7,7 @@ module.exports = function(sequelize, DataTypes) {
       associate: function(models) {
         // associations can be defined here
         Location.belongsToMany(models.User, {through: models.UserLocation});
-        Location.hasMany(models.Room, {foreignKey: models.Room.location_id});
+        Location.hasMany(models.Room);
       }
     }
   });
