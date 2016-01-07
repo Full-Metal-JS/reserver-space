@@ -1,5 +1,5 @@
-angular.module('eventsInfoFactory', [])
-.factory('Eventstored', function($http) {
+angular.module('eventsFactory', [])
+.factory('EventsFactory', function($http) {
   //posts events to database
   var eventData = function(dibEvent) {
     return $http({

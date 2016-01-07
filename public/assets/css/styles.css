@@ -213,7 +213,27 @@ fieldset[disabled] .btn-primary.active {
   padding: 20px;
 }
 
+/*
+/* Forms
+/* -------------------------------------------------- */
 
+.form-auth .input-group {
+  margin-bottom: 8px;
+}
+
+/*
+/* Modal
+/* -------------------------------------------------- */
+
+.modal-auth .modal-header {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.modal-auth .modal-footer {
+  border-top: 0;
+  padding: 15px 0;
+}
 
 
 

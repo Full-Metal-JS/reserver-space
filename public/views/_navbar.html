@@ -14,9 +14,9 @@
     </div>
     <div class="collapse navbar-collapse" uib-collapse="isNavbarCollapsed">
       <ul class="nav navbar-nav navbar-right">
-        <li><a  ng-click="open('sm')">Sign Up</a></li>
-        <li><a  ng-click="open('sm')">Sign In</a></li>
-        <li><a>Sign Out</a></li>
+        <li><a ng-click="open('sm')" ng-show="!isLoggedIn()">Sign Up</a></li>
+        <li><a ng-click="open('sm')" ng-show="!isLoggedIn()">Sign In</a></li>
+        <li><a href="#" ng-click="signout()" ng-show="isLoggedIn()">Sign Out</a></li>
       </ul>
     </div>
   </div>

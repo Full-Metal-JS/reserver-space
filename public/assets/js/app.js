@@ -5,12 +5,10 @@ angular.module('reserverSpace', [
   'ngAnimate',
   'ui.bootstrap',
   'landing',
-  'signup', 
-  'signin', 
+  'auth', 
   'events', 
-  'eventsInfoFactory', 
-  'userFactory', 
-  'userloginFactory',
+  'eventsFactory', 
+  'authFactory',
   'navbarDirectives'
 ])
 
@@ -23,16 +21,6 @@ angular.module('reserverSpace', [
       url: '/',
       templateUrl: 'views/landing.html',
       controller: 'LandingController'
-    })
-    .state('signin', {
-      url : '/signin', 
-      templateUrl : 'views/signin.html',
-      controller : 'SigninController'
-    })
-    .state('signup', {
-      url : '/signup', 
-      templateUrl : 'views/signup.html',
-      controller : 'SignupController'
     })
     .state('dashboard', {
       url : '/dashboard',
@@ -51,7 +39,7 @@ angular.module('reserverSpace', [
 .factory('AttachToken', function($window) {
   return { 
     request : function(http) {
-      var token = $window.localStorage.getItem('dibsToken');
+      var token = $window.localStorage.getItem('space.reserver');
       if (token) {
         http.headers["x-access-token"] = token;
       }
@@ -61,13 +49,15 @@ angular.module('reserverSpace', [
   };
 })
 
-.run(function($state, $rootScope, SignUpFactory) {
+.run(function($state, $rootScope, AuthFactory) {
   $rootScope.$state = $state;
 
-  $rootScope.$on('$stateChangeStart', function(event, toState) {
-    if(toState.authenticate === true && !SignUpFactory.validToken) {
-      $state.go('landing');
+  $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
+    $rootScope.isNavbarCollapsed = true;
+
+    if (toState && toState.authenticate && !AuthFactory.isAuth()) {
       event.preventDefault();
-    }
+      $state.go('landing');
+    } 
   });
 });

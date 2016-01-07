@@ -1,6 +1,6 @@
 angular.module('events', [])
   .constant('moment', moment)
-  .controller('EventsController', function($scope, $state, Eventstored, moment, $interval) {
+  .controller('EventsController', function($scope, $state, EventsFactory, moment, $interval) {
     $scope.eve = {};
     $scope.eve.eventDate = '';
     $scope.eve.eventDescription = '';
@@ -10,28 +10,28 @@ angular.module('events', [])
     $scope.eve.houseName = 'Hacker House';
 
     $scope.refreshEvents = function() {
-      $interval(function(){
-        Eventstored.getData().then(function(events) {
+      // $interval(function(){
+      //   EventsFactory.getData().then(function(events) {
 
-          var allEvents = events.data;
-          console.log(allEvents);
-          var today = moment().dayOfYear();
+      //     var allEvents = events.data;
+      //     console.log(allEvents);
+      //     var today = moment().dayOfYear();
 
-          for (var i = 0; i < allEvents.length; i++) {
-            var eachDib = moment(allEvents[i].eventDate).dayOfYear();
-            var diff = eachDib - today;
-            allEvents[i].diff = diff;
-            console.log('This is the flag', diff);
-          }
-          var formattedEvents = Eventstored.formatData(events);
-          $scope.bookedEvents = formattedEvents;
-        });
-      }, 500);
+      //     for (var i = 0; i < allEvents.length; i++) {
+      //       var eachDib = moment(allEvents[i].eventDate).dayOfYear();
+      //       var diff = eachDib - today;
+      //       allEvents[i].diff = diff;
+      //       console.log('This is the flag', diff);
+      //     }
+      //     var formattedEvents = EventsFactory.formatData(events);
+      //     $scope.bookedEvents = formattedEvents;
+      //   });
+      // }, 500);
     };
 
     $scope.renderSideDashboard = function() {
       $state.go('dashboard.events');
-      Eventstored.getData().then(function(events) {
+      EventsFactory.getData().then(function(events) {
           var allEvents = events.data;
           console.log(allEvents);
           var today = moment().dayOfYear();
@@ -42,16 +42,16 @@ angular.module('events', [])
             allEvents[i].diff = diff;
             console.log('This is the flag', diff);
           }
-        var formattedEvents = Eventstored.formatData(events);
+        var formattedEvents = EventsFactory.formatData(events);
         $scope.bookedEvents = formattedEvents;
       });
 
       // removing past daily dibs every 30s
-      $scope.refreshEvents();
+      //$scope.refreshEvents();
     };
 
     $scope.highlightEvents = function(event) {
-    console.log('test', event.diff);
+      console.log('test', event.diff);
       
         if(event.diff <= 1){
           console.log(true);
@@ -64,18 +64,14 @@ angular.module('events', [])
 
     $scope.eventSubmit = function() {
       var $events = $scope.eve;
-      Eventstored.eventData($events)
+      EventsFactory.eventData($events)
       .then(function(message) {
         if(!message.data.result){
           alert('Someone else called Dibs!');
         }
       });
-      // Eventstored.getData();
+      // EventFactory.getData();
       $scope.renderSideDashboard();
-    };
-
-    $scope.signout = function() {
-      $state.go('signup');
     };
 
     //TIME ADDON
