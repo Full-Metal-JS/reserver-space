@@ -1,4 +1,5 @@
 var models = require('../db/models');
+var _ = require('underscore');
 
 function getLocationIds(user) {
   models.UserLocation.findAll({

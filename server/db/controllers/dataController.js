@@ -1,22 +1,23 @@
 var models = require('../models');
+var _ = require('underscore');
 
 module.exports = {
   addLocation: function(req, res, next) {
     var userId = req.body.userId;
     var locationName = req.body.locationName;
 
-    return models.Location.create({
+    models.Location.create({
       location_name: locationName
     })
-    .then(function(location) {
+    .then(function(newLocation) {
       models.UserLocation.create({
         UserId: userId,
-        LocationId: location.id 
+        LocationId: newLocation.id 
       });
 
       res.json({
-        locationId: location.id,
-        locationName: location.location_name
+        locationId: newLocation.id,
+        locationName: newLocation.location_name
       });
     })
     .catch(function(error) {
@@ -28,22 +29,22 @@ module.exports = {
     var usersToAdd = req.body.usersToAdd;
     var roomsToAdd = req.body.roomsToAdd;
 
-    usersToAdd.each(function(user, index, allUsersToAdd) {
+    _.each(usersToAdd.split(','), function(user, index, allUsersToAdd) {
       models.User.find({
         where: {
           username: user
         }
       })
-      .spread(function(foundUser) {
+      .then(function(foundUser) {
         if (!foundUser) {
-          return models.User.create({
+          models.User.create({
             username: user,
             registered: false
           })
           .spread(function(pendingUser) {
             models.UserLocation.create({
               UserId: pendingUser.id,
-              locationId: locationId
+              LocationId: locationId
             });
           });
         }
@@ -53,13 +54,15 @@ module.exports = {
         });
       });
     });
-    roomsToAdd.each(function(room, index, allRoomsToAdd) {
-      return models.Room.create({
+    roomsToAdd = roomsToAdd.split(',');
+    _.each(roomsToAdd, function(room, index, allRoomsToAdd) {
+      console.log('room: ', room);
+      models.Room.create({
         room_name: room,
-        location_id: locationId
+        LocationId: locationId
       })
       .then(function(newRoom) {
-        allRoomsToAdd[index] = {
+        roomsToAdd[index] = {
           roomName: newRoom.room_name,
           roomId: newRoom.id
         }
@@ -76,9 +79,9 @@ module.exports = {
     var endTime = req.body.endTime;
     var reservationName = req.body.reservationName;
 
-    return models.Reservation.create({
-      user_id: userId,
-      room_id: roomId,
+    models.Reservation.create({
+      UserId: userId,
+      RoomId: roomId,
       start_time: startTime,
       end_time: endTime,
       reservation_name: reservationName
