@@ -2,9 +2,9 @@
     <div class="col-sm-3 col-md-2 sidebar">
         <ul class="nav nav-sidebar">
             <li class="active"><a href="#">Locations <span class="sr-only">(current)</span></a> </li>
-            <li ng-repeat="location in locations" ng-model="locations"> <a href="#">{{location.locationName}}</a>
+            <li ng-repeat="location in locations" ng-model="locations"> <a ng-click=selectedLocation($index)>{{location.locationName}}</a>
                 <ul>
-                    <li ng-repeat="room in location.rooms"><a href="#">{{room.roomName}}</a> </li>
+                    <li ng-repeat="room in location.rooms"><a>{{room.roomName}}</a> </li>
                 </ul>
             </li>
         </ul>
@@ -13,12 +13,11 @@
         <div class="row main">
             <div class="col-md-5">
                 <h3>Create a Reservation</h3>
-                <div class="btn dropdown">
-                    <button class="btn btn-default dropdown-toggle" type="button" id="roomSelect" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"> Select Space <span class="caret"></span> </button>
+                <div class="dropdown btn">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"> Select Space <span class="caret"></span> </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                        <li><a href="#">Room 1</a> </li>
-                        <li><a href="#">Room 2</a> </li>
-                        <li><a href="#">Room 3</a> </li>
+                        <li><a href="" ng-repeat="room in currentLocation.rooms" data-value="{{room.roomName}}">{{room.roomName}}</a>
+                        </li>
                     </ul>
                 </div>
                 <div class="btn input-group">
@@ -29,27 +28,27 @@
                 <div class="btn dropdown">
                     <button class="btn btn-default dropdown-toggle" type="button" id="roomSelect" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"> Select Start Time <span class="caret"></span> </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                        <li><a href="#">4:00 AM</a> </li>
-                        <li><a href="#">5:00 AM</a> </li>
-                        <li><a href="#">6:00 AM</a> </li>
-                        <li><a href="#">7:00 AM</a> </li>
-                        <li><a href="#">8:00 AM</a> </li>
-                        <li><a href="#">9:00 AM</a> </li>
-                        <li><a href="#">10:00 AM</a> </li>
-                        <li><a href="#">11:00 AM</a> </li>
-                        <li><a href="#">12:00 AM</a> </li>
-                        <li><a href="#">1:00 PM</a> </li>
-                        <li><a href="#">2:00 PM</a> </li>
-                        <li><a href="#">3:00 PM</a> </li>
-                        <li><a href="#">4:00 PM</a> </li>
-                        <li><a href="#">5:00 PM</a> </li>
-                        <li><a href="#">6:00 PM</a> </li>
-                        <li><a href="#">7:00 PM</a> </li>
-                        <li><a href="#">8:00 PM</a> </li>
-                        <li><a href="#">9:00 PM</a> </li>
-                        <li><a href="#">10:00 PM</a> </li>
-                        <li><a href="#">11:00 PM</a> </li>
-                        <li><a href="#">12:00 PM</a> </li>
+                        <li><a>4:00 AM</a> </li>
+                        <li><a>5:00 AM</a> </li>
+                        <li><a>6:00 AM</a> </li>
+                        <li><a>7:00 AM</a> </li>
+                        <li><a>8:00 AM</a> </li>
+                        <li><a>9:00 AM</a> </li>
+                        <li><a>10:00 AM</a> </li>
+                        <li><a>11:00 AM</a> </li>
+                        <li><a>12:00 AM</a> </li>
+                        <li><a>1:00 PM</a> </li>
+                        <li><a>2:00 PM</a> </li>
+                        <li><a>3:00 PM</a> </li>
+                        <li><a>4:00 PM</a> </li>
+                        <li><a>5:00 PM</a> </li>
+                        <li><a>6:00 PM</a> </li>
+                        <li><a>7:00 PM</a> </li>
+                        <li><a>8:00 PM</a> </li>
+                        <li><a>9:00 PM</a> </li>
+                        <li><a>10:00 PM</a> </li>
+                        <li><a>11:00 PM</a> </li>
+                        <li><a>12:00 PM</a> </li>
                     </ul>
                 </div>
                 <div class="btn input-group">
@@ -57,8 +56,13 @@
                 <button type="button" class="btn btn-primary btn-block"> <i class="fa fa-check"></i> Confirm Reservation </button>
             </div>
             <div class="col-md-5">
-                <h3 class="text-center">Current Reservations</h3>
-                <div ng-controller="eventsController" class="panel panel-default" id="events-sidebar">
+                <h3 class="text-center">Current {{currentLocation.locationName}} Reservations</h3>
+                <div class="panel panel-default" id="events-sidebar">
+                    <div ng-repeat="index in currentReservations">
+                        <p class="text-center">{{index.reservationName}}</p>
+                        <p class="text-center">{{index.starttime}}</p>
+                        <p class="text-center">{{index.endtime}}</p>
+                    </div>
                     <div id="event-wrapper"> </div>
                 </div>
             </div>
