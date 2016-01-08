@@ -59,6 +59,15 @@ angular.module('dashboard', ['ngAnimate', 'ui.bootstrap'])
                 size: size
             });
         };
+
+        $scope.openCal = function(){
+          $scope.popupCal.opened = true;
+        };
+
+        $scope.popupCal = {
+          opened: false
+        };
+
         $scope.addUserInput = ""
         $scope.addRoomInput = ""
         $scope.addRoom = function(){
