@@ -142,5 +142,16 @@ module.exports = {
     .catch(function(err) {
       next(err);
     });
+  },
+  getAllRoomsAndReservations: function(LocationId) {
+    helper.getAllRooms(LocationId)
+      .then(function(result) {
+        var roomsAndReservations = _.map(result[0], function(val, index, list) {
+          return val.json_build_object;
+        });
+        res.json({
+          data: {rooms: roomsAndReservations}
+        });
+      });
   }
 }
