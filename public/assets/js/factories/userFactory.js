@@ -19,8 +19,28 @@ angular.module('userFactory', [])
       })
       .then(function (res) {
         return res.data;
-      }, function (res) {
-        console.error('Error: ', res);
+      })
+      .catch(function (err) {
+        console.error('Error: ', err);
+      });
+    };
+
+    user.addRoomsAndUsers = function(locId, users, rooms) {
+      return $http({
+        method: 'POST',
+        url: '/api/users/roomsusers',
+        data: {
+          userId: user.currentUser.id,
+          locationId: locId,
+          usersToAdd: users,
+          roomsToAdd: rooms
+        }
+      })
+      .then(function(res) {
+        return res.data;
+      })
+      .catch(function(err) {
+        console.error('Error:', err);
       });
     };
 
