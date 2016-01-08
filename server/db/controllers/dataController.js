@@ -1,7 +1,7 @@
 var models = require('../models');
 var _ = require('underscore');
-var helper = require('/../../config/helpers.js');
-var sendGrid = require('/../../email/sendGrid.js');
+var helper = require('../../config/helpers.js');
+var sendGrid = require('../../email/sendGrid.js');
 
 module.exports = {
   addLocation: function(req, res, next) {
@@ -18,8 +18,9 @@ module.exports = {
       });
 
       res.json({
-        locationId: newLocation.id,
-        locationName: newLocation.location_name
+        id: newLocation.id,
+        locationName: newLocation.location_name,
+        rooms: []
       });
     })
     .catch(function(error) {
@@ -127,7 +128,7 @@ module.exports = {
         end: newReservation.end_time,
         createdBy: createdByUser
       };
-      
+
       var usersList = helper.getAllUsersAtLocation(locationId);
       _.each(usersList, function(user) {
         sendGrid.reservationEmail(user.username, emailReservationDetails);
