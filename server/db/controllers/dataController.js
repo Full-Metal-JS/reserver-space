@@ -45,7 +45,7 @@ module.exports = {
               username: user,
               registered: false
             })
-            .spread(function(pendingUser) {
+            .then(function(pendingUser) {
               models.UserLocation.create({
                 UserId: pendingUser.id,
                 LocationId: locationId
