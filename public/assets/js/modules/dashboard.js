@@ -2,7 +2,7 @@
 angular.module('dashboard', [])
     .controller('DashboardController', function($scope, UserFactory) {
         $scope.locations = (UserFactory.currentUser.data.locations !== undefined) ?
-            UserFactory.currentUser.data.locations : [];
+          UserFactory.currentUser.data.locations : [];
 
         $scope.addbar = {
             text: '',
