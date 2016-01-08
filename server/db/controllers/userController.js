@@ -64,6 +64,7 @@ module.exports = {
               var allData = helpers.getAllData(user);
               console.log(allData);
               res.json({
+                id: user.id,
                 username: user.username,
                 token: token,
                 data: data.user.data
