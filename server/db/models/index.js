@@ -5,10 +5,10 @@ var path      = require('path');
 var Sequelize = require('sequelize');
 var basename  = path.basename(module.filename);
 var env       = 'production';
-var config    = require(__dirname + '/../config/config.json')[env];
+var config    = require(__dirname + '/../config/config.json')[env] || null;
 var db        = {};
 
-if (process.env.DATABASE_URI) {
+if (!config) {
   var sequelize = new Sequelize(process.env.DATABASE_URI, {
     dialect: 'postgres',
     protocol: 'postgres',
