@@ -2,7 +2,11 @@ angular.module('userFactory', [])
   .factory('UserFactory', ['$http', function($http) {
     var user = {};
 
-    user.currentUser = {};
+    user.currentUser = {
+      data: {
+        locations: []
+      }
+    };
 
     user.savelocation = function (location) {
       return $http({
@@ -18,7 +22,11 @@ angular.module('userFactory', [])
     };
 
     user.clearUser = function () {
-      user.currentUser = {};
+      user.currentUser = {
+        data: {
+          locations: []
+        }
+      };
     };
 
     return user;
