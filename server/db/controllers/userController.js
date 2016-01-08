@@ -1,6 +1,7 @@
 var models = require('../models');
 var jwt = require('jwt-simple');
 var helpers = require('../../config/helpers.js');
+var sendGrid = require('../../email/sendGrid.js');
 var data = require('../../data.js');
 
 module.exports = {
@@ -18,7 +19,7 @@ module.exports = {
         if (user.registered) {
           res.status(403).send({error: 'User already exist!'});
           next(new Error('User already exist!'));
-        } 
+        }
         else {
           user.update({
             password: password,
@@ -34,7 +35,7 @@ module.exports = {
       }
     })
     .then(function(user) {
-      var token = jwt.encode(user, 'secret'); 
+      var token = jwt.encode(user, 'secret');
       res.json({token: token});
     })
     .catch(function(error) {
@@ -44,7 +45,7 @@ module.exports = {
   signin: function(req, res, next) {
     var username = req.body.email;
     var password = req.body.password;
- 
+
     models.User.findAll({
       where: {
         username: username
@@ -60,14 +61,13 @@ module.exports = {
             if (foundUser) {
               var token = jwt.encode(user, 'secret');
               // compile locations, rooms, reservations
-              // helpers.getLocationIds(user);
-
-              // res.json({
-              //   username: user.username,
-              //   token: token,
-              //   locations: data.user
-              // });
-              res.json(data.user);
+              var allData = helpers.getAllData(user);
+              console.log(allData);
+              res.json({
+                username: user.username,
+                token: token,
+                data: data.user.data
+              });
             } else {
               res.status(401).send('User or password is incorrect');
               next(new Error('User or password is incorrect'));
@@ -124,6 +124,12 @@ module.exports = {
           models.User.create({
             username: username,
             registered: false
+          })
+          .then(function(user) {
+            sendGrid.signupEmail(user.username);
+          })
+          .catch(function(error) {
+            next(error);
           });
         }
       })
