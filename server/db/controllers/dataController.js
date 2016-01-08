@@ -133,11 +133,12 @@ module.exports = {
         end: newReservation.end_time,
         createdBy: createdByUser
       };
-
-      var usersList = helper.getAllUsersAtLocation(locationId);
-      _.each(usersList, function(user) {
-        sendGrid.reservationEmail(user.username, emailReservationDetails);
-      });
+      helper.getAllUsersAtLocation(locationId)
+        .then(function(result) {
+          _.each(result[0], function(user) {
+            sendGrid.reservationEmail(user.username);
+          });
+        });
     })
     .catch(function(err) {
       next(err);

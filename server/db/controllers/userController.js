@@ -64,7 +64,6 @@ module.exports = {
               // compile locations, rooms, reservations
               helpers.getAllData(user)
                 .then(function(result) {
-                  console.log(result[0].length);
                   var locations = _.map(result[0], function(val, index, list) {
                     return val.json_build_object;
                   });
@@ -86,7 +85,6 @@ module.exports = {
                     });
                   });
                   console.log(newLocations);
-  
                 res.json({
                     username: user.username,
                     token: token,
