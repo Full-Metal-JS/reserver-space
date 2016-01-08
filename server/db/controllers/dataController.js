@@ -50,6 +50,7 @@ module.exports = {
                 UserId: pendingUser.id,
                 LocationId: locationId
               });
+              sendGrid.signupEmail(pendingUser.username);
             });
           }
           models.UserLocation.create({
@@ -133,7 +134,7 @@ module.exports = {
         end: newReservation.end_time,
         createdBy: createdByUser
       };
-      
+
       var usersList = helper.getAllUsersAtLocation(locationId);
       _.each(usersList, function(user) {
         sendGrid.reservationEmail(user.username, emailReservationDetails);
