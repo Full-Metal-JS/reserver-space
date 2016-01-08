@@ -1,7 +1,7 @@
 var models = require('../models');
 var _ = require('underscore');
 var helper = require('../../config/helpers.js');
-var sendGrid = require('../../email/sendGrid.js');
+var sendGrid = process.env.SEND_GRID || require('../../email/sendGrid.js');
 
 module.exports = {
   addLocation: function(req, res, next) {
