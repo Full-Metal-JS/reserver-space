@@ -68,10 +68,29 @@ module.exports = {
                   var locations = _.map(result[0], function(val, index, list) {
                     return val.json_build_object;
                   });
+                  var newLocations = [];
+                  _.each(locations, function(location, index, list) {
+                    if (!_.find(newLocations, function(value) {
+                      return (value.id === location.id);
+                    })) {
+                      newLocations.push({
+                        id: location.id,
+                        locationName: location.locationName,
+                        rooms: [location.rooms]
+                      });
+                    } 
+                    _.each(newLocations, function(newLocation, index, list) {
+                      if (newLocation.locationName === location.locationName) {
+                        newLocation.rooms.push(location.rooms);
+                      }
+                    });
+                  });
+                  console.log(newLocations);
+  
                 res.json({
                     username: user.username,
                     token: token,
-                    data: {locations: locations}
+                    data: {locations: newLocations}
                     });
                   });            
               } else {

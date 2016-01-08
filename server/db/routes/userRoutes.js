@@ -10,4 +10,5 @@ module.exports = function(app) {
   app.post('/locations', dataController.addLocation);
   app.post('/roomsusers', dataController.addRoomsAndUsers);
   app.post('/reservations', dataController.addReservation);
+  app.post('/roomsreservations', dataController.getAllRoomsAndReservations);
 };

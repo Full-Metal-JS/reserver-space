@@ -64,7 +64,6 @@ module.exports = {
     if (roomsToAdd) {
     roomsToAdd = roomsToAdd.split(',');
       _.each(roomsToAdd, function(room, index, allRoomsToAdd) {
-        console.log('room: ', room);
         models.Room.create({
           room_name: room,
           LocationId: locationId
@@ -143,5 +142,16 @@ module.exports = {
     .catch(function(err) {
       next(err);
     });
+  },
+  getAllRoomsAndReservations: function(LocationId) {
+    helper.getAllRooms(LocationId)
+      .then(function(result) {
+        var roomsAndReservations = _.map(result[0], function(val, index, list) {
+          return val.json_build_object;
+        });
+        res.json({
+          data: {rooms: roomsAndReservations}
+        });
+      });
   }
 }
