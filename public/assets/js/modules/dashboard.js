@@ -1,6 +1,6 @@
 
-angular.module('dashboard', [])
-    .controller('DashboardController', function($scope, UserFactory) {
+angular.module('dashboard', ['ngAnimate', 'ui.bootstrap'])
+    .controller('DashboardController', function($scope,$uibModal, UserFactory) {
         $scope.locations = (UserFactory.currentUser.data.locations !== undefined) ?
           UserFactory.currentUser.data.locations : [];
 
@@ -50,4 +50,20 @@ angular.module('dashboard', [])
                     console.error('Error adding location: ', error);
                 });
         };
+
+        $scope.open = function (size) {
+          var modalInstance = $uibModal.open({
+                animation: $scope.animationsEnabled,
+                templateUrl: 'addModal.html',
+                controller: 'DashboardController',
+                size: size
+            });
+        };
+        $scope.addUserInput = ""
+        $scope.addRoomInput = ""
+        $scope.addRoom = function(){
+            console.log($scope.addUserInput)
+            console.log($scope.addRoomInput)
+            console.log("it worked")
+        }
     });

@@ -4,16 +4,17 @@
       <li class="active"><a href="#">Locations<span class="sr-only">(current)</span></a></li>
       <li ng-repeat="location in locations" ng-model="locations"> 
         <a ng-click="selectedLocation($index)">{{location.locationName}}</a>
-        <ul ng-show="locaton.rooms.length > 0">
-          <li ng-repeat="room in location.rooms"><a>{{room.roomName}}</a></li>
+        <ul ng-show="location.rooms.length > 0">
+          <li ng-repeat="room in location.rooms"><a>{{rooms.roomName}}</a></li>
         </ul>
       </li>
     </ul>
   </div>
     <div class="col-sm-offset-3 col-md-10 col-md-offset-2">
+
       <div class="input-group create-input-group">
         <span class="input-group-btn">
-          <button type="button" class="btn btn-default" ng-click="addLocation()">
+          <button type="button" class="btn btn-default" ng-click="open('lg')">
             <i class="fa fa-plus"></i>
           </button>
         </span>
@@ -77,4 +78,30 @@
             </div>
         </div>
     </div>
+</div>
+
+<div ng-controller="DashboardController">
+  <script type="text/ng-template" id="addModal.html">
+    <div class="modal-content modal-auth">
+      <div class="modal-header">
+        <h3 class="modal-title">Add Rooms</h3>
+      </div>
+      <div class="modal-body">
+        <p class="text-danger" ng-show="error">{{error.data.error}}</p>
+        <form>
+          <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-fort-awesome"></i></span>
+            <input class="form-control" ng-model="addRoomInput" placeholder="Add Room followed by ','" required>
+          </div>
+          <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-user-plus"></i></span>
+            <input class="form-control" ng-model="addUserInput" placeholder="Add Users Email followed by ','">
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-primary btn-block" ng-click="addRoom()">Confirm</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </script>
 </div>
