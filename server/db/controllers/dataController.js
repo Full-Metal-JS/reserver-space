@@ -16,8 +16,9 @@ module.exports = {
       });
 
       res.json({
-        locationId: newLocation.id,
-        locationName: newLocation.location_name
+        id: newLocation.id,
+        locationName: newLocation.location_name,
+        rooms: []
       });
     })
     .catch(function(error) {
@@ -29,31 +30,33 @@ module.exports = {
     var usersToAdd = req.body.usersToAdd;
     var roomsToAdd = req.body.roomsToAdd;
 
-    _.each(usersToAdd.split(','), function(user, index, allUsersToAdd) {
-      models.User.find({
-        where: {
-          username: user
-        }
-      })
-      .then(function(foundUser) {
-        if (!foundUser) {
-          models.User.create({
-            username: user,
-            registered: false
-          })
-          .spread(function(pendingUser) {
-            models.UserLocation.create({
-              UserId: pendingUser.id,
-              LocationId: locationId
+    if (usersToAdd){
+      _.each(usersToAdd.split(','), function(user, index, allUsersToAdd) {
+        models.User.find({
+          where: {
+            username: user
+          }
+        })
+        .then(function(foundUser) {
+          if (!foundUser) {
+            models.User.create({
+              username: user,
+              registered: false
+            })
+            .spread(function(pendingUser) {
+              models.UserLocation.create({
+                UserId: pendingUser.id,
+                LocationId: locationId
+              });
             });
+          }
+          models.UserLocation.create({
+            UserId: foundUser.id,
+            LocationId: locationId
           });
-        }
-        models.UserLocation.create({
-          UserId: foundUser.id,
-          LocationId: locationId
         });
       });
-    });
+    }
     roomsToAdd = roomsToAdd.split(',');
     _.each(roomsToAdd, function(room, index, allRoomsToAdd) {
       console.log('room: ', room);
@@ -74,7 +77,7 @@ module.exports = {
   },
   addReservation: function(req, res, next) {
     var userId = req.body.userId;
-    var roomId = req.body.locationId;
+    var roomId = req.body.roomId;
     var startTime = req.body.startTime;
     var endTime = req.body.endTime;
     var reservationName = req.body.reservationName;
