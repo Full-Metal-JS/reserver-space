@@ -3,7 +3,6 @@ var jwt = require('jwt-simple');
 var helpers = require('../../config/helpers.js');
 var sendGrid = require('../../email/sendGrid.js');
 var data = require('../../data.js');
-var _ = require('underscore');
 
 module.exports = {
   signup: function(req, res, next) {
@@ -62,20 +61,14 @@ module.exports = {
             if (foundUser) {
               var token = jwt.encode(user, 'secret');
               // compile locations, rooms, reservations
-              helpers.getAllData(user)
-                .then(function(result) {
-                  console.log(result[0].length);
-                  var locations = _.map(result[0], function(val, index, list) {
-                    return val.json_build_object;
-                  });
-          
-                  res.json({
-                    username: user.username,
-                    token: token,
-                    data: {locations: locations}
-                    });
-                  });
-             
+              var allData = helpers.getAllData(user);
+              console.log(allData);
+              res.json({
+                id: user.id,
+                username: user.username,
+                token: token,
+                data: data.user.data
+              });
             } else {
               res.status(401).send('User or password is incorrect');
               next(new Error('User or password is incorrect'));
