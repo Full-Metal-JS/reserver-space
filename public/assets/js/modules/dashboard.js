@@ -1,6 +1,6 @@
 
 angular.module('dashboard', ['ngAnimate', 'ui.bootstrap'])
-    .controller('DashboardController', function($scope,$uibModal, UserFactory) {
+    .controller('DashboardController', function($scope,$uibModal, UserFactory,moment) {
         $scope.locations = (UserFactory.currentUser.data.locations !== undefined) ?
           UserFactory.currentUser.data.locations : [];
 
@@ -13,19 +13,41 @@ angular.module('dashboard', ['ngAnimate', 'ui.bootstrap'])
         $scope.currentReservations = [];
         // $scope.currentRoom = [];
 
-        $(".main").on('click', ".dropdown-menu li a", function() {
-            console.log("clicked")
+        //change the drop down and sets the selected room in scope
+        $(".main").on('click', ".dropdown-menu#room li a", function() {
+            $scope.roomInput = this.text
+
             $(this).parents(".dropdown").find('.btn').html($(this).text() + ' <span class="caret"></span>');
             $(this).parents(".dropdown").find('.btn').val($(this).data('value'));
         });
 
-        // $scope.selectedRoom = function() {
+        //change the drop down and sets the selected time in scope
+        $(".main").on('click', ".dropdown-menu#time li a", function() {
+            $scope.timeInput = this.text
+            $(this).parents(".dropdown").find('.btn').html($(this).text() + ' <span class="caret"></span>');
+            $(this).parents(".dropdown").find('.btn').val($(this).data('value'));
+        });
 
-        // }
+        $scope.roomInput = ""
+        $scope.calendarInput = ""
+        $scope.timeInput = ""
+        $scope.resDescInput = ""
+        $scope.confirmReservation = function(){
+            var date =  $scope.eve.eventDate
+            var formatted = moment(date).format('D-MM-YYYY');
+            // $scope.calendarInput = $scope.eve.eventDate || ""
+            
+            console.log($scope.resDescInput)
+            console.log($scope.roomInput)
+            console.log(formatted)
+            console.log($scope.currentLocation.locationName)
+            console.log($scope.timeInput)
+        }
 
         $scope.selectedLocation = function(index) {
             $scope.currentReservations = []
             $scope.currentLocation = $scope.locations[index]
+
             console.log("was run")
             angular.forEach($scope.currentLocation.rooms, function(index) {
                 console.log("reservations: ", index)
