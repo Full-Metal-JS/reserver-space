@@ -1,9 +1,7 @@
-var models = require('../db/models');
-var _ = require('underscore');
-var Promise = require('bluebird');
+var models = require("../db/models");
 
 module.exports = {
   getAllData: function(user) {
-    return models.sequelize.query('select * from "Locations" left join "Rooms" on "Locations".id="Rooms"."LocationId" left join "Reservations" on "Rooms".id = "Reservations"."RoomId";');
+    return models.sequelize.query('select json_build_object(\'id\', "Locations".id,\'locationName\', "Locations"."location_name",\'rooms\', json_build_object(\'id\', "Rooms".id,\'roomName\', "Rooms"."room_name",\'reservations\', json_build_object(\'id\', "Reservations".id,\'reservationName\', "Reservations"."reservation_name")))from "Locations" left join "Rooms" on "Locations".id="Rooms"."LocationId"left join "Reservations" on "Rooms".id="Reservations"."RoomId";');
   }
 }

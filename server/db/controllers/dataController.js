@@ -32,48 +32,53 @@ module.exports = {
     var usersToAdd = req.body.usersToAdd;
     var roomsToAdd = req.body.roomsToAdd;
 
-    _.each(usersToAdd.split(','), function(user, index, allUsersToAdd) {
-      models.User.find({
-        where: {
-          username: user
-        }
-      })
-      .then(function(foundUser) {
-        if (!foundUser) {
-          models.User.create({
-            username: user,
-            registered: false
-          })
-          .spread(function(pendingUser) {
-            models.UserLocation.create({
-              UserId: pendingUser.id,
-              LocationId: locationId
+    if (usersToAdd) {
+      _.each(usersToAdd.split(','), function(user, index, allUsersToAdd) {
+        models.User.find({
+          where: {
+            username: user
+          }
+        })
+        .then(function(foundUser) {
+          if (!foundUser) {
+            models.User.create({
+              username: user,
+              registered: false
+            })
+            .spread(function(pendingUser) {
+              models.UserLocation.create({
+                UserId: pendingUser.id,
+                LocationId: locationId
+              });
             });
+          }
+          models.UserLocation.create({
+            UserId: foundUser.id,
+            LocationId: locationId
           });
-        }
-        models.UserLocation.create({
-          UserId: foundUser.id,
-          LocationId: locationId
         });
       });
-    });
+    }
+
+    if (roomsToAdd) {
     roomsToAdd = roomsToAdd.split(',');
-    _.each(roomsToAdd, function(room, index, allRoomsToAdd) {
-      console.log('room: ', room);
-      models.Room.create({
-        room_name: room,
-        LocationId: locationId
-      })
-      .then(function(newRoom) {
-        roomsToAdd[index] = {
-          roomName: newRoom.room_name,
-          roomId: newRoom.id
-        }
+      _.each(roomsToAdd, function(room, index, allRoomsToAdd) {
+        console.log('room: ', room);
+        models.Room.create({
+          room_name: room,
+          LocationId: locationId
+        })
+        .then(function(newRoom) {
+          roomsToAdd[index] = {
+            roomName: newRoom.room_name,
+            roomId: newRoom.id
+          }
+        });
       });
-    });
-    res.json({
-      addedRooms: roomsToAdd
-    });
+      res.json({
+        addedRooms: roomsToAdd
+      });
+    }
   },
   addReservation: function(req, res, next) {
     var userId = req.body.userId;
