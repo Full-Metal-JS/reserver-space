@@ -1,5 +1,7 @@
 var models = require('../models');
 var _ = require('underscore');
+var helper = require('../../config/helpers.js');
+var sendGrid = require('../../email/sendGrid.js');
 
 module.exports = {
   addLocation: function(req, res, next) {
@@ -12,7 +14,7 @@ module.exports = {
     .then(function(newLocation) {
       models.UserLocation.create({
         UserId: userId,
-        LocationId: newLocation.id 
+        LocationId: newLocation.id
       });
 
       res.json({
@@ -30,33 +32,31 @@ module.exports = {
     var usersToAdd = req.body.usersToAdd;
     var roomsToAdd = req.body.roomsToAdd;
 
-    if (usersToAdd){
-      _.each(usersToAdd.split(','), function(user, index, allUsersToAdd) {
-        models.User.find({
-          where: {
-            username: user
-          }
-        })
-        .then(function(foundUser) {
-          if (!foundUser) {
-            models.User.create({
-              username: user,
-              registered: false
-            })
-            .spread(function(pendingUser) {
-              models.UserLocation.create({
-                UserId: pendingUser.id,
-                LocationId: locationId
-              });
+    _.each(usersToAdd.split(','), function(user, index, allUsersToAdd) {
+      models.User.find({
+        where: {
+          username: user
+        }
+      })
+      .then(function(foundUser) {
+        if (!foundUser) {
+          models.User.create({
+            username: user,
+            registered: false
+          })
+          .spread(function(pendingUser) {
+            models.UserLocation.create({
+              UserId: pendingUser.id,
+              LocationId: locationId
             });
-          }
-          models.UserLocation.create({
-            UserId: foundUser.id,
-            LocationId: locationId
           });
+        }
+        models.UserLocation.create({
+          UserId: foundUser.id,
+          LocationId: locationId
         });
       });
-    }
+    });
     roomsToAdd = roomsToAdd.split(',');
     _.each(roomsToAdd, function(room, index, allRoomsToAdd) {
       console.log('room: ', room);
@@ -77,10 +77,14 @@ module.exports = {
   },
   addReservation: function(req, res, next) {
     var userId = req.body.userId;
+    var locationId = req.body.locationId;
     var roomId = req.body.roomId;
     var startTime = req.body.startTime;
     var endTime = req.body.endTime;
     var reservationName = req.body.reservationName;
+    var location;
+    var room;
+    var createdByUser;
 
     models.Reservation.create({
       UserId: userId,
@@ -93,6 +97,41 @@ module.exports = {
       res.json({
         reservationName: newReservation.reservation_name,
         reservationId: newReservation.id
+      });
+
+      models.Location.findById(locationId).then(function(foundLocation) {
+        location = foundLocation;
+      })
+      .catch(function(error) {
+        next(error);
+      });
+
+      models.Room.findById(roomId).then(function(foundRoom) {
+        room = foundRoom;
+      })
+      .catch(function(error) {
+        next(error);
+      });
+
+      models.User.findById(userId).then(function(foundUser) {
+         createdByUser = foundUser;
+      })
+      .catch(function(error) {
+        next(error);
+      });
+
+      var emailReservationDetails = {
+        reservationName: reservationName,
+        location: location,
+        room: room,
+        start: newReservation.start_time,
+        end: newReservation.end_time,
+        createdBy: createdByUser
+      };
+
+      var usersList = helper.getAllUsersAtLocation(locationId);
+      _.each(usersList, function(user) {
+        sendGrid.reservationEmail(user.username, emailReservationDetails);
       });
     })
     .catch(function(err) {

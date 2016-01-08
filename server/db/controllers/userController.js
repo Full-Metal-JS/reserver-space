@@ -60,14 +60,14 @@ module.exports = {
             if (foundUser) {
               var token = jwt.encode(user, 'secret');
               // compile locations, rooms, reservations
-              //var userData = helpers.getAllData(user);
+              helpers.getAllData(user, console.log);
 
               // res.json({
               //   username: user.username,
               //   token: token,
               //   locations: data.user
               // });
-              res.json(data.user);
+              // res.json(data.user);
             } else {
               res.status(401).send('User or password is incorrect');
               next(new Error('User or password is incorrect'));

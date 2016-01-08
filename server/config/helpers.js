@@ -1,95 +1,80 @@
 var models = require('../db/models');
 var _ = require('underscore');
-
-function getLocationIds(user) {
-  models.UserLocation.findAll({
-    where: {
-      UserId: user.id 
-    }
-  })
-  .spread(function(locationIds) {
-    return locationIds;
-  });
-}
-
-function getAllLocations(locationIds, callback) {
-  var locationArray = locationIds.map(function(value, key, list) {
-    models.Location.find({
-      where: {
-        id: value
-      }
-    })
-    .spread(function(location){
-      return {
-        id: location.id,
-        name: location.location_name
-      }
-    })
-    .catch(function(err) {
-      return err;
-    });
-  });
-  callback(locationArray);
-}
-
-function getAllRooms(locationsArray, callback) {
-  locationsArray.each(function(value, index, list) {
-    models.Room.findAll({
-      where: {
-        location_id: value.id
-      }
-    })
-    .spread(function(rooms) {
-      list[index].rooms = rooms.map(function(value, key, list) {
-        return {
-          id: value.id,
-          name: value.room_name
-        }
-      })
-    })
-  })
-  callback(locationsArray);
-}
-
-function getAllReservations(locationsArray, callback) {
-  locationsArray.each(function(value, index, locations) {
-    locations[index].each(function(value, index, rooms) {
-      models.Reservation.findAll({
-        where: {
-          room_id: value.id
-        }
-      })
-      .spread(function(reservations) {
-        rooms[index].reservations = reservations.map(function(value, key, list) {
-          return {
-            id: value.id,
-            name: value.reservation_name,
-            start_time: value.start_time,
-            end_time: value.end_time
-          }
-        });
-      });
-    });
-  });
-  callback(locationsArray);
-}
+var Promise = require('bluebird');
 
 module.exports = {
-  getAllData: function(user) {
-    var allData;
-    var locationIds = getLocationIds(user);
-    if (locationIds){
-      getAllLocations(locationIds, 
-        getAllRooms(locationsArray, 
-          getAllReservations(locationsArray, 
-            function(locationsArray) {
-              allData = {
-                locations: locationsArray
-              }
-            })));
-      return allData;
-    } else {
-      return allData = [];
-    }
+//   getAllData: function(user, callback) {
+//     models.UserLocation.findAll({
+//       where: {
+//         UserId: user.id
+//       }
+//     })
+//     .then(function(results){
+//       return (_.map(results, function(location, index, list) {
+//         return location.LocationId;
+//       }));
+//     })
+//     .then(function(locationIds) {
+//       return models.Location.findAll({
+//         where: {
+//           id: locationIds
+//         }
+//       })
+//     })
+//     .then(function(allLocations) {
+//       return (_.map(allLocations, function(location, index, list) {
+//         return {
+//           id: location.id,
+//           locationName: location.location_name,
+//           rooms: []
+//         }
+//       }));
+//     })
+//     .then(function(locationsArray) {
+//       // use previously created locationIds array to find corresponding rooms
+//       return (models.Room.findAll({
+//         where: {
+//           LocationId: _.map(locationsArray, function(location, index, list) { 
+//             return location.id 
+//           })
+//         }
+//       })
+//       .then(function(rooms) {
+//         return _.each(locationsArray, function(location, index, locationList) {
+//           _.each(rooms, function(room, index, roomList) {
+//             if (location.id === room.LocationId) {
+//               locationList[index].rooms.push({
+//                 id: room.id,
+//                 roomName: room.room_name,
+//                 reservations: 
+//               });
+//             }
+//           });
+//         });
+//       }))
+//     })
+//     .then(function(locationsArray) {
+      
+//     })
+//   }
+  getAllData: function(user, callback) {
+    models.sequelize.query('select * from Locations left join Rooms on Locations.id=Rooms.LocationId left join Reservations on Rooms.id = Reservations.RoomId;')
+      .then(function(poop) {
+        callback(poop);
+      })
   }
 }
+    //   .then(function(rooms) {
+    //     return _.each(locationsArray, function(location, index, locationList) {
+    //       _.each(rooms, function(room, index, roomList) {
+    //         if (location.id === room.LocationId) {
+    //           locationList[index].push({
+    //             id: room.id,
+    //             roomName: room.room_name,
+    //             reservations: []
+    //           });
+    //         }
+    //       });
+    //     });
+    //   }))
+    // })
