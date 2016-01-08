@@ -128,6 +128,9 @@ module.exports = {
           .then(function(user) {
             sendGrid.signupEmail(user.username);
           })
+          .catch(function(error) {
+            next(error);
+          });
         }
       })
     .catch(function(error) {
