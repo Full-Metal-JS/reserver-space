@@ -1,7 +1,7 @@
 var models = require('../models');
 var _ = require('underscore');
 var helper = require('../../config/helpers.js');
-var sendGrid = process.env.SEND_GRID || require('../../email/sendGrid.js');
+var sendGrid = process.env.SEND_GRID;
 
 module.exports = {
   addLocation: function(req, res, next) {
@@ -133,7 +133,7 @@ module.exports = {
         end: newReservation.end_time,
         createdBy: createdByUser
       };
-
+      if (!sendGrid) {sendGrid = require('../../email/sendGrid.js');}
       var usersList = helper.getAllUsersAtLocation(locationId);
       _.each(usersList, function(user) {
         sendGrid.reservationEmail(user.username, emailReservationDetails);
