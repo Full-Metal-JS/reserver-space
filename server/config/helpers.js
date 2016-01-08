@@ -1,12 +1,7 @@
-module.exports = {
-  // send error to middleware
-  errorLogger: function(error, req, res, next) {
-    console.error(error.stack);
-    next(error);
-  },
+var models = require("../db/models");
 
-  // send error to client
-  errorHandler: function(error, req, res, next) {
-    res.status(500).send({error: error.message});
-  },
-};
+module.exports = {
+  getAllData: function(user) {
+    return models.sequelize.query('select json_build_object(\'id\', "Locations".id,\'locationName\', "Locations"."location_name",\'rooms\', json_build_object(\'id\', "Rooms".id,\'roomName\', "Rooms"."room_name",\'reservations\', json_build_object(\'id\', "Reservations".id,\'reservationName\', "Reservations"."reservation_name")))from "Locations" left join "Rooms" on "Locations".id="Rooms"."LocationId"left join "Reservations" on "Rooms".id="Reservations"."RoomId";');
+  }
+}

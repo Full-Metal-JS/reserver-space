@@ -1,32 +1,36 @@
 <!doctype html>
-<html ng-app="dibs">
-
-<head>
+<html ng-app="reserverSpace">
+  <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="./css/styles.css" />
-    <link rel="stylesheet" type="text/css" href="./lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="./lib/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    <title>Dibs helping make roommates happy</title>
-</head>
+    <link rel="stylesheet" type="text/css" href="./assets/css/styles.css">
+    <title>Reserver Space</title>
+  </head>
+  <body class="{{$state.current.name}}">
+    <navbar></navbar>
 
-<body>
-    <!-- views are injected here -->
-    <div ui-view="indexPage"></div>
-    <script src="/lib/angular/angular.min.js"></script>
+    <div class="container">
+      <div ui-view></div>
+    </div>
+    
+    <script src="./lib/angular/angular.min.js"></script>
+    <script src="./lib/angular-ui-router/release/angular-ui-router.min.js"></script>
     <script src="./lib/angular-animate/angular-animate.min.js"></script>
     <script src="./lib/jquery/dist/jquery.min.js"></script>
     <script src="./lib/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="./lib/angular-bootstrap/ui-bootstrap.min.js"></script>
     <script src="./lib/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
     <script src="./lib/moment/min/moment.min.js"></script>
-    <script src="/js/modules/events.js"></script>
-    <script src="/js/modules/signup.js"></script>
-    <script src="/js/modules/login.js"></script>
-    <script src="/js/factories/eventFactory.js"></script>
-    <script src="/js/factories/signupFactory.js"></script>
-    <script src="/js/factories/loginFactory.js"></script>
-    <script src="/lib/angular-ui-router/release/angular-ui-router.min.js"></script>
-    <script src="/js/appRoutes.js"></script>
-</body>
-
+    <script src="./assets/js/modules/landing.js"></script>
+    <script src="./assets/js/modules/auth.js"></script>
+    <script src="./assets/js/modules/dashboard.js"></script>
+    <script src="./assets/js/modules/events.js"></script>
+    <script src="./assets/js/factories/dashboardFactory.js"></script>
+    <script src="./assets/js/factories/eventsFactory.js"></script>
+    <script src="./assets/js/factories/authFactory.js"></script>
+    <script src="./assets/js/factories/userFactory.js"></script>
+    <script src="./assets/js/directives/navbarDirectives.js"></script>
+    <script src="./assets/js/app.js"></script>
+  </body>
 </html>

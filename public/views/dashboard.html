@@ -1,61 +1,107 @@
-<!-- navbar -->
-<div id="nav-container">
-    <div class="container">
-        <img id="logo-image" src="./css/dibs3.png" alt="Ball Script Logo">
-    </div>
-</div>
-<div class="container">
-    <div class="row">
-        <div class="col-md-5">
-            <div class="nav nav-list">
-                <div class="sideBar">
-                    <!-- Angular datePicker -->
-                    <h3>Create Dibs</h3>
-                    <div class="input-group">
-                        <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="eve.eventDate" is-open="status.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
-                        <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-              </span>
+<div class="row">
+  <div class="col-sm-3 col-md-2 sidebar">
+    <ul class="nav nav-sidebar">
+      <li class="active"><a href="#">Locations<span class="sr-only">(current)</span></a></li>
+      <li ng-repeat="location in locations" ng-model="locations"> 
+        <a ng-click="selectedLocation($index)">{{location.locationName}}</a>
+        <ul ng-show="location.rooms.length > 0">
+          <li ng-repeat="room in location.rooms"><a>{{rooms.roomName}}</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+    <div class="col-sm-offset-3 col-md-10 col-md-offset-2">
+
+      <div class="input-group create-input-group">
+        <span class="input-group-btn">
+          <button type="button" class="btn btn-default" ng-click="open('lg')">
+            <i class="fa fa-plus"></i>
+          </button>
+        </span>
+        <input type="text" placeholder="{{addbar.placeholder}}" class="form-control" ng-model="addbar.text">
+      </div>
+        <div class="row main">
+            <div class="col-md-5">
+                <h3>Create a Reservation</h3>
+                <div class="dropdown btn">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"> Select Space <span class="caret"></span> </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li><a href="" ng-repeat="room in currentLocation.rooms" data-value="{{room.roomName}}">{{room.roomName}}</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="btn input-group">
+                    <input type="text" class="form-control" placeholder="Select Date" uib-datepicker-popup="{{format}}" ng-model="eve.eventDate" is-open="status.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" /> <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i>
+            </button>
+          </span> </div>
+                <div class="btn dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="roomSelect" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"> Select Start Time <span class="caret"></span> </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li><a>4:00 AM</a> </li>
+                        <li><a>5:00 AM</a> </li>
+                        <li><a>6:00 AM</a> </li>
+                        <li><a>7:00 AM</a> </li>
+                        <li><a>8:00 AM</a> </li>
+                        <li><a>9:00 AM</a> </li>
+                        <li><a>10:00 AM</a> </li>
+                        <li><a>11:00 AM</a> </li>
+                        <li><a>12:00 AM</a> </li>
+                        <li><a>1:00 PM</a> </li>
+                        <li><a>2:00 PM</a> </li>
+                        <li><a>3:00 PM</a> </li>
+                        <li><a>4:00 PM</a> </li>
+                        <li><a>5:00 PM</a> </li>
+                        <li><a>6:00 PM</a> </li>
+                        <li><a>7:00 PM</a> </li>
+                        <li><a>8:00 PM</a> </li>
+                        <li><a>9:00 PM</a> </li>
+                        <li><a>10:00 PM</a> </li>
+                        <li><a>11:00 PM</a> </li>
+                        <li><a>12:00 PM</a> </li>
+                    </ul>
+                </div>
+                <div class="btn input-group">
+                    <input type="text" class="form-control" placeholder="Reservations Description" aria-describedby="basic-addon1"> <span class="input-group-addon"><i class="glyphicon glyphicon-edit"></i></span> </div>
+                <button type="button" class="btn btn-primary btn-block"> <i class="fa fa-check"></i> Confirm Reservation </button>
+            </div>
+            <div class="col-md-5">
+                <h3 class="text-center">Current {{currentLocation.locationName}} Reservations</h3>
+                <div class="panel panel-default" id="events-sidebar">
+                    <div ng-repeat="index in currentReservations">
+                        <p class="text-center">{{index.reservationName}}</p>
+                        <p class="text-center">{{index.starttime}}</p>
+                        <p class="text-center">{{index.endtime}}</p>
                     </div>
-                    <!-- Angular datePicker End -->
-                    <!-- Angular TimePicker -->
-                    <div class="timePicker">
-                        <div class="timePickerLeft">
-                            <uib-timepicker ng-model="eve.eventDate" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian" class='centerTime'></uib-timepicker>
-                        </div>
-                        <div class="timePickerRight">
-                            <pre class="alert alert-info">Dibs on: {{eve.eventDate  | date:'shortDate' }} | {{eve.eventDate  | date:'shortTime' }}</pre>
-                        </div>
-                    </div>
-                    <!-- Angular TimePicker End -->
-                    <div>
-                        <input class="standardInputStyling" ng-model="eve.eventDescription" placeholder="Dibs description..."></input>
-                    </div>
-                    <h4>Pick a room</h4>
-                    <div class="btn-group">
-                        <label class="btn btn-success room-btn" ng-model="eve.roomName" uib-btn-radio="'Kitchen'" uncheckable>Kitchen</label>
-                        <label class="btn btn-success room-btn" ng-model="eve.roomName" uib-btn-radio="'Living Room'" uncheckable>Living Room</label>
-                        <label class="btn btn-success room-btn" ng-model="eve.roomName" uib-btn-radio="'Entire House'" uncheckable>Entire House</label>
-                    </div>
-                    <div>
-                        <h4>Alert Roommates</h4>
-                        <input type="checkbox" ng-model="eve.eventAlert"><span id="alert-roommates-padding">Please Alert Roommates</span></input>
-                    </div>
-                    <button class="submit-btn" type="submit" ng-click="eventSubmit()">Set Room Dibs!!!</button>
-                    <!--3DONE ^ what are we going to do with this data -->
+                    <div id="event-wrapper"> </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-1"></div>
-        <div class="col-md-6" ng-init="renderSideDashboard()" ui-view>
-            <!--9 make it for now that each event saved is displayed to this view  -->
-        </div>
     </div>
 </div>
-<!-- footer -->
-<div class="navbar navbar-fixed-bottom" role="footer" style="background-color: #f7f7f9">
-    <div class="container">
-        <p id="copyright-text">© 2016 Dibs</p>
-        <button id="logout-btn" type="submit" ng-click="signout()">Logout</button>
+
+<div ng-controller="DashboardController">
+  <script type="text/ng-template" id="addModal.html">
+    <div class="modal-content modal-auth">
+      <div class="modal-header">
+        <h3 class="modal-title">Add Rooms</h3>
+      </div>
+      <div class="modal-body">
+        <p class="text-danger" ng-show="error">{{error.data.error}}</p>
+        <form>
+          <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-fort-awesome"></i></span>
+            <input class="form-control" ng-model="addRoomInput" placeholder="Add Room followed by ','" required>
+          </div>
+          <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-user-plus"></i></span>
+            <input class="form-control" ng-model="addUserInput" placeholder="Add Users Email followed by ','">
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-primary btn-block" ng-click="addRoom()">Confirm</button>
+          </div>
+        </form>
+      </div>
     </div>
+  </script>
 </div>

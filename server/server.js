@@ -1,27 +1,11 @@
-var express = require('express');
-var mongoose = require('mongoose');
-var app = express();
-
-// initialize express
-// Mongoose DB Connection
-
-mongoose.connect('mongodb://nodetojoy:nodetojoy@ds037165.mongolab.com:37165/nodetojoy');
-
-//http is for any network protocal
-
-var server = require('http').createServer(app);
-
-//checking to see if PORT# is defined otherwise use 3000
+var app = require('./server-config.js');
+var models = require('./db/models');
 
 var port = process.env.PORT || 3000;
+app.set('port', port);
 
-require('./config/routeconfig.js')(app, express);
-
-  /*
-  express.static is a function taking the path name as an argument
-  takes care of entire client side
-  */
-  
-app.use(express.static(__dirname +  "/../public"));
-
-server.listen(port);
+models.sequelize.sync().then(function() {
+  app.listen(port, function() {
+    console.log('server running on port: ', port);
+  });
+});
