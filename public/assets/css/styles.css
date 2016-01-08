@@ -202,6 +202,13 @@ fieldset[disabled] .btn-primary.active {
   background-color: #0047c5;
 }
 
+.nav-sidebar > li > a {
+  font-weight: bold;
+}
+
+.nav-sidebar > li > ul {
+  list-style: none;
+}
 
 /*
 /* Main Content
