@@ -44,6 +44,27 @@ angular.module('userFactory', [])
       });
     };
 
+    user.addReservation = function(locId, roomId, startTime, endTime, reservationName) {
+      return $http({
+        method: 'POST',
+        url: '/api/users/reservations',
+        data: {
+          userId: user.currentUser.id,
+          locationId: locId,
+          roomId: roomId,
+          startTime: startTime,
+          endTime: endTime,
+          reservationName: reservationName
+        }
+      })
+      .then(function(res) {
+        return res.data;
+      })
+      .catch(function(err) {
+        console.error('Error:', err);
+      });
+    }
+
     user.clearUser = function () {
       user.currentUser = {
         data: {
