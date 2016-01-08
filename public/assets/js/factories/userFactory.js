@@ -1,5 +1,5 @@
 angular.module('userFactory', [])
-  .factory('UserFactory', ['$http', function($http) {
+  .factory('UserFactory', ['$http', function ($http) {
     var user = {};
 
     user.currentUser = {
@@ -8,11 +8,14 @@ angular.module('userFactory', [])
       }
     };
 
-    user.savelocation = function (location) {
+    user.addLocation = function (name) {
       return $http({
         method: 'POST',
         url: '/api/users/locations',
-        data: location
+        data: {
+          userId: user.currentUser.id,
+          locationName: name
+        }
       })
       .then(function (res) {
         return res.data;
