@@ -64,7 +64,6 @@ module.exports = {
     if (roomsToAdd) {
     roomsToAdd = roomsToAdd.split(',');
       _.each(roomsToAdd, function(room, index, allRoomsToAdd) {
-        console.log('room: ', room);
         models.Room.create({
           room_name: room,
           LocationId: locationId
