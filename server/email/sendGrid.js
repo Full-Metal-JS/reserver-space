@@ -1,4 +1,5 @@
-var sendgrid = require('sendgrid')('SENDGRID_API_KEY');
+var API_KEY = require('./sendGrid-config.js');
+var sendgrid = require('sendgrid')(API_KEY);
 
 module.exports = {
   signupEmail: function(toEmail) {
@@ -20,13 +21,20 @@ module.exports = {
   },
 
   reservationEmail: function(toEmail, reservationDetail) {
-    var emailBodyHtml = '<h1>Check out the new reservation</h1>' +
-                        '<a href="www.reserver.space">Click here to sign up.</a>';
+    var emailSubject = 'New Reservation at ' + reservationDetail.location + ' in ' +
+                       reservationDetail.room;
+    var emailBodyHtml = '<h1>New reservation details:</h1>' +
+                        '<h3>Location: ' + reservationDetail.location + '</h3>' +
+                        '<h3>Room: ' + reservationDetail.room + '</h3>' +
+                        '<h3>Title: ' + reservationDetail.reservationName + '</h3>' +
+                        '<h3>Start: ' + reservationDetail.start + '</h3>' +
+                        '<h3>End: ' + reservationDetail.end + '</h3>' +
+                        '<h3>Reserved By: ' + reservationDetail.createdBy + '</h3>';
 
     var email = new sendgrid.Email({
       to: toEmail,
       from: 'no-reply@reserver.space',
-      subject: 'New Reservation',
+      subject: emailSubject,
       text: emailBodyHtml
     });
 
