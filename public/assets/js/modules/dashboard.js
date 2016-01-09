@@ -52,7 +52,8 @@ angular.module('dashboard', ['ngAnimate', 'ui.bootstrap'])
                 return formattedTime
             }
 
-            var startTime = timeFormatted($scope.timeInput))
+
+            var startTime = timeFormatted($scope.timeInput)
             var endTime = AddHour($scope.timeInput)
             var reservationName = $scope.resDescInput
             var roomId = $scope.roomInput
@@ -70,6 +71,7 @@ angular.module('dashboard', ['ngAnimate', 'ui.bootstrap'])
         $scope.selectedLocation = function(index) {
             $scope.currentReservations = []
             $scope.currentLocation = $scope.locations[index]
+            console.log($scope.currentLocation)
 
             console.log("was run")
             angular.forEach($scope.currentLocation.rooms, function(index) {
