@@ -2,10 +2,10 @@
   <div class="col-sm-3 col-md-2 sidebar">
     <ul class="nav nav-sidebar">
       <li class="active"><a href="#">Locations<span class="sr-only">(current)</span></a></li>
-      <li ng-repeat="location in locations" ng-model="locations"> 
+      <li ng-repeat="location in locations" ng-model="locations">
         <a ng-click="selectedLocation($index)">{{location.locationName}}</a>
         <ul ng-show="location.rooms.length > 0">
-          <li ng-repeat="room in location.rooms"><a>{{rooms.roomName}}</a></li>
+          <li ng-repeat="room in location.rooms"><a>{{room.roomName}}</a></li>
         </ul>
       </li>
     </ul>
@@ -25,19 +25,19 @@
                 <h3>Create a Reservation</h3>
                 <div class="dropdown btn">
                     <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"> Select Space <span class="caret"></span> </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                        <li><a href="" ng-repeat="room in currentLocation.rooms" data-value="{{room.roomName}}">{{room.roomName}}</a>
+                    <ul class="dropdown-menu" id="room" aria-labelledby="dropdownMenu1">
+                        <li><a href="" ng-repeat="room in currentLocation.rooms" data-value="{{room.roomName}}">{{room.roomName}} | id:{{room.id}}</a>
                         </li>
                     </ul>
                 </div>
                 <div class="btn input-group">
-                    <input type="text" class="form-control" placeholder="Select Date" uib-datepicker-popup="{{format}}" ng-model="eve.eventDate" is-open="status.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" /> <span class="input-group-btn">
-            <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i>
+                    <input type="text" class="form-control" placeholder="Select Date" uib-datepicker-popup="{{format}}" ng-model="eve.eventDate" is-open="popupCal.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" /> <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="openCal()"><i class="glyphicon glyphicon-calendar"></i>
             </button>
           </span> </div>
                 <div class="btn dropdown">
                     <button class="btn btn-default dropdown-toggle" type="button" id="roomSelect" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"> Select Start Time <span class="caret"></span> </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    <ul class="dropdown-menu" id="time" ng-model="timeInput" aria-labelledby="dropdownMenu1">
                         <li><a>4:00 AM</a> </li>
                         <li><a>5:00 AM</a> </li>
                         <li><a>6:00 AM</a> </li>
@@ -46,7 +46,7 @@
                         <li><a>9:00 AM</a> </li>
                         <li><a>10:00 AM</a> </li>
                         <li><a>11:00 AM</a> </li>
-                        <li><a>12:00 AM</a> </li>
+                        <li><a>12:00 PM</a> </li>
                         <li><a>1:00 PM</a> </li>
                         <li><a>2:00 PM</a> </li>
                         <li><a>3:00 PM</a> </li>
@@ -58,20 +58,20 @@
                         <li><a>9:00 PM</a> </li>
                         <li><a>10:00 PM</a> </li>
                         <li><a>11:00 PM</a> </li>
-                        <li><a>12:00 PM</a> </li>
+                        <li><a>12:00 AM</a> </li>
                     </ul>
                 </div>
-                <div class="btn input-group">
-                    <input type="text" class="form-control" placeholder="Reservations Description" aria-describedby="basic-addon1"> <span class="input-group-addon"><i class="glyphicon glyphicon-edit"></i></span> </div>
-                <button type="button" class="btn btn-primary btn-block"> <i class="fa fa-check"></i> Confirm Reservation </button>
+                <div class="btn input-group" >
+                    <input type="text" ng-model="resDescInput" class="form-control" placeholder="Reservations Description" aria-describedby="basic-addon1"> <span class="input-group-addon"><i class="glyphicon glyphicon-edit"></i></span> </div>
+                <button type="button" class="btn btn-primary btn-block" ng-click="confirmReservation()"> <i class="fa fa-check"></i> Confirm Reservation </button>
             </div>
             <div class="col-md-5">
                 <h3 class="text-center">Current {{currentLocation.locationName}} Reservations</h3>
                 <div class="panel panel-default" id="events-sidebar">
                     <div ng-repeat="index in currentReservations">
-                        <p class="text-center">{{index.reservationName}}</p>
-                        <p class="text-center">{{index.starttime}}</p>
-                        <p class="text-center">{{index.endtime}}</p>
+                    
+                        <p class="text-center">Reservation : {{index.reservationName}} | Starting at: {{index.startTime}} | Ending at: {{index.endTime}} | At roomID: {{index.roomId}} | locationID:  {{index.locId}}</p>
+                     
                     </div>
                     <div id="event-wrapper"> </div>
                 </div>
@@ -98,7 +98,7 @@
             <input class="form-control" ng-model="addUserInput" placeholder="Add Users Email followed by ','">
           </div>
           <div class="modal-footer">
-            <button class="btn btn-primary btn-block" ng-click="addRoom()">Confirm</button>
+            <button class="btn btn-primary btn-block" ng-click="addRoomsUsers()">Confirm</button>
           </div>
         </form>
       </div>

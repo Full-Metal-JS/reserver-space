@@ -37,7 +37,10 @@ module.exports = {
     })
     .then(function(user) {
       var token = jwt.encode(user, 'secret');
-      res.json({token: token});
+      res.json({token: token,
+        username: user.username,
+        id: user.id
+      });
     })
     .catch(function(error) {
       next(error);
@@ -64,16 +67,33 @@ module.exports = {
               // compile locations, rooms, reservations
               helpers.getAllData(user)
                 .then(function(result) {
-                  console.log(result[0].length);
                   var locations = _.map(result[0], function(val, index, list) {
                     return val.json_build_object;
                   });
+                  var newLocations = [];
+                  _.each(locations, function(location, index, list) {
+                    if (!_.find(newLocations, function(value) {
+                      return (value.id === location.id);
+                    })) {
+                      newLocations.push({
+                        id: location.id,
+                        locationName: location.locationName,
+                        rooms: [location.rooms]
+                      });
+                    } 
+                    _.each(newLocations, function(newLocation, index, list) {
+                      if (newLocation.locationName === location.locationName) {
+                        newLocation.rooms.push(location.rooms);
+                      }
+                    });
+                  });
                 res.json({
                     username: user.username,
+                    id: user.id,
                     token: token,
-                    data: {locations: locations}
+                    data: {locations: newLocations}
                     });
-                  });            
+                  });          
               } else {
               res.status(401).send('User or password is incorrect');
               next(new Error('User or password is incorrect'));

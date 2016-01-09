@@ -33,7 +33,7 @@ module.exports = {
     var roomsToAdd = req.body.roomsToAdd;
 
     if (usersToAdd) {
-      _.each(usersToAdd.split(','), function(user, index, allUsersToAdd) {
+      _.each(usersToAdd, function(user, index, allUsersToAdd) {
         models.User.find({
           where: {
             username: user
@@ -45,38 +45,40 @@ module.exports = {
               username: user,
               registered: false
             })
-            .spread(function(pendingUser) {
+            .then(function(pendingUser) {
               models.UserLocation.create({
                 UserId: pendingUser.id,
                 LocationId: locationId
               });
+              sendGrid.signupEmail(pendingUser.username);
+            });
+          } else {
+            models.UserLocation.create({
+              UserId: foundUser.id,
+              LocationId: locationId
             });
           }
-          models.UserLocation.create({
-            UserId: foundUser.id,
-            LocationId: locationId
-          });
         });
       });
     }
 
     if (roomsToAdd) {
-    roomsToAdd = roomsToAdd.split(',');
+    // roomsToAdd = roomsToAdd.split(',');
+      var addedRooms = [];
       _.each(roomsToAdd, function(room, index, allRoomsToAdd) {
-        console.log('room: ', room);
         models.Room.create({
           room_name: room,
           LocationId: locationId
         })
         .then(function(newRoom) {
-          roomsToAdd[index] = {
-            roomName: newRoom.room_name,
-            roomId: newRoom.id
-          }
+          addedRooms.push({
+            id: newRoom.id,
+            roomName: newRoom.room_name
+          });
         });
       });
       res.json({
-        addedRooms: roomsToAdd
+        addedRooms: addedRooms
       });
     }
   },
@@ -133,14 +135,44 @@ module.exports = {
         end: newReservation.end_time,
         createdBy: createdByUser
       };
-      
-      var usersList = helper.getAllUsersAtLocation(locationId);
-      _.each(usersList, function(user) {
-        sendGrid.reservationEmail(user.username, emailReservationDetails);
-      });
+      helper.getAllUsersAtLocation(locationId)
+        .then(function(result) {
+          _.each(result[0], function(user) {
+            sendGrid.reservationEmail(user.username);
+          });
+        });
     })
     .catch(function(err) {
       next(err);
     });
+  },
+  getAllRoomsAndReservations: function(LocationId) {
+    helper.getAllRooms(LocationId)
+      .then(function(result) {
+        var rooms = _.map(result[0], function(val, index, list) {
+          return val.json_build_object;
+        });
+        var newRooms = [];
+        _.each(rooms, function(room, index, list) {
+          if(!_.find(newRooms, function(value) {
+            return (value.id === room.id);
+          })) {
+            newRooms.push({
+              id: room.id,
+              roomName: room.roomName,
+              reservations: [room.reservations]
+            });
+          }
+          _.each(newRooms, function(newRoom, index, list) {
+            if (newRoom.id === room.id) {
+              newRoom.reservations.push(room.reservations);
+            }
+          });
+        });
+
+        res.json({
+          data: {rooms: newRooms}
+        });
+      });
   }
 }
