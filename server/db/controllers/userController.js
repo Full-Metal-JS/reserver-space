@@ -87,6 +87,7 @@ module.exports = {
                   console.log(newLocations);
                 res.json({
                     username: user.username,
+                    id: user.id,
                     token: token,
                     data: {locations: newLocations}
                     });
