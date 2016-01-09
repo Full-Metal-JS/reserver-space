@@ -5,7 +5,7 @@
       <li ng-repeat="location in locations" ng-model="locations">
         <a ng-click="selectedLocation($index)">{{location.locationName}}</a>
         <ul ng-show="location.rooms.length > 0">
-          <li ng-repeat="room in location.rooms"><a>{{rooms.roomName}}</a></li>
+          <li ng-repeat="room in location.rooms"><a>{{room.roomName}}</a></li>
         </ul>
       </li>
     </ul>
