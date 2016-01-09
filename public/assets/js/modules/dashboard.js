@@ -8,7 +8,7 @@ angular.module('dashboard', ['ngAnimate', 'ui.bootstrap'])
             text: '',
             placeholder: 'Add location'
         };
-        
+
         $scope.currentLocation = $scope.locations[0];
         $scope.currentReservations = [];
         // $scope.currentRoom = [];
@@ -36,7 +36,7 @@ angular.module('dashboard', ['ngAnimate', 'ui.bootstrap'])
             var date =  $scope.eve.eventDate
             var formatted = moment(date).format('D-MM-YYYY');
             // $scope.calendarInput = $scope.eve.eventDate || ""
-            
+
             console.log($scope.resDescInput)
             console.log($scope.roomInput)
             console.log(formatted)
@@ -80,6 +80,7 @@ angular.module('dashboard', ['ngAnimate', 'ui.bootstrap'])
                 controller: 'DashboardController',
                 size: size
             });
+            $scope.addLocation();
         };
 
         $scope.openCal = function(){
@@ -90,11 +91,13 @@ angular.module('dashboard', ['ngAnimate', 'ui.bootstrap'])
           opened: false
         };
 
-        $scope.addUserInput = ""
-        $scope.addRoomInput = ""
-        $scope.addRoom = function(){
-            console.log($scope.addUserInput)
-            console.log($scope.addRoomInput)
-            console.log("it worked")
+        $scope.addUserInput = "";
+        $scope.addRoomInput = "";
+
+        $scope.addRoomsUsers = function(){
+          var usersList = $scope.addUserInput.split(',');
+          var roomsList = $scope.addRoomInput.split(',');
+
+          UserFactory.addRoomsAndUsers($scope.currentLocation.id, usersList, roomsList);
         }
     });
