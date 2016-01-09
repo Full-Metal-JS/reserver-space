@@ -69,9 +69,9 @@
                 <h3 class="text-center">Current {{currentLocation.locationName}} Reservations</h3>
                 <div class="panel panel-default" id="events-sidebar">
                     <div ng-repeat="index in currentReservations">
-                        <p class="text-center">{{index.reservationName}}</p>
-                        <p class="text-center">{{index.starttime}}</p>
-                        <p class="text-center">{{index.endtime}}</p>
+                    
+                        <p class="text-center">Reservation : {{index.reservationName}} | Starting at: {{index.startTime}} | Ending at: {{index.endTime}} | At roomID: {{index.roomId}} | locationID:  {{index.locId}}</p>
+                     
                     </div>
                     <div id="event-wrapper"> </div>
                 </div>
