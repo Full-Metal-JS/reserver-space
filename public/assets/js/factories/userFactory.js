@@ -8,6 +8,8 @@ angular.module('userFactory', [])
       }
     };
 
+    user.currentLocation = {};
+
     user.addLocation = function (name) {
       return $http({
         method: 'POST',
@@ -18,6 +20,7 @@ angular.module('userFactory', [])
         }
       })
       .then(function (res) {
+        user.currentUser.locations.push(res.data);
         return res.data;
       })
       .catch(function (err) {
@@ -37,12 +40,31 @@ angular.module('userFactory', [])
         }
       })
       .then(function(res) {
+        user.currentUser.locations.forEach(function(location, index, list) {
+          if (location.id === locId) {
+            location.rooms.push(res.data);
+          }
+        });
         return res.data;
       })
       .catch(function(err) {
         console.error('Error:', err);
       });
     };
+
+    user.getAllRoomsAndReservations = function(locId) {
+      return $http({
+        method: 'POST',
+        url: '/api/users/roomsreservations',
+        data: {
+          locationId: locId
+        }
+      })
+      .then(function(res) {
+        console.log('this is res.data: ', res.data);
+        return res.data;
+      });
+    }
 
     user.addReservation = function(locId, roomId, startTime, endTime, reservationName) {
       return $http({

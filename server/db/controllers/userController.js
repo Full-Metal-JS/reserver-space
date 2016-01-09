@@ -87,14 +87,13 @@ module.exports = {
                       }
                     });
                   });
-                  console.log(newLocations);
                 res.json({
                     username: user.username,
                     id: user.id,
                     token: token,
                     data: {locations: newLocations}
                     });
-                  });            
+                  });          
               } else {
               res.status(401).send('User or password is incorrect');
               next(new Error('User or password is incorrect'));
