@@ -11,6 +11,8 @@ angular.module('dashboard', ['ngAnimate', 'ui.bootstrap'])
 
         $scope.currentLocation = $scope.locations[0];
         $scope.currentReservations = [];
+
+        
         // $scope.currentRoom = [];
 
         //change the drop down and sets the selected room in scope
@@ -34,14 +36,35 @@ angular.module('dashboard', ['ngAnimate', 'ui.bootstrap'])
         $scope.resDescInput = ""
         $scope.confirmReservation = function(){
             var date =  $scope.eve.eventDate
-            var formatted = moment(date).format('D-MM-YYYY');
+            var formatted = moment(date).format('DD/MM/YYYY');
             // $scope.calendarInput = $scope.eve.eventDate || ""
 
-            console.log($scope.resDescInput)
-            console.log($scope.roomInput)
-            console.log(formatted)
-            console.log($scope.currentLocation.locationName)
-            console.log($scope.timeInput)
+            var timeFormatted = function(time){
+                var momentObj = moment(time, ["h:mm A"])
+                var formattedTime = momentObj.format("HH:mm")
+                return formattedTime
+            }
+
+            var AddHour = function(time){
+                var momentObj = moment(time, ["h:mm A"])
+                var newHour = momentObj.add(1,'hour')
+                var formattedTime = momentObj.format("HH:mm")
+                return formattedTime
+            }
+
+            var startTime = timeFormatted($scope.timeInput))
+            var endTime = AddHour($scope.timeInput))
+            var reservationName = $scope.resDescInput
+            var roomId = $scope.roomInput
+
+            // console.log($scope.resDescInput)
+            // console.log($scope.roomInput)
+            // console.log(formatted)
+            // console.log($scope.currentLocation.locationName)
+            // console.log($scope.timeInput)
+             
+             // console.log(endTime)
+            // UserFactory.addReservation(locId,roomId,startTime,endTime,reservationName)
         }
 
         $scope.selectedLocation = function(index) {
