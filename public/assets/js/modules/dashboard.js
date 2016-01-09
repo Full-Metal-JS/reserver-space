@@ -51,13 +51,12 @@ angular.module('dashboard', ['ngAnimate', 'ui.bootstrap'])
                 var formattedTime = momentObj.format("HH:mm")
                 return formattedTime
             }
-
-
+            var theRoomId = $scope.roomInput.split(":")
+            var roomId = Number(theRoomId[1])
             var startTime = timeFormatted($scope.timeInput)
             var endTime = AddHour($scope.timeInput)
             var reservationName = $scope.resDescInput
-            var roomId = $scope.roomInput
-
+            var locId = $scope.currentLocation.id
             // console.log($scope.resDescInput)
             // console.log($scope.roomInput)
             // console.log(formatted)
@@ -65,7 +64,7 @@ angular.module('dashboard', ['ngAnimate', 'ui.bootstrap'])
             // console.log($scope.timeInput)
              
              // console.log(endTime)
-            // UserFactory.addReservation(locId,roomId,startTime,endTime,reservationName)
+            UserFactory.addReservation(locId,roomId,startTime,endTime,reservationName)
         }
 
         $scope.selectedLocation = function(index) {

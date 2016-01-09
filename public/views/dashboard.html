@@ -26,7 +26,7 @@
                 <div class="dropdown btn">
                     <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"> Select Space <span class="caret"></span> </button>
                     <ul class="dropdown-menu" id="room" aria-labelledby="dropdownMenu1">
-                        <li><a href="" ng-repeat="room in currentLocation.rooms" data-value="{{room.roomName}}">{{room.roomName}}</a>
+                        <li><a href="" ng-repeat="room in currentLocation.rooms" data-value="{{room.roomName}}">{{room.roomName}} | id:{{room.id}}</a>
                         </li>
                     </ul>
                 </div>
