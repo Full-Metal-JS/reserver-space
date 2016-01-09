@@ -33,7 +33,7 @@ module.exports = {
     var roomsToAdd = req.body.roomsToAdd;
 
     if (usersToAdd) {
-      _.each(usersToAdd.split(','), function(user, index, allUsersToAdd) {
+      _.each(usersToAdd, function(user, index, allUsersToAdd) {
         models.User.find({
           where: {
             username: user
@@ -62,7 +62,7 @@ module.exports = {
     }
 
     if (roomsToAdd) {
-    roomsToAdd = roomsToAdd.split(',');
+    // roomsToAdd = roomsToAdd.split(',');
       _.each(roomsToAdd, function(room, index, allRoomsToAdd) {
         models.Room.create({
           room_name: room,
