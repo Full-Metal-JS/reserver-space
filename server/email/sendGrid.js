@@ -3,9 +3,7 @@ var sendgrid = require('sendgrid')(API_KEY);
 
 module.exports = {
   signupEmail: function(toEmail) {
-    var emailBodyHtml = '<html><title></title><body>' +
-                        '<h1>Join Reserver.space</h1>' +
-                        '<a href="www.reserver.space">Click here to sign up.</a></body></html>';
+    var emailBodyHtml = 'Join Reserver.space at www.reserver.space';
 
     var email = new sendgrid.Email({
       to: toEmail,
