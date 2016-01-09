@@ -53,7 +53,7 @@ angular.module('dashboard', ['ngAnimate', 'ui.bootstrap'])
             }
 
             var startTime = timeFormatted($scope.timeInput))
-            var endTime = AddHour($scope.timeInput))
+            var endTime = AddHour($scope.timeInput)
             var reservationName = $scope.resDescInput
             var roomId = $scope.roomInput
 
