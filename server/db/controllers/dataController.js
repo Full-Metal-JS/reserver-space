@@ -52,31 +52,33 @@ module.exports = {
               });
               sendGrid.signupEmail(pendingUser.username);
             });
+          } else {
+            models.UserLocation.create({
+              UserId: foundUser.id,
+              LocationId: locationId
+            });
           }
-          models.UserLocation.create({
-            UserId: foundUser.id,
-            LocationId: locationId
-          });
         });
       });
     }
 
     if (roomsToAdd) {
     // roomsToAdd = roomsToAdd.split(',');
+      var addedRooms = [];
       _.each(roomsToAdd, function(room, index, allRoomsToAdd) {
         models.Room.create({
           room_name: room,
           LocationId: locationId
         })
         .then(function(newRoom) {
-          roomsToAdd[index] = {
-            roomName: newRoom.room_name,
-            roomId: newRoom.id
-          }
+          addedRooms.push({
+            id: newRoom.id,
+            roomName: newRoom.room_name
+          });
         });
       });
       res.json({
-        addedRooms: roomsToAdd
+        addedRooms: addedRooms
       });
     }
   },
@@ -147,11 +149,29 @@ module.exports = {
   getAllRoomsAndReservations: function(LocationId) {
     helper.getAllRooms(LocationId)
       .then(function(result) {
-        var roomsAndReservations = _.map(result[0], function(val, index, list) {
+        var rooms = _.map(result[0], function(val, index, list) {
           return val.json_build_object;
         });
+        var newRooms = [];
+        _.each(rooms, function(room, index, list) {
+          if(!_.find(newRooms, function(value) {
+            return (value.id === room.id);
+          })) {
+            newRooms.push({
+              id: room.id,
+              roomName: room.roomName,
+              reservations: [room.reservations]
+            });
+          }
+          _.each(newRooms, function(newRoom, index, list) {
+            if (newRoom.id === room.id) {
+              newRoom.reservations.push(room.reservations);
+            }
+          });
+        });
+
         res.json({
-          data: {rooms: roomsAndReservations}
+          data: {rooms: newRooms}
         });
       });
   }

@@ -19,6 +19,7 @@ angular.module('dashboard', ['ngAnimate', 'ui.bootstrap'])
         $(".main").on('click', ".dropdown-menu#room li a", function() {
             $scope.roomInput = this.text
 
+
             $(this).parents(".dropdown").find('.btn').html($(this).text() + ' <span class="caret"></span>');
             $(this).parents(".dropdown").find('.btn').val($(this).data('value'));
         });
@@ -71,13 +72,14 @@ angular.module('dashboard', ['ngAnimate', 'ui.bootstrap'])
         $scope.selectedLocation = function(index) {
             $scope.currentReservations = []
             $scope.currentLocation = $scope.locations[index]
-            console.log($scope.currentLocation)
+            
+            var test = UserFactory.getAllRoomsAndReservations($scope.currentLocation.id)
 
-            console.log("was run")
+            console.log(test)
             angular.forEach($scope.currentLocation.rooms, function(index) {
-                console.log("reservations: ", index)
+                // console.log("reservations: ", index)
                 angular.forEach(index.reservations, function(index) {
-                    console.log("index: ", index)
+                    // console.log("index: ", index)
                     $scope.currentReservations.push(index)
                 })
             })
