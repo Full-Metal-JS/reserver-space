@@ -81,9 +81,9 @@ angular.module('dashboard', ['ngAnimate', 'ui.bootstrap'])
             $scope.currentReservations = []
             $scope.currentLocation = $scope.locations[index]
             
-            var test = UserFactory.getAllRoomsAndReservations($scope.currentLocation.id)
+            // var test = UserFactory.getAllRoomsAndReservations($scope.currentLocation.id)
 
-            console.log(test)
+            // console.log(test)
             angular.forEach($scope.currentLocation.rooms, function(index) {
                 // console.log("reservations: ", index)
                 angular.forEach(index.reservations, function(index) {
