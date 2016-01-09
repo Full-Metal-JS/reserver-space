@@ -20,7 +20,7 @@ angular.module('userFactory', [])
         }
       })
       .then(function (res) {
-        user.currentUser.locations.push(res.data);
+        // user.currentUser.locations.push(res.data);
         return res.data;
       })
       .catch(function (err) {
