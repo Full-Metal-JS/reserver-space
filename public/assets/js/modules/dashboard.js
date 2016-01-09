@@ -52,21 +52,29 @@ angular.module('dashboard', ['ngAnimate', 'ui.bootstrap'])
                 var formattedTime = momentObj.format("HH:mm")
                 return formattedTime
             }
-
-
+            var theRoomId = $scope.roomInput.split(":")
+            var roomId = Number(theRoomId[1])
             var startTime = timeFormatted($scope.timeInput)
             var endTime = AddHour($scope.timeInput)
             var reservationName = $scope.resDescInput
-            var roomId = $scope.roomInput
-
+            var locId = $scope.currentLocation.id
             // console.log($scope.resDescInput)
             // console.log($scope.roomInput)
             // console.log(formatted)
             // console.log($scope.currentLocation.locationName)
             // console.log($scope.timeInput)
-             
+            var resObj = {
+                reservationName : reservationName,
+                startTime : startTime,
+                endTime : endTime,
+                roomId : roomId,
+                locId : locId
+            }
+            // resObj.reservationName = 
+             $scope.currentReservations.push(resObj)
              // console.log(endTime)
-            // UserFactory.addReservation(locId,roomId,startTime,endTime,reservationName)
+            // $scope.currentReservations = UserFactory.addReservation(locId,roomId,startTime,endTime,reservationName)
+            
         }
 
         $scope.selectedLocation = function(index) {
@@ -86,6 +94,11 @@ angular.module('dashboard', ['ngAnimate', 'ui.bootstrap'])
         }
 
         $scope.addLocation = function() {
+            console.log("this is addbar text: ",$scope.addbar.text)
+            if ($scope.addbar.text === ""){
+                alert("Add a locations")
+                return
+            }
             UserFactory.addLocation($scope.addbar.text)
                 .then(function(location) {
                     console.log('location: ', location);
@@ -122,6 +135,7 @@ angular.module('dashboard', ['ngAnimate', 'ui.bootstrap'])
         $scope.addRoomInput = "";
 
         $scope.addRoomsUsers = function(){
+
           var usersList = $scope.addUserInput.split(',');
           var roomsList = $scope.addRoomInput.split(',');
 
