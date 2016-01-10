@@ -137,7 +137,7 @@ angular.module('dashboard', ['ngAnimate', 'ui.bootstrap'])
         $scope.addRoomsUsers = function(){
 
           var usersList = $scope.addUserInput;
-          var roomsList = $scope.addRoomInput;;
+          var roomsList = $scope.addRoomInput;
 
           UserFactory.addRoomsAndUsers($scope.currentLocation.id, usersList, roomsList);
         }
