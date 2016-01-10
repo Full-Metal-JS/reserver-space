@@ -65,7 +65,7 @@ module.exports = {
             if (foundUser) {
               var token = jwt.encode(user, 'secret');
               // compile locations, rooms, reservations
-              helpers.getAllData(user)
+              helpers.getAllData(user.id)
                 .then(function(result) {
                   var locations = _.map(result[0], function(val, index, list) {
                     return val.json_build_object;
