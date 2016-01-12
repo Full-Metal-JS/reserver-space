@@ -9,7 +9,7 @@ angular.module('dashboard', ['ngAnimate', 'ui.bootstrap'])
             placeholder: 'Add location'
         };
 
-        $scope.currentLocation = $scope.locations[0];
+        $scope.currentLocation;
         $scope.currentReservations = [];
 
         
@@ -79,6 +79,7 @@ angular.module('dashboard', ['ngAnimate', 'ui.bootstrap'])
 
         $scope.selectedLocation = function(index) {
             $scope.currentReservations = []
+            console.log('scope.location selected', $scope.locations[index]);
             $scope.currentLocation = $scope.locations[index]
             
             // var test = UserFactory.getAllRoomsAndReservations($scope.currentLocation.id)
@@ -97,7 +98,8 @@ angular.module('dashboard', ['ngAnimate', 'ui.bootstrap'])
             console.log("this is addbar text: ",$scope.addbar.text)
             if ($scope.addbar.text === ""){
                 alert("Add a locations")
-                return
+                $scope.open('lg');
+                return;
             }
             UserFactory.addLocation($scope.addbar.text)
                 .then(function(location) {
@@ -118,9 +120,12 @@ angular.module('dashboard', ['ngAnimate', 'ui.bootstrap'])
                 animation: $scope.animationsEnabled,
                 templateUrl: 'addModal.html',
                 controller: 'DashboardController',
-                size: size
+                size: size,
+                scope: $scope
             });
-            $scope.addLocation();
+            if ($scope.addbar.text.length) {
+                $scope.addLocation();
+            }
         };
 
         $scope.openCal = function(){
@@ -138,7 +143,9 @@ angular.module('dashboard', ['ngAnimate', 'ui.bootstrap'])
 
           var usersList = $scope.addUserInput;
           var roomsList = $scope.addRoomInput;
+          console.log(roomsList);
 
           UserFactory.addRoomsAndUsers($scope.currentLocation.id, usersList, roomsList);
+          $uibModal.close();
         }
     });
