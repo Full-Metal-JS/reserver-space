@@ -72,15 +72,18 @@ module.exports = {
           LocationId: locationId
         })
         .then(function(newRoom) {
-          addedRooms.push({
-            id: newRoom.id,
-            roomName: newRoom.room_name
+          console.log('location id', newRoom.dataValues.room_name);
+          var newRoomObj = {
+            id: newRoom.dataValues.id,
+            roomName: newRoom.dataValues.room_name
+          };
+          addedRooms.push(newRoomObj);
+          res.json({
+            addedRooms: addedRooms
           });
         });
       });
-      res.json({
-        addedRooms: addedRooms
-      });
+      
     }
   },
   addReservation: function(req, res, next) {

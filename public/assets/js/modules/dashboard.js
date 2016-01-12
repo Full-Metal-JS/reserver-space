@@ -107,6 +107,7 @@ angular.module('dashboard', ['ngAnimate', 'ui.bootstrap'])
 
                     $scope.locations.push(location);
                     $scope.addbar.text = '';
+                    $scope.currentLocation = location;
                     //$scope.alerts.push({type: 'success', msg: 'Your preferences have been saved!'});
                 })
                 .catch(function(error) {
@@ -143,9 +144,16 @@ angular.module('dashboard', ['ngAnimate', 'ui.bootstrap'])
 
           var usersList = $scope.addUserInput;
           var roomsList = $scope.addRoomInput;
-          console.log(roomsList);
+          // console.log(roomsList);
 
-          UserFactory.addRoomsAndUsers($scope.currentLocation.id, usersList, roomsList);
+          UserFactory.addRoomsAndUsers($scope.currentLocation.id, usersList, roomsList)
+            .then(function(response) {
+                console.log(response.addedRooms);
+                console.log($scope.locations);
+            });
+          // $scope.currentLocation.rooms.push(addedRooms.$$state.value.addedRooms);
+          // console.log($scope.currentLocation.rooms.push(location));
+
           $scope.modalInstance.close();
         }
     });
