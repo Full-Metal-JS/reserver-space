@@ -4,6 +4,36 @@ var helper = require('../../config/helpers.js');
 var sendGrid = process.env.SEND_GRID || require('../../email/sendGrid.js');
 
 module.exports = {
+  getAllData: function(req, res, next) {
+    var userId = req.body.userId;
+
+    helper.getAllData(userId)
+      .then(function(result) {
+        var locations = _.map(result[0], function(val, index, list) {
+          return val.json_build_object;
+        });
+        var newLocations = [];
+        _.each(locations, function(location, index, list) {
+          if (!_.find(newLocations, function(value) {
+            return (value.id === location.id);
+          })) {
+            newLocations.push({
+              id: location.id,
+              locationName: location.locationName,
+              rooms: [location.rooms]
+            });
+          } 
+          _.each(newLocations, function(newLocation, index, list) {
+            if (newLocation.locationName === location.locationName) {
+              newLocation.rooms.push(location.rooms);
+            }
+          });
+        });
+      res.json({
+          data: {locations: newLocations}
+          });
+        });  
+  },
   addLocation: function(req, res, next) {
     var userId = req.body.userId;
     var locationName = req.body.locationName;

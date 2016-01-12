@@ -10,6 +10,25 @@ angular.module('userFactory', [])
 
     user.currentLocation = {};
 
+    user.getAllData = function() {
+      return $http({
+        method: 'POST',
+        url: '/api/users/alldata',
+        data: {
+          userId: user.currentUser.id
+        }
+      })
+      .then(function(res) {
+        console.log('user factory', user.currentUser);
+
+        user.currentUser.data = res.data;
+        return res.data;
+      })
+      .catch(function(err) {
+        console.error(err);
+      });
+    };
+
     user.addLocation = function (name) {
       return $http({
         method: 'POST',

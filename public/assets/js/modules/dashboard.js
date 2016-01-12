@@ -1,6 +1,6 @@
 
 angular.module('dashboard', ['ngAnimate', 'ui.bootstrap'])
-    .controller('DashboardController', function($scope,$uibModal, UserFactory,moment) {
+    .controller('DashboardController', function($scope,$uibModal, UserFactory,moment, $state) {
         $scope.locations = (UserFactory.currentUser.data.locations !== undefined) ?
           UserFactory.currentUser.data.locations : [];
 
@@ -148,12 +148,19 @@ angular.module('dashboard', ['ngAnimate', 'ui.bootstrap'])
 
           UserFactory.addRoomsAndUsers($scope.currentLocation.id, usersList, roomsList)
             .then(function(response) {
-                console.log(response.addedRooms);
-                console.log($scope.locations);
+                console.log(response);
             });
           // $scope.currentLocation.rooms.push(addedRooms.$$state.value.addedRooms);
           // console.log($scope.currentLocation.rooms.push(location));
 
           $scope.modalInstance.close();
+        };
+
+        $scope.getAllData = function() {
+
+          UserFactory.getAllData()
+            .then(function(result) {
+                $state.go('dashboard');
+            });
         }
     });
