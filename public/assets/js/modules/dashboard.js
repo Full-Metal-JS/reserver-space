@@ -116,7 +116,7 @@ angular.module('dashboard', ['ngAnimate', 'ui.bootstrap'])
         };
 
         $scope.open = function (size) {
-          var modalInstance = $uibModal.open({
+          $scope.modalInstance = $uibModal.open({
                 animation: $scope.animationsEnabled,
                 templateUrl: 'addModal.html',
                 controller: 'DashboardController',
@@ -146,5 +146,6 @@ angular.module('dashboard', ['ngAnimate', 'ui.bootstrap'])
           console.log(roomsList);
 
           UserFactory.addRoomsAndUsers($scope.currentLocation.id, usersList, roomsList);
+          $scope.modalInstance.close();
         }
     });
