@@ -9,7 +9,7 @@ angular.module('dashboard', ['ngAnimate', 'ui.bootstrap'])
             placeholder: 'Add location'
         };
 
-        $scope.currentLocation;
+        $scope.currentLocation = $scope.locations[0];
         $scope.currentReservations = [];
 
         
