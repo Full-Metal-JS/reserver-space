@@ -9,7 +9,7 @@ angular.module('dashboard', ['ngAnimate', 'ui.bootstrap'])
             placeholder: 'Add location'
         };
 
-        $scope.currentLocation = $scope.locations[0];
+        $scope.currentLocation;
         $scope.currentReservations = [];
 
         
@@ -146,6 +146,5 @@ angular.module('dashboard', ['ngAnimate', 'ui.bootstrap'])
           console.log(roomsList);
 
           UserFactory.addRoomsAndUsers($scope.currentLocation.id, usersList, roomsList);
-          $uibModal.close();
         }
     });
