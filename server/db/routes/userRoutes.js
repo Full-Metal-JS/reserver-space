@@ -7,8 +7,10 @@ module.exports = function(app) {
   app.post('/signin', userController.signin);
   app.post('/signedin', userController.checkAuth);
   app.post('/pending', userController.addPendingUser);
+  app.post('/token', userController.decodeToken);
   app.post('/locations', dataController.addLocation);
   app.post('/roomsusers', dataController.addRoomsAndUsers);
   app.post('/reservations', dataController.addReservation);
   app.post('/roomsreservations', dataController.getAllRoomsAndReservations);
+  app.post('/alldata', dataController.getAllData);
 };
