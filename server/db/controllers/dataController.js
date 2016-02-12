@@ -30,7 +30,7 @@ module.exports = {
           });
         });
       res.json({
-          data: {locations: newLocations}
+          locations: newLocations
           });
         });  
   },

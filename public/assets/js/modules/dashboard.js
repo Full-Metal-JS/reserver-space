@@ -1,8 +1,26 @@
+angular.module('dashboard', ['ngAnimate', 'ui.bootstrap', 'angular-jwt'])
+    .controller('DashboardController', function($scope,$uibModal, jwtHelper, UserFactory,moment, $state, $window) {
+        // $scope.locations = (UserFactory.currentUser.data.locations !== undefined) ?
+        //   UserFactory.currentUser.data.locations : [];
 
-angular.module('dashboard', ['ngAnimate', 'ui.bootstrap'])
-    .controller('DashboardController', function($scope,$uibModal, UserFactory,moment, $state) {
-        $scope.locations = (UserFactory.currentUser.data.locations !== undefined) ?
-          UserFactory.currentUser.data.locations : [];
+        // $scope.appInit = function() {
+        //   UserFactory.decodeToken($window.localStorage.getItem('space.reserver'))
+        //     .then(function(user) {
+        //         console.log(user, ' is user');
+        //         $scope.currentUser = user;
+
+        //         UserFactory.getAllData($scope.currentUser.id)
+        //           .then(function(allData) {
+        //             UserFactory.currentUser.data.locations = allData;
+        //             $scope.locations = UserFactory.currentUser.data.locations;
+        //           });
+        //     });
+        // }
+
+        $scope.currentUser = jwtHelper.decodeToken($window.localStorage.getItem('space.reserver'));
+
+        // UserFactory.getAllData($scope.currentUser.id);
+     
 
         $scope.addbar = {
             text: '',
@@ -144,11 +162,12 @@ angular.module('dashboard', ['ngAnimate', 'ui.bootstrap'])
 
           var usersList = $scope.addUserInput;
           var roomsList = $scope.addRoomInput;
-          // console.log(roomsList);
+          console.log(roomsList, usersList);
 
           UserFactory.addRoomsAndUsers($scope.currentLocation.id, usersList, roomsList)
             .then(function(response) {
                 console.log(response);
+                // $scope.currentLocation.rooms.push(roo
             });
           // $scope.currentLocation.rooms.push(addedRooms.$$state.value.addedRooms);
           // console.log($scope.currentLocation.rooms.push(location));
@@ -158,8 +177,9 @@ angular.module('dashboard', ['ngAnimate', 'ui.bootstrap'])
 
         $scope.getAllData = function() {
 
-          UserFactory.getAllData()
+          UserFactory.getAllData($scope.currentUser.id)
             .then(function(result) {
+                $scope.locations = UserFactory.currentUser.data.locations;
                 $state.go('dashboard');
             });
         }

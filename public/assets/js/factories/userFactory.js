@@ -10,16 +10,18 @@ angular.module('userFactory', [])
 
     user.currentLocation = {};
 
-    user.getAllData = function() {
+    user.getAllData = function(userId) {
+      if (!userId) userId = user.currentUser.id;
       return $http({
         method: 'POST',
         url: '/api/users/alldata',
         data: {
-          userId: user.currentUser.id
+          userId: userId
         }
       })
       .then(function(res) {
         console.log('user factory', user.currentUser);
+        console.log('res.data', res.data)
 
         user.currentUser.data = res.data;
         return res.data;
@@ -58,17 +60,17 @@ angular.module('userFactory', [])
           roomsToAdd: rooms
         }
       })
-      .then(function(res) {
-        // user.currentUser.locations.forEach(function(location, index, list) {
-        //   if (location.id === locId) {
-        //     location.rooms.push(res.data);
-        //   }
-        // });
-        return res.data;
-      })
-      .catch(function(err) {
-        console.error('Error:', err);
-      });
+      // .then(function(res) {
+      //   // user.currentUser.locations.forEach(function(location, index, list) {
+      //   //   if (location.id === locId) {
+      //   //     location.rooms.push(res.data);
+      //   //   }
+      //   // });
+      //   return res.data;
+      // })
+      // .catch(function(err) {
+      //   console.error('Error:', err);
+      // });
     };
 
     user.getAllRoomsAndReservations = function(locId) {
@@ -113,6 +115,22 @@ angular.module('userFactory', [])
         }
       };
     };
+
+    user.decodeToken = function(token) {
+      return $http({
+        method: 'POST',
+        url: '/api/users/token',
+        data: {
+          token: token
+        }
+      })
+      .then(function(res) {
+        return res.data;
+      })
+      .catch(function(err) {
+        console.error('Error: ', err);
+      });
+    }
 
     return user;
   }]);
