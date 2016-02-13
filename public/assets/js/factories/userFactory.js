@@ -10,6 +10,24 @@ angular.module('userFactory', [])
 
     user.currentLocation = {};
 
+    user.getAllData = function(userId) {
+      if (!userId) userId = user.currentUser.id;
+      return $http({
+        method: 'POST',
+        url: '/api/users/alldata',
+        data: {
+          userId: userId
+        }
+      })
+      .then(function(res) {
+        user.currentUser.data = res.data;
+        return res.data;
+      })
+      .catch(function(err) {
+        console.error(err);
+      });
+    };
+
     user.addLocation = function (name) {
       return $http({
         method: 'POST',
@@ -64,30 +82,32 @@ angular.module('userFactory', [])
         console.log('this is res.data: ', res.data);
         return res.data;
       });
-    }
+    };
 
-    user.addReservation = function(locId, roomId, startTime, endTime, reservationName) {
+    user.addReservation = function(locId, roomId, startTime, endTime, reservationName, date, userId) {
       return $http({
         method: 'POST',
         url: '/api/users/reservations',
         data: {
-          userId: user.currentUser.id,
+          userId: userId,
           locationId: locId,
           roomId: roomId,
           startTime: startTime,
           endTime: endTime,
-          reservationName: reservationName
+          reservationName: reservationName,
+          date: date
         }
       })
       .then(function(res) {
+        console.log(res.data);
         return res.data;
       })
       .catch(function(err) {
         console.error('Error:', err);
       });
-    }
+    };
 
-    user.clearUser = function () {
+    user.clearUser = function() {
       user.currentUser = {
         data: {
           locations: []

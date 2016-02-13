@@ -4,6 +4,7 @@ angular.module('reserverSpace', [
   'ui.router',
   'ngAnimate',
   'ui.bootstrap',
+  'angular-jwt',
   'landing',
   'auth', 
   'dashboard',

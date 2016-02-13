@@ -1,8 +1,7 @@
+angular.module('dashboard', ['ngAnimate', 'ui.bootstrap', 'angular-jwt'])
+    .controller('DashboardController', function($scope,$uibModal, jwtHelper, UserFactory,moment, $state, $window) {
 
-angular.module('dashboard', ['ngAnimate', 'ui.bootstrap'])
-    .controller('DashboardController', function($scope,$uibModal, UserFactory,moment) {
-        $scope.locations = (UserFactory.currentUser.data.locations !== undefined) ?
-          UserFactory.currentUser.data.locations : [];
+        $scope.currentUser = jwtHelper.decodeToken($window.localStorage.getItem('space.reserver'));
 
         $scope.addbar = {
             text: '',
@@ -64,6 +63,7 @@ angular.module('dashboard', ['ngAnimate', 'ui.bootstrap'])
             // console.log($scope.currentLocation.locationName)
             // console.log($scope.timeInput)
             var resObj = {
+                date: date,
                 reservationName : reservationName,
                 startTime : startTime,
                 endTime : endTime,
@@ -71,28 +71,36 @@ angular.module('dashboard', ['ngAnimate', 'ui.bootstrap'])
                 locId : locId
             }
             // resObj.reservationName = 
-             $scope.currentReservations.push(resObj)
-             // console.log(endTime)
-            // $scope.currentReservations = UserFactory.addReservation(locId,roomId,startTime,endTime,reservationName)
-            
-        }
+             
+            UserFactory.addReservation(locId, roomId, startTime, endTime, reservationName, date, $scope.currentUser.id)
+              .then(function(data) {
+                // console.log('this is when i try to add a reservations : ', data);
+                $scope.currentReservations.push(data);
+                // $scope.roomInput.$setPristine();
+              });
+
+        };
 
         $scope.selectedLocation = function(index) {
-            $scope.currentReservations = []
+            $scope.currentReservations = [];
             console.log('scope.location selected', $scope.locations[index]);
-            $scope.currentLocation = $scope.locations[index]
+            $scope.currentLocation = $scope.locations[index];
             
-            // var test = UserFactory.getAllRoomsAndReservations($scope.currentLocation.id)
+            UserFactory.getAllRoomsAndReservations($scope.currentLocation.id)
+              .then(function(reservations) {
+                console.log(reservations);
+                $scope.currentReservations = reservations.reservations;
+              });
 
             // console.log(test)
             angular.forEach($scope.currentLocation.rooms, function(index) {
                 // console.log("reservations: ", index)
                 angular.forEach(index.reservations, function(index) {
                     // console.log("index: ", index)
-                    $scope.currentReservations.push(index)
-                })
-            })
-        }
+                    // $scope.currentReservations.push(index);
+                });
+            });
+        };
 
         $scope.addLocation = function() {
             console.log("this is addbar text: ",$scope.addbar.text)
@@ -107,6 +115,7 @@ angular.module('dashboard', ['ngAnimate', 'ui.bootstrap'])
 
                     $scope.locations.push(location);
                     $scope.addbar.text = '';
+                    $scope.currentLocation = location;
                     //$scope.alerts.push({type: 'success', msg: 'Your preferences have been saved!'});
                 })
                 .catch(function(error) {
@@ -143,9 +152,37 @@ angular.module('dashboard', ['ngAnimate', 'ui.bootstrap'])
 
           var usersList = $scope.addUserInput;
           var roomsList = $scope.addRoomInput;
-          console.log(roomsList);
+          console.log(roomsList, usersList);
 
-          UserFactory.addRoomsAndUsers($scope.currentLocation.id, usersList, roomsList);
+          UserFactory.addRoomsAndUsers($scope.currentLocation.id, usersList, roomsList)
+            .then(function(response) {
+                console.log(response);
+                // $scope.currentLocation.rooms.push(r
+                angular.forEach(response.addedRooms, function(room) {
+                  $scope.currentLocation.rooms.push(room);
+                });
+            });
+          // $scope.currentLocation.rooms.push(addedRooms.$$state.value.addedRooms);
+          // console.log($scope.currentLocation.rooms.push(location));
+
           $scope.modalInstance.close();
-        }
+        };
+
+        $scope.getAllData = function() {
+
+          UserFactory.getAllData($scope.currentUser.id)
+            .then(function(result) {
+                $scope.locations = UserFactory.currentUser.data.locations;
+                $state.go('dashboard');
+            });
+        };
+
+        $scope.getAllRoomsAndReservations = function(locId) {
+            UserFactory.getAllRoomsAndReservations(locId)
+              .then(function(result) {
+                // $scope.
+                console.log('this is the result of getting all rooms and reserves: ', result);
+                $state.go('dashboard');
+              });
+        };
     });
