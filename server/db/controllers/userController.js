@@ -162,11 +162,5 @@ module.exports = {
     .catch(function(error) {
       next(error);
     });
-  },
-  decodeToken: function(req, res) {
-    var token = req.body.token;
-    console.log(jwt.decode(token, 'secret'));
-
-    res.send(jwt.decode(token, 'secret'));
   }
 }

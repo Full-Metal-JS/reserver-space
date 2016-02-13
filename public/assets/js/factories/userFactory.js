@@ -20,9 +20,6 @@ angular.module('userFactory', [])
         }
       })
       .then(function(res) {
-        console.log('user factory', user.currentUser);
-        console.log('res.data', res.data)
-
         user.currentUser.data = res.data;
         return res.data;
       })
@@ -85,7 +82,7 @@ angular.module('userFactory', [])
         console.log('this is res.data: ', res.data);
         return res.data;
       });
-    }
+    };
 
     user.addReservation = function(locId, roomId, startTime, endTime, reservationName) {
       return $http({
@@ -101,36 +98,21 @@ angular.module('userFactory', [])
         }
       })
       .then(function(res) {
+        console.log(res.data);
         return res.data;
       })
       .catch(function(err) {
         console.error('Error:', err);
       });
-    }
+    };
 
-    user.clearUser = function () {
+    user.clearUser = function() {
       user.currentUser = {
         data: {
           locations: []
         }
       };
     };
-
-    user.decodeToken = function(token) {
-      return $http({
-        method: 'POST',
-        url: '/api/users/token',
-        data: {
-          token: token
-        }
-      })
-      .then(function(res) {
-        return res.data;
-      })
-      .catch(function(err) {
-        console.error('Error: ', err);
-      });
-    }
 
     return user;
   }]);
