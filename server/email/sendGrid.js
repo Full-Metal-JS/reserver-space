@@ -27,6 +27,7 @@ module.exports = {
                         '<h3>Location: ' + reservationDetail.location + '</h3>' +
                         '<h3>Room: ' + reservationDetail.room + '</h3>' +
                         '<h3>Title: ' + reservationDetail.reservationName + '</h3>' +
+                        '<h3>Date: ' + reservationDetail.date + '</h3>' +
                         '<h3>Start: ' + reservationDetail.start + '</h3>' +
                         '<h3>End: ' + reservationDetail.end + '</h3>' +
                         '<h3>Reserved By: ' + reservationDetail.createdBy + '</h3></body></html>';
@@ -35,7 +36,7 @@ module.exports = {
       to: toEmail,
       from: 'no-reply@reserver.space',
       subject: emailSubject,
-      text: emailBodyHtml
+      html: emailBodyHtml
     });
 
     sendgrid.send(email, function(err, json) {

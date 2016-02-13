@@ -84,17 +84,18 @@ angular.module('userFactory', [])
       });
     };
 
-    user.addReservation = function(locId, roomId, startTime, endTime, reservationName) {
+    user.addReservation = function(locId, roomId, startTime, endTime, reservationName, date, userId) {
       return $http({
         method: 'POST',
         url: '/api/users/reservations',
         data: {
-          userId: user.currentUser.id,
+          userId: userId,
           locationId: locId,
           roomId: roomId,
           startTime: startTime,
           endTime: endTime,
-          reservationName: reservationName
+          reservationName: reservationName,
+          date: date
         }
       })
       .then(function(res) {

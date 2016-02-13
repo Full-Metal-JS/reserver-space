@@ -63,6 +63,7 @@ angular.module('dashboard', ['ngAnimate', 'ui.bootstrap', 'angular-jwt'])
             // console.log($scope.currentLocation.locationName)
             // console.log($scope.timeInput)
             var resObj = {
+                date: date,
                 reservationName : reservationName,
                 startTime : startTime,
                 endTime : endTime,
@@ -70,28 +71,37 @@ angular.module('dashboard', ['ngAnimate', 'ui.bootstrap', 'angular-jwt'])
                 locId : locId
             }
             // resObj.reservationName = 
-             $scope.currentReservations.push(resObj)
+             
              // console.log(endTime)
             // $scope.currentReservations = UserFactory.addReservation(locId,roomId,startTime,endTime,reservationName)
+            UserFactory.addReservation(locId, roomId, startTime, endTime, reservationName, date, $scope.currentUser.id)
+              .then(function(data) {
+                // console.log('this is when i try to add a reservations : ', data);
+                $scope.currentReservations.push(data);
+              });
             
         }
 
         $scope.selectedLocation = function(index) {
-            $scope.currentReservations = []
+            $scope.currentReservations = [];
             console.log('scope.location selected', $scope.locations[index]);
-            $scope.currentLocation = $scope.locations[index]
+            $scope.currentLocation = $scope.locations[index];
             
-            // var test = UserFactory.getAllRoomsAndReservations($scope.currentLocation.id)
+            UserFactory.getAllRoomsAndReservations($scope.currentLocation.id)
+              .then(function(reservations) {
+                console.log(reservations);
+                $scope.currentReservations = reservations.reservations;
+              });
 
             // console.log(test)
             angular.forEach($scope.currentLocation.rooms, function(index) {
                 // console.log("reservations: ", index)
                 angular.forEach(index.reservations, function(index) {
                     // console.log("index: ", index)
-                    $scope.currentReservations.push(index)
-                })
-            })
-        }
+                    $scope.currentReservations.push(index);
+                });
+            });
+        };
 
         $scope.addLocation = function() {
             console.log("this is addbar text: ",$scope.addbar.text)
@@ -169,6 +179,8 @@ angular.module('dashboard', ['ngAnimate', 'ui.bootstrap', 'angular-jwt'])
             UserFactory.getAllRoomsAndReservations(locId)
               .then(function(result) {
                 // $scope.
+                console.log('this is the result of getting all rooms and reserves: ', result);
+                $state.go('dashboard');
               });
-        } 
+        };
     });

@@ -66,14 +66,13 @@
                 <button type="button" class="btn btn-primary btn-block" ng-click="confirmReservation()"> <i class="fa fa-check"></i> Confirm Reservation </button>
             </div>
             <div class="col-md-5">
-                <h3 class="text-center">Current {{currentLocation.locationName}} Reservations</h3>
-                <div class="panel panel-default" id="events-sidebar">
+                <h3 class="panel-title">Current Reservations at {{currentLocation.locationName}}!</h3>
+                <div class="panel panel-default" id="events-sidebar" style="max-height: 10;overflow-y: scroll;">
                     <div ng-repeat="index in currentReservations">
                     
-                        <p class="text-center">Reservation : {{index.reservationName}} | Starting at: {{index.startTime}} | Ending at: {{index.endTime}} | At roomID: {{index.roomId}} | locationID:  {{index.locId}}</p>
+                        <p class="alert alert-info">{{index.reservationName}} | Starting at: {{index.startTime}} | Ending at: {{index.endTime}} | At room: {{index.roomName}}</p>
                      
                     </div>
-                    <div id="event-wrapper"> </div>
                 </div>
             </div>
         </div>

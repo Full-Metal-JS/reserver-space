@@ -123,6 +123,7 @@ module.exports = {
     var startTime = req.body.startTime;
     var endTime = req.body.endTime;
     var reservationName = req.body.reservationName;
+    var date = req.body.date;
     var location;
     var room;
     var createdByUser;
@@ -132,56 +133,57 @@ module.exports = {
       RoomId: roomId,
       start_time: startTime,
       end_time: endTime,
-      reservation_name: reservationName
+      reservation_name: reservationName,
+      // date: date
     })
     .then(function(newReservation) {
-      res.json({
-        reservationName: newReservation.reservation_name,
-        reservationId: newReservation.id
-      });
+      res.json(newReservation);
 
       models.Location.findById(locationId).then(function(foundLocation) {
         location = foundLocation;
+        
+        models.Room.findById(roomId).then(function(foundRoom) {
+          room = foundRoom;
+
+          models.User.findById(userId).then(function(foundUser) {
+            createdByUser = foundUser;
+
+            var emailReservationDetails = {
+              reservationName: reservationName,
+              location: foundLocation.dataValues.location_name,
+              room: foundRoom.dataValues.room_name,
+              start: newReservation.start_time,
+              end: newReservation.end_time,
+              date: date,
+              createdBy: foundUser.dataValues.username
+            };
+            helper.getAllUsersAtLocation(locationId)
+              .then(function(result) {
+                _.each(result[0], function(user) {
+                  sendGrid.reservationEmail(user.username, emailReservationDetails);
+                });
+              })
+              .catch(function(error) {
+                next(error);
+              })
+          })
+          .catch(function(error) {
+            next(error);
+          })
+        })
+        .catch(function(error) {
+          next(error);
+        })
       })
       .catch(function(error) {
         next(error);
       });
-
-      models.Room.findById(roomId).then(function(foundRoom) {
-        room = foundRoom;
-      })
-      .catch(function(error) {
-        next(error);
-      });
-
-      models.User.findById(userId).then(function(foundUser) {
-         createdByUser = foundUser;
-      })
-      .catch(function(error) {
-        next(error);
-      });
-
-      var emailReservationDetails = {
-        reservationName: reservationName,
-        location: location,
-        room: room,
-        start: newReservation.start_time,
-        end: newReservation.end_time,
-        createdBy: createdByUser
-      };
-      helper.getAllUsersAtLocation(locationId)
-        .then(function(result) {
-          _.each(result[0], function(user) {
-            sendGrid.reservationEmail(user.username);
-          });
-        });
-    })
-    .catch(function(err) {
-      next(err);
     });
   },
-  getAllRoomsAndReservations: function(LocationId) {
-    helper.getAllRooms(LocationId)
+  getAllRoomsAndReservations: function(req, res) {
+    var reservations = [];
+    console.log(req.body.locationId);
+    helper.getAllRooms(req.body.locationId)
       .then(function(result) {
         var rooms = _.map(result[0], function(val, index, list) {
           return val.json_build_object;
@@ -199,13 +201,14 @@ module.exports = {
           }
           _.each(newRooms, function(newRoom, index, list) {
             if (newRoom.id === room.id) {
-              newRoom.reservations.push(room.reservations);
+              room.reservations.roomName = room.roomName;
+              reservations.push(room.reservations);
             }
           });
         });
 
         res.json({
-          data: {rooms: newRooms}
+          reservations: reservations
         });
       });
   }
