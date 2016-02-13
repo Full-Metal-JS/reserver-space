@@ -107,7 +107,7 @@ module.exports = {
             id: newRoom.dataValues.id,
             roomName: newRoom.dataValues.room_name
           };
-          addedRooms.push(newRoomObj);
+          addedRooms.push(newRoom.dataValues);
           res.json({
             addedRooms: addedRooms
           });
