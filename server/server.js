@@ -1,11 +1,8 @@
-var app = require('./server-config.js');
-var models = require('./db/models');
+const server = require('./config/server-config');
+require('dotenv').config();
 
-var port = process.env.PORT || 4000;
-app.set('port', port);
+const port = process.env.PORT;
 
-models.sequelize.sync().then(function() {
-  app.listen(port, function() {
-    console.log('server running on port: ', port);
-  });
+server.listen(port, () => {
+  console.log(`server is listening on port ${port}`);
 });
