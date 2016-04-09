@@ -47,3 +47,5 @@ Thumbs.db
 sendGrid-config.js
 
 dist/bundle.js
+
+.env
