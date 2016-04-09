@@ -28,9 +28,6 @@ public/lib/
 # Logs and databases #
 ######################
 *.log
-*.sql
-*.sqlite
-server/db/config/config.json
 
 # OS generated files #
 ######################
