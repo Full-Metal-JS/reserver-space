@@ -1,5 +1,3 @@
-'use strict'
-
 const bodyParser = require('body-parser');
 const joinPaths = require('path').join;
 const utils = require('./utils');

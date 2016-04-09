@@ -1,15 +1,6 @@
-'use strict'
+var express = require('express');
+var app = express();
 
-const express = require('express');
-const applyMiddleware = require('./middleware');
-const createServer = require('http').createServer;
+require('./routeconfig.js')(app, express);
 
-let server = createServer();
-
-let app = express();
-
-applyMiddleware(app, express);
-
-server.on('request', app);
-
-module.exports = server;
+module.exports = app;

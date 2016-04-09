@@ -1,9 +1,7 @@
-'use strict'
-
-const jwt = require('jwt-simple');
+var jwt = require('jwt-simple');
 
 module.exports = {
-  logError: (err, req, res, next) => {
+  logError: function(err, req, res, next) {
     console.error(err.stack);
     next(err);
   },
@@ -11,8 +9,8 @@ module.exports = {
     res.status(500).send({error: err.message});
   },
   decode: function(req, res, next) {
-    let token = req.headers['x-access-token'];
-    let user = null;
+    var token = req.headers['x-access-token'];
+    var user;
 
     if (!token) {
       return res.status(403).send();
