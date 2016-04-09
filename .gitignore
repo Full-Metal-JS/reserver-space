@@ -45,3 +45,7 @@ Thumbs.db
 # Api Config #
 ##############
 sendGrid-config.js
+
+dist/bundle.js
+
+.env
