@@ -15,6 +15,7 @@ create table users (
   googleid varchar(100),
   email varchar(100) unique,
   password varchar(100),
+  photo varchar(100),
   registered boolean
 );
 
