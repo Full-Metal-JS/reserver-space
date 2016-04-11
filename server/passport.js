@@ -1,6 +1,7 @@
 const FacebookStrategy = require('passport-facebook').Strategy;
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const LocalStrategy = require('passport-local').Strategy;
+const bcrypt = require('bluebird').PromisifyAll(require('bcrypt'));
 
 const applyPassportMiddleware = (app, passport) => {
   passport.serializeUser((user, done) => {
