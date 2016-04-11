@@ -26,7 +26,7 @@ const userModel = {
   getUserByParameter: (parameter, field) => {
     // gets a user by a parameter that must be passed in. ie. fb id, google id, email
     return new Promise((resolve, reject) => {
-      let queryString = `select * from users where ${parameter}=${field};`;
+      let queryString = `select * from users where ${parameter}='${field}';`;
       
       db.query(queryString)
         .map(response => {
