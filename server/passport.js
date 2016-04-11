@@ -1,7 +1,8 @@
 const FacebookStrategy = require('passport-facebook').Strategy;
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const LocalStrategy = require('passport-local').Strategy;
-const bcrypt = require('bluebird').PromisifyAll(require('bcrypt'));
+const Promise = require('bluebird');
+const bcrypt = Promise.promisifyAll(require('bcrypt'));
 const User = require('./db/models/userModel');
 
 const applyPassportMiddleware = (app, passport) => {
@@ -78,30 +79,30 @@ const applyPassportMiddleware = (app, passport) => {
     });
   }));
   
-  passport.use(new FacebookStrategy({
-    clientID: process.env.FACEBOOK_APP_ID,
-    clientSecret: process.env.FACEBOOK_APP_SECRET,
-    callbackURL: process.env.FACEBOOK_CALLBACK_URL,
-    profileFields: ['id', 'displayName', 'email', 'photos', 'timezone', 'gender']
-  },
-    (token, refreshToken, profile, done) => {
-      process.nextTick(() => {
-        done(null, profile);
-      });
-    }
-  ));
+  // passport.use(new FacebookStrategy({
+  //   clientID: process.env.FACEBOOK_APP_ID,
+  //   clientSecret: process.env.FACEBOOK_APP_SECRET,
+  //   callbackURL: process.env.FACEBOOK_CALLBACK_URL,
+  //   profileFields: ['id', 'displayName', 'email', 'photos', 'timezone', 'gender']
+  // },
+  //   (token, refreshToken, profile, done) => {
+  //     process.nextTick(() => {
+  //       done(null, profile);
+  //     });
+  //   }
+  // ));
   
-  passport.use(new GoogleStrategy({
-    clientID: process.env.GOOGLE_APP_ID,
-    clientSecret: process.env.GOOGLE_APP_SECRET,
-    callbackURL: process.env.GOOGLE_CALLBACK_URL
-  }, 
-    (token, refreshToken, profile, done) => {
-      process.nextTick(() => {
-        done(null, profile)
-      });
-    }
-  ));
+  // passport.use(new GoogleStrategy({
+  //   clientID: process.env.GOOGLE_APP_ID,
+  //   clientSecret: process.env.GOOGLE_APP_SECRET,
+  //   callbackURL: process.env.GOOGLE_CALLBACK_URL
+  // }, 
+  //   (token, refreshToken, profile, done) => {
+  //     process.nextTick(() => {
+  //       done(null, profile)
+  //     });
+  //   }
+  // ));
 
   app.use(passport.initialize());
   app.use(passport.session());
