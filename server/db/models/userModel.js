@@ -71,9 +71,11 @@ const userModel = {
     });
   },
   
-  deleteUser: () => {
+  deleteUser: (userId) => {
     return new Promise((resolve, reject) => {
+      let queryString = `delete from users where id=${userId} returning *;`;
       
+      utils.dbQuery(db, queryString, 'could not delete user', resolve, reject);
     });
   },
   
