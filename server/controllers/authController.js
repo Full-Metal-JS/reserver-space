@@ -20,9 +20,9 @@ const authController = {
   }),
   
   updateSession: (req, res) => {
-    console.log(req.session)
-    console.log(req.passport)
-    console.log(req.user);
+    console.log('session', req.session)
+    console.log('passport', req.passport)
+    console.log('user', req.user);
     res.send('success');
   }
 };
