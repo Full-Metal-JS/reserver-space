@@ -25,7 +25,7 @@ create table userslocations (
   locationid integer,
   
   foreign key (userid) references users(id),
-  foreign key (locationid) references location(id)
+  foreign key (locationid) references locations(id)
 );
 
 create table rooms (
@@ -33,7 +33,7 @@ create table rooms (
   room_name varchar(100),
   locationid integer,
   
-  foreign key (locationid) references location(id)
+  foreign key (locationid) references locations(id)
 );
 
 create table reservations (
@@ -46,5 +46,5 @@ create table reservations (
   roomid integer,
   
   foreign key (userid) references users(id),
-  foreign key (locationid) references locations(id)
+  foreign key (roomid) references rooms(id)
 );
