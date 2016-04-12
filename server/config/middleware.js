@@ -8,6 +8,7 @@ const compression = require('compression');
 const session = require('express-session');
 const RedisStore = require('connect-redis')(session);
 const passport = require('passport');
+const flash = require('flash');
 
 module.exports = function(app, express) {
   let authRouter = express.Router();
@@ -27,6 +28,9 @@ module.exports = function(app, express) {
     resave: true,
     saveUninitialized: true
   }));
+  
+  // flash middleware
+  app.use(flash());
   
   // apply passport middleware
   require('./../passport')(app, passport);

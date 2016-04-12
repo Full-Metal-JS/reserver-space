@@ -17,7 +17,14 @@ const authController = {
   
   login: passport.authenticate('local-login', {
     failureFlash: true
-  })
+  }),
+  
+  updateSession: (req, res) => {
+    console.log(req.session)
+    console.log(req.passport)
+    console.log(req.user);
+    res.send('success');
+  }
 };
 
 module.exports = authController;

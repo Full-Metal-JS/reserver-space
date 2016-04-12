@@ -38,6 +38,7 @@
     "enzyme": "^2.2.0",
     "express": "^4.13.3",
     "express-session": "^1.13.0",
+    "flash": "^1.1.0",
     "gulp": "^3.9.0",
     "http": "0.0.0",
     "jwt-simple": "^0.4.0",
