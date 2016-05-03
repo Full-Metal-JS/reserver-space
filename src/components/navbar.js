@@ -1,8 +1,8 @@
 import React from 'react';
 import {Link} from 'react-router';
 
-export default Navbar = ({userAuthenticated, submitLogout}) => {
-  if(userAuthenticated){
+const NavBar = ({userAuthenticated, submitLogout}) => {
+  if (userAuthenticated){
     return (
     <nav className='navbar navbar-inverse navbar-fixed-top'>
       <div className='contianer-fluid'>
@@ -16,6 +16,7 @@ export default Navbar = ({userAuthenticated, submitLogout}) => {
     </nav>
     )
   } else {
+    return(
     <nav className='navbar navbar-inverse navbar-fixed-top'>
       <div className='contianer-fluid'>
         <div className='navbar-header'>
@@ -23,5 +24,8 @@ export default Navbar = ({userAuthenticated, submitLogout}) => {
         </div>
       </div>
     </nav>
+    )
   }
 }
+
+export default NavBar;

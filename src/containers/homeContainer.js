@@ -1,4 +1,4 @@
-import {connect} from 'redux';
+import {connect} from 'react-redux';
 import Home from '../components/home';
 import {postLogout} from '../actions/authActions';
 
