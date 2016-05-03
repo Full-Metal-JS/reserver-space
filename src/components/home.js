@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router';
 import Navbar from './navbar';
 
-export default Home = ({childern}) => {
+const Home = ({childern}) => {
   return (
     <div>
       <Navbar />
@@ -13,3 +13,5 @@ export default Home = ({childern}) => {
     </div>
   )
 }
+
+export default Home;

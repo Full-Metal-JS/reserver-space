@@ -1,4 +1,4 @@
-import {connect} from react-redux;
+import {connect} from 'react-redux';
 import Login from '../components/login';
 import {addLoginEmail, addLoginPassword, postLogin} from '../actions/authActions';
 
@@ -13,10 +13,10 @@ function mapDispatchToProps(dispatch) {
   return {
     addEmail: (email) => {
       dispatch(addEmail(email));
-    }
+    },
     addPassword: (password) => {
       dispatch(addPassword(password));
-    }
+    },
     postLogin: (user) => {
       dispatch(postLogin(user));
     }

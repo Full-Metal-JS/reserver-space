@@ -16,7 +16,7 @@ const initialState = {
   userAuthenticated: false
 }
 
-export default userAuthReducer (state = initialState, action) => {
+export default  (state = initialState, action) => {
   switch (action.type) {
     case actions.ADD_EMAIL:
       return Object.assign({}, state, {

@@ -1,8 +1,8 @@
 import React from 'react';
 import {Link} from 'react-router';
 
-export default Signup = ({addFirstName, addLastName, addEmail, addPassword, postSignup, userFirstName, userLastName, userEmail, userPassword}) => {
-  handleSubmit(e){
+const Signup = ({addFirstName, addLastName, addEmail, addPassword, postSignup, userFirstName, userLastName, userEmail, userPassword}) => {
+  const handleSubmit = e => {
     e.preventDefault();
     let user = {
       firstName: userFirstName,
@@ -36,3 +36,5 @@ export default Signup = ({addFirstName, addLastName, addEmail, addPassword, post
     </div>
   )
 }
+
+export default Signup;
