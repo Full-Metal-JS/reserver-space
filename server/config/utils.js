@@ -1,5 +1,5 @@
 'use strict'
-const { reduce, findLastKey } = require('lodash');
+const _ = require('lodash');
 
 module.exports = {
   // logs the error
@@ -15,8 +15,8 @@ module.exports = {
   
   // creates a string to update an entry in the db
   createUpdateString: (updateObj) => {
-    return reduce(updateObj, (result, value, key, object) => {
-      return (key === findLastKey(object)) ? `${result}${key}='${value}'` : `${result}${key}='${value}',`;
+    return _.reduce(updateObj, (result, value, key, object) => {
+      return (key === _.findLastKey(object)) ? `${result}${key}='${value}'` : `${result}${key}='${value}',`;
     }, '');
   },
   
