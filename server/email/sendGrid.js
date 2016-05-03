@@ -1,4 +1,4 @@
-var API_KEY = process.env.SEND_GRID || require('./sendGrid-config.js');
+var API_KEY = process.env.SENDGRID_PASSWORD;
 var sendgrid = require('sendgrid')(API_KEY);
 
 module.exports = {

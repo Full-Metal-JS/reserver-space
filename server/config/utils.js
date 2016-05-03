@@ -1,7 +1,5 @@
 'use strict'
-
-const jwt = require('jwt-simple');
-const _ = require('lodash');
+const { reduce, findLastKey } = require('lodash');
 
 module.exports = {
   // logs the error
@@ -15,32 +13,10 @@ module.exports = {
     res.status(500).send({error: err.message});
   },
   
-  // decodes the token
-  decode: (req, res, next) => {
-    let token = req.headers['x-access-token'];
-    let user = null;
-
-    if (!token) {
-      return res.status(403).send('no token');
-    }
-    try {
-      user = jwt.decode(token, 'i dont have secrets');
-      req.user = user;
-      next();
-    } catch (error) {
-      return next(error);
-    }
-  },
-  
-  // helper function that creates a web token
-  createJWT: (user) => {
-    return jwt.encode(user, 'i dont have secrets');
-  },
-  
   // creates a string to update an entry in the db
   createUpdateString: (updateObj) => {
-    return _.reduce(updateObj, (result, value, key, object) => {
-      return (key === _.findLastKey(object)) ? `${result}${key}='${value}'` : `${result}${key}='${value}',`;
+    return reduce(updateObj, (result, value, key, object) => {
+      return (key === findLastKey(object)) ? `${result}${key}='${value}'` : `${result}${key}='${value}',`;
     }, '');
   },
   
