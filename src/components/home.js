@@ -2,10 +2,10 @@ import React from 'react';
 import {Link} from 'react-router';
 import Navbar from './navbar';
 
-const Home = ({childern}) => {
+const Home = ({childern, userAuthenticated, submitLogout}) => {
   return (
     <div>
-      <Navbar />
+      <Navbar userAuthenticated={userAuthenticated} submitLogout={submitLogout}/>
       <div className='jumbotron text-center'>
         <h1>Find Your Space</h1>
         {childern}
