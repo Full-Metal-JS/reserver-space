@@ -1,7 +1,6 @@
 'use strict'
 const passport = require('passport');
 const User = require('./../db/models/userModel');
-const jwt = require('jwt-simple');
 const utils = require('./../config/utils');
 
 const authController = {
