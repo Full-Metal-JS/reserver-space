@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server/server",
     "start:dev": "nodemon server/server",
-    "postinstall": "npm run build",
+    "postinstall": "npm run production",
     "build": "node_modules/.bin/webpack",
     "dev": "node_modules/.bin/webpack-dev-server --hot",
     "production": "webpack -p"
