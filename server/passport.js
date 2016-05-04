@@ -5,6 +5,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const pify = require('pify');
 const bcrypt = pify(require('bcrypt-nodejs'));
 const User = require('./db/models/userModel');
+const isEmpty = require('lodash').isEmpty;
 
 const applyPassportMiddleware = (app, passport) => {
   passport.serializeUser((user, done) => {
@@ -23,14 +24,14 @@ const applyPassportMiddleware = (app, passport) => {
     // logic of signup
     User.getUserByParameter('email', email)
       .then(user => {
-        if (user.length) {
+        if (!isEmpty(user)) {
           return done(null, false, req.flash('signupMessage', 'That email is already taken'));  
         }
         
         //  else {
-        //   bcrypt.genSaltAsync(10)
+        //   bcrypt.genSalt(10)
         //     .then(salt => {
-        //       bcrypt.hashAsync(password, salt)
+        //       bcrypt.hash(password, salt)
         //         .then(hash => {
         //           User.createUser('local', {
         //             email: email,
@@ -53,9 +54,9 @@ const applyPassportMiddleware = (app, passport) => {
         // }
       })
       .catch(err => {
-        bcrypt.genSaltAsync(10)
+        bcrypt.genSalt(10)
           .then(salt => {
-            bcrypt.hashAsync(password, salt)
+            bcrypt.hash(password, salt, null)
               .then(hash => {
                 User.createUser('local', {
                   email: email,
@@ -88,7 +89,7 @@ const applyPassportMiddleware = (app, passport) => {
       // logic of signin
       User.getUserByParameter('email', email)
         .then(user => {
-          bcrypt.compareAsync(password, user.password)
+          bcrypt.compare(password, user.password)
             .then(isMatch => {
               return (isMatch) ? done(null, user) : done(null, false, req.flash('loginMessage', 'Wrong Password'));
             })
