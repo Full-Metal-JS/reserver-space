@@ -1,6 +1,5 @@
 'use strict'
 const db = require('./../db');
-const Promise = require('bluebird');
 const utils = require('./../../config/utils');
 
 const locationModel = {
@@ -16,9 +15,18 @@ const locationModel = {
   // creates location for user
   createLocation: () => {
     return new Promise((resolve, reject) => {
-      
+      let queryString = ``;
+
+      utils.dbQuery(db, queryString, '', resolve, reject);
     });
-  }
+  },
+
+  // updates location with new room or user
+  addRoomOrUserToLocation: () => new Promise((resolve, reject) => {
+    let queryString = ``;
+
+    utils.dbQuery(db, queryString, '', resolve, reject);
+  })
 };
 
 module.exports = locationModel;
