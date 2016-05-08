@@ -2,14 +2,6 @@ import React from 'react';
 import {Link} from 'react-router';
 
 const Login = ({addEmail, addPassword, postLogin, userEmail, userPassword}) => {
-  const handleSubmit = e => {
-    e.preventDefault();
-    let user = {
-      email: userEmail,
-      password: userPassword
-    };
-    postLogin(user);
-  }
 
   return(
     <div className='container'>
@@ -29,7 +21,7 @@ const Login = ({addEmail, addPassword, postLogin, userEmail, userPassword}) => {
         <h3>Or log in with email</h3>
         <input type='email' placeholder='Your Email' onBlur={(e) => {addEmail(e.target.value)}} />
         <input type='password' placeholder='Password' onBlue={(e) => {addPassword(e.target.value)}} />
-        <button className='btn btn-primary btn-block' onClick={this.handleSubmit.bind(this)}>Log In</button>
+        <button className='btn btn-primary btn-block' onClick={postLogin({email: userEmail, password: userPassword})}>Log In</button>
       </form>
     </div>
   )
