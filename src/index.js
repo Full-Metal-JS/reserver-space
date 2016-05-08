@@ -10,8 +10,9 @@ import reducers from './reducers';
 
 import App from './components/app';
 import HomeContainer from './containers/homeContainer';
-import loginContainer from './containers/loginContainer';
-import signupContainer from './containers/signupContainer';
+import LoginContainer from './containers/loginContainer';
+import SignupContainer from './containers/signupContainer';
+import DashContainer from './containers/dashboardContainer';
 
 const store = configureStore(browserHistory);
 const history = syncHistoryWithStore(browserHistory, store);
@@ -20,10 +21,9 @@ ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
       <Route path='/' component={App}>
-        <IndexRoute component={HomeContainer}>
-          <IndexRoute component={loginContainer} />
-          <Route path='signup' component={signupContainer}></Route>
-        </IndexRoute>
+        <IndexRoute component={HomeContainer}></IndexRoute>
+        <Route path='signup' component={SignupContainer}></Route>
+        <Route path='dashboard' component={DashContainer}></Route>
       </Route>
       <Redirect from='*' to='/' />
     </Router>
