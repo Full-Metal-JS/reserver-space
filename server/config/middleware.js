@@ -9,12 +9,13 @@ const session = require('express-session');
 const RedisStore = require('connect-redis')(session);
 const passport = require('passport');
 const flash = require('flash');
+const history = require('connect-history-api-fallback');
 
 module.exports = function(app, express) {
   let authRouter = express.Router();
   // compression middleware to lower the size of request and response
   app.use(compression());
-
+  app.use(history());
   // body parser for all url encoded requests and json
   app.use(bodyParser.urlencoded({extended: true}));
   app.use(bodyParser.json());
