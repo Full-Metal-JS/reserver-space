@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router';
 import Navbar from './navbar';
+import LoginContainer from '../containers/loginContainer';
 
 const Home = ({childern, userAuthenticated, submitLogout}) => {
   return (
@@ -8,7 +9,7 @@ const Home = ({childern, userAuthenticated, submitLogout}) => {
       <Navbar userAuthenticated={userAuthenticated} submitLogout={submitLogout}/>
       <div className='jumbotron text-center'>
         <h1>Find Your Space</h1>
-        {childern}
+        <LoginContainer/>
       </div>
     </div>
   )
