@@ -4,14 +4,10 @@
 const { getUsersLocations, createLocation, addUserToLocation, deleteLocation } = require('../db/models/locationModel');
 
 const locationController = {
-  locationGet: ({ params: {userID, locationID} }, res, next) => {
-    if (userID) {
-      getUsersLocations('users', userID)
-        .then(users => res.json(users))
-        .catch(err => next(err));
-    } else if (locationID) {
-      getUsersLocations('locations', locationID)
-        .then(users => res.json(users))
+  locationGet: ({ params: {id}, query: {type} }, res, next) => {
+    if (type && id) {
+      getUsersLocations(type, id)
+        .then(response => res.json(response))
         .catch(err => next(err));
     } else {
       next(new Error('must send user id'));
