@@ -1,5 +1,5 @@
 'use strict';
-const _ = require('lodash');
+const { reduce, findLastKey } = require('lodash');
 
 module.exports = {
   // logs the error
@@ -15,25 +15,25 @@ module.exports = {
   
   // creates a string to update an entry in the db
   createUpdateString: (updateObj) => {
-    return _.reduce(updateObj, (result, value, key, object) => {
-      return (key === _.findLastKey(object)) ? `${result}${key}='${value}'` : `${result}${key}='${value}',`;
+    return reduce(updateObj, (result, value, key, object) => {
+      return (key === findLastKey(object)) ? `${result}${key}='${value}'` : `${result}${key}='${value}',`;
     }, '');
   },
   
   // db query function takes in the db connection, query string and error message
-  dbQuery: (db, queryString, errorMsg, resolve, reject) => {
+  dbQuery: (db, queryString, errorMsg, successCB, errorCB) => {
     db.query(queryString)
       .map(response => {
         if (response.rowCount) {
           return response.rows[0];
         }
-        reject(new Error(errorMsg));
+        errorCB(new Error(errorMsg));
       })
       .subscribe(row => {
-        resolve(row);
+        successCB(row);
       },
       err => {
-        reject(err);
+        errorCB(err);
       });
   }
 };
