@@ -1,7 +1,7 @@
 'use strict';
 const passport = require('passport');
 const User = require('./../db/models/userModel');
-const utils = require('./../config/utils');
+// const utils = require('./../config/utils');
 
 const authController = {
   logout: (req, res, next) => {
@@ -47,24 +47,28 @@ const authController = {
       });
   },
   
-  validateFacebook: (req, res, next) => {
-    req.session.name = req.user.displayName;
-    req.session.facebookId = req.user.id;
-    req.session.picture = `https://graph.facebook.com/${req.user.id}/picture?height=500`;
-    req.session.email = req.user.emails[0].value;
-    
-    User.getUserByParameter('facebook', req.user.id)
+  validateFacebook: ({ user: { displayName, id, emails}, session }, res, next) => {
+    session.name = displayName;
+    session.facebookId = id;
+    session.picture = `https://graph.facebook.com/${id}/picture?height=500`;
+    session.email = emails[0].value;
+
+    User.getUserByParameter('facebookid', id)
       .then(user => {
         res.json(user);
       })
       .catch(err => {
-        User.createUser('facebook', req.user.id)
-          .then(createdUser => {
-            res.json(createdUser);
-          })
-          .catch(err => {
-            next(err);
-          });
+        User.createUser('facebook', {
+          email: emails[0].value,
+          photo: `https://graph.facebook.com/${id}/picture?height=500`,
+          id
+        })
+        .then(createdUser => {
+          res.json(createdUser);
+        })
+        .catch(err => {
+          next(err);
+        });
       });
   },
   
@@ -81,7 +85,7 @@ const authController = {
   }),
 
   googleCallback: passport.authenticate('google', {
-    failureRedirect: '/login'
+    failureRedirect: '/'
   })
 };
 

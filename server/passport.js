@@ -103,18 +103,18 @@ const applyPassportMiddleware = (app, passport) => {
     });
   }));
   
-  // passport.use(new FacebookStrategy({
-  //   clientID: process.env.FACEBOOK_APP_ID,
-  //   clientSecret: process.env.FACEBOOK_APP_SECRET,
-  //   callbackURL: process.env.FACEBOOK_CALLBACK_URL,
-  //   profileFields: ['id', 'displayName', 'email', 'photos', 'timezone', 'gender']
-  // },
-  //   (token, refreshToken, profile, done) => {
-  //     process.nextTick(() => {
-  //       done(null, profile);
-  //     });
-  //   }
-  // ));
+  passport.use(new FacebookStrategy({
+    clientID: process.env.FACEBOOK_APP_ID,
+    clientSecret: process.env.FACEBOOK_APP_SECRET,
+    callbackURL: process.env.FACEBOOK_CALLBACK_URL,
+    profileFields: ['id', 'displayName', 'email', 'photos', 'timezone', 'gender']
+  },
+    (token, refreshToken, profile, done) => {
+      process.nextTick(() => {
+        done(null, profile);
+      });
+    }
+  ));
   
   // passport.use(new GoogleStrategy({
   //   clientID: process.env.GOOGLE_APP_ID,
@@ -123,7 +123,7 @@ const applyPassportMiddleware = (app, passport) => {
   // }, 
   //   (token, refreshToken, profile, done) => {
   //     process.nextTick(() => {
-  //       done(null, profile)
+  //       done(null, profile);
   //     });
   //   }
   // ));

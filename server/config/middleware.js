@@ -14,9 +14,10 @@ const history = require('connect-history-api-fallback');
 module.exports = function(app, express) {
   const { Router } = express;
   let authRouter = Router();
+  let router = Router();
   // compression middleware to lower the size of request and response
   app.use(compression());
-  app.use(history());
+  // app.use(history());
   // body parser for all url encoded requests and json
   app.use(bodyParser.urlencoded({extended: true}));
   app.use(bodyParser.json());
@@ -41,8 +42,10 @@ module.exports = function(app, express) {
   app.use(express.static(joinPaths(__dirname, '../../dist')));
 
   app.use('/auth', authRouter);
+  app.use('/api', router);
 
   require('./../routes/authRoutes')(authRouter);
+  require('./../routes/routes')(router);
 
   // catch all
   app.use('*', function(req, res) {
