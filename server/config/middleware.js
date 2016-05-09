@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 require('dotenv').config();
 
 const bodyParser = require('body-parser');
@@ -12,7 +12,8 @@ const flash = require('flash');
 const history = require('connect-history-api-fallback');
 
 module.exports = function(app, express) {
-  let authRouter = express.Router();
+  const { Router } = express;
+  let authRouter = Router();
   // compression middleware to lower the size of request and response
   app.use(compression());
   app.use(history());
@@ -23,7 +24,7 @@ module.exports = function(app, express) {
   // express sessions using redis as the session store
   app.use(session({
     store: new RedisStore({
-      url: process.env.REDIS_URL,
+      url: process.env.REDIS_URL
     }),
     secret: 'i dont have a secret',
     resave: true,

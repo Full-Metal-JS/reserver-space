@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 const passport = require('passport');
 const User = require('./../db/models/userModel');
 const utils = require('./../config/utils');
@@ -19,8 +19,8 @@ const authController = {
   }),
   
   updateSession: (req, res) => {
-    console.log('session', req.session)
-    console.log('passport', req.passport)
+    console.log('session', req.session);
+    console.log('passport', req.passport);
     console.log('user', req.user);
     res.send('success');
   },
@@ -37,8 +37,8 @@ const authController = {
         res.json(user);
       })
       .catch(err => {
-        User.createUser('google', googleId)
-          then(createdUser => {
+        User.createUser('google', googleId);
+        then(createdUser => {
             res.json(createdUser);
           })
           .catch(err => {
