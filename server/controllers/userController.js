@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 const db = require('./../db/db');
 const User = require('./../db/models/userModel');
@@ -33,6 +33,6 @@ const userController = {
       next(new Error('must send user id'));
     }
   }
-}
+};
 
 module.exports = userController;

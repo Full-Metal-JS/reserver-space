@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 const db = require('./../db');
 const utils = require('./../../config/utils');
 
@@ -15,7 +15,7 @@ const locationModel = {
   // creates location for user
   createLocation: () => {
     return new Promise((resolve, reject) => {
-      let queryString = ``;
+      let queryString = '';
 
       utils.dbQuery(db, queryString, '', resolve, reject);
     });
@@ -23,7 +23,7 @@ const locationModel = {
 
   // updates location with new room or user
   addRoomOrUserToLocation: () => new Promise((resolve, reject) => {
-    let queryString = ``;
+    let queryString = '';
 
     utils.dbQuery(db, queryString, '', resolve, reject);
   })

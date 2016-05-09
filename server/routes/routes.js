@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 const User = require('./../controllers/userController');
 const Location = require('./../controllers/locationController');

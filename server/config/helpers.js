@@ -1,4 +1,4 @@
-var models = require("../db/models");
+var models = require('../db/models');
 
 module.exports = {
   getAllData: function(userId) {
@@ -10,4 +10,4 @@ module.exports = {
   getAllUsersAtLocation: function(locationId) {
     return models.sequelize.query('select "Users"."username" from "Users" left join "UserLocations" on "Users".id="UserLocations"."UserId" where "UserLocations"."LocationId"='+ locationId + ';');
   }
-}
+};
