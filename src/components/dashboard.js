@@ -4,10 +4,12 @@ import Sidebar from './sidebar';
 
 const Dashboard = ({childern, userAuthenticated, submitLogout}) => {
   return (
-    <Navbar userAuthenticated={userAuthenticated} submitLogout={submitLogout}/>
-    <div className='container'>
+    <div>
+      <Navbar userAuthenticated={userAuthenticated} submitLogout={submitLogout}/>
+      <div className='container'>
       <Sidebar />
       {childern}
+      </div>
     </div>
   )
 };
