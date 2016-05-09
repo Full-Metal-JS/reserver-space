@@ -28,6 +28,13 @@ const locationModel = {
     let queryString = `insert into userslocations (userid, locationid) values (${userID}, ${locationID}) returning *;`;
 
     dbQuery(db, queryString, 'could not add user to location', resolve, reject);
+  }),
+
+  // deletes a location
+  deleteLocation: locationID => new Promise((resolve, reject) => {
+    let queryString = `delete from locations where id=${locationID} returning *;`;
+
+    dbQuery(db, queryString, 'could not delete location', resolve, reject);
   })
 };
 
