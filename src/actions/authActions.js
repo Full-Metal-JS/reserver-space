@@ -1,4 +1,5 @@
 import * as actions from './actionConstants';
+import {browserHistory} from 'react-router';
 
 export const addEmail = (email) => {
   return {
@@ -21,6 +22,7 @@ export const submitLogin = () => {
 }
 
 export const loginSuccess = (user) => {
+  browserHistory.push('/dashboard');
   return {
     type: actions.LOGIN_SUCCESS,
     user
@@ -81,6 +83,7 @@ export const submitSignup = () => {
 };
 
 export const signupSuccess = () => {
+  browserHistory.push('/dashboard');
   return {
     type: actions.SIGNUP_SUCCESS
   }
