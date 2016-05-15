@@ -41,7 +41,7 @@ export const postLogin = (user) => {
     let state = getState();
     if(!state.postingLogin){
       dispatch(submitLogin());
-      fetch('/auth/local-login', {
+      fetch('/auth/login', {
         method: 'post',
         headers: {
           'Accept': 'application/json',
@@ -82,10 +82,11 @@ export const submitSignup = () => {
   }
 };
 
-export const signupSuccess = () => {
+export const signupSuccess = (user) => {
   browserHistory.push('/dashboard');
   return {
-    type: actions.SIGNUP_SUCCESS
+    type: actions.SIGNUP_SUCCESS,
+    user
   }
 };
 
@@ -101,7 +102,7 @@ export const postSignup = (user) => {
     let state = getState();
     if(!state.postingSignup){
       dispatch(submitSignup());
-      fetch('/auth/local-signup', {
+      fetch('/auth/signup', {
         method: 'post',
         headers: {
           'Accept': 'application/json',
@@ -111,7 +112,7 @@ export const postSignup = (user) => {
       })
       .then((response) => {
         if (response.status >= 200 && response.status < 300){
-          dispatch(signupSuccess());
+          dispatch(signupSuccess(response.user));
         }
         else {
           let error = new Error(response.statusText);

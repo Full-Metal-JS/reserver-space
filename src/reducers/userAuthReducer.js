@@ -1,6 +1,7 @@
 import * as actions from '../actions/authActions';
 
 const initialState = {
+  id: '',
   firstName: '',
   lastName: '',
   email: '',
@@ -32,6 +33,7 @@ export default  (state = initialState, action) => {
       });
     case actions.LOGIN_SUCCESS:
       return Object.assign({}, state, {
+        id: action.user.id,
         firstName: action.user.firstName,
         lastName: action.user.lastName,
         password: '',
@@ -58,6 +60,7 @@ export default  (state = initialState, action) => {
       });
     case actions.SIGNUP_SUCCESS:
       return Object.assign({}, state, {
+        id: action.user.id,
         password: '',
         postingSignup: false,
         signupSuccess: true,
