@@ -3,7 +3,7 @@ import SidebarLocation from './SidebarLocation';
 
 const Sidebar = ({locationsList, roomsList}) => {
   let locations = locationsList.map(function(location){
-    return <SidebarLocation location=location roomsList=roomsList}/>;
+    return <SidebarLocation location={location} roomsList={roomsList}/>;
   });
 
   return (
