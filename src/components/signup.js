@@ -2,7 +2,16 @@ import React from 'react';
 import {Link} from 'react-router';
 
 const Signup = ({addFirstName, addLastName, addEmail, addPassword, postSignup, userFirstName, userLastName, userEmail, userPassword}) => {
-  
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    postSignup({
+      firstName: userFirstName,
+      lastName: userLastName,
+      email: userEmail,
+      password: userPassword
+    });
+  }
   return(
     <div className='container'>
         <div>
@@ -22,7 +31,7 @@ const Signup = ({addFirstName, addLastName, addEmail, addPassword, postSignup, u
         <input type='email' placeholder='Your Email' onBlur={(e) => {addEmail(e.target.value)}} />
         <input type='password' placeholder='Password' onBlue={(e) => {addPassword(e.target.value)}} />
         <button className='btn btn-primary btn-block'
-          onClick={postSignup({firstName: userFirstName, lastName: userLastName, email: userEmail, password: userPassword})}>Sign Up</button>
+          onClick={handleSubmit.bind(this)}>Sign Up</button>
       </form>
     </div>
   )
