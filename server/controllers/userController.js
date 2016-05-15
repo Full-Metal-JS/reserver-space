@@ -1,16 +1,15 @@
 'use strict';
 
-const db = require('./../db/db');
 const User = require('./../db/models/userModel');
 const _ = require('lodash');
 
 const userController = {
   // update user 
-  userPut: (req, res, next) => {
-    if (!_.isEmpty(req.body && req.params.userId)) {
-      User.updateUser(req.params.userId, req.body)
+  userPut: ({body, params: { userId }}, res, next) => {
+    if (!_.isEmpty(body && userId)) {
+      User.updateUser(userId, body)
         .then(updatedUser => {
-          res.json(updateUser);
+          res.json(updatedUser);
         })
         .catch(err => {
           next(err);
@@ -20,8 +19,8 @@ const userController = {
     }
   },
   
-  userDelete: (req, res, next) => {
-    if (req.params.userId) {
+  userDelete: ({ params: { userId }}, res, next) => {
+    if (userId) {
       User.deleteUser(userId)
         .then(deletedUser => {
           res.json(deletedUser);

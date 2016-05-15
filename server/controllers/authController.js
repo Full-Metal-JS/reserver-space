@@ -19,9 +19,9 @@ const authController = {
   }),
   
   updateSession: (req, res) => {
-    console.log('session', req.session);
-    console.log('passport', req.passport);
-    console.log('user', req.user);
+    // console.log('session', req.session);
+    // console.log('passport', req.passport);
+    // console.log('user', req.user);
     res.send('success');
   },
   
@@ -36,9 +36,9 @@ const authController = {
       .then(user => {
         res.json(user);
       })
-      .catch(err => {
-        User.createUser('google', googleId);
-        then(createdUser => {
+      .catch(() => {
+        User.createUser('google', googleId)
+          .then(createdUser => {
             res.json(createdUser);
           })
           .catch(err => {
@@ -57,7 +57,7 @@ const authController = {
       .then(user => {
         res.json(user);
       })
-      .catch(err => {
+      .catch(() => {
         User.createUser('facebook', {
           email: emails[0].value,
           photo: `https://graph.facebook.com/${id}/picture?height=500`,
