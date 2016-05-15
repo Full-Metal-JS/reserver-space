@@ -19,9 +19,9 @@ const authController = {
   }),
   
   updateSession: (req, res) => {
-    // console.log('session', req.session);
-    // console.log('passport', req.passport);
-    // console.log('user', req.user);
+    console.log('session', req.session);
+    console.log('passport', req.passport);
+    console.log('user', req.user);
     res.send('success');
   },
   
