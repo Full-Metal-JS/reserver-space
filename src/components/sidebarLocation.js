@@ -7,6 +7,7 @@ const SidebarLocation = ({location, roomsList}) => {
 
   return (
     <li id={location}>
+      <h3>{location}</h3>
       <ul className='roomsList'>
         {rooms}
       </ul>
