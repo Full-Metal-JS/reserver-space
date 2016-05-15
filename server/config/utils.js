@@ -12,6 +12,10 @@ module.exports = {
   handleError: (err, req, res) => {
     res.status(500).send({error: err.message});
   },
+
+  isAuthed: (req, res, next) => {
+    
+  },
   
   // creates a string to update an entry in the db
   createUpdateString: (updateObj) => {
