@@ -29,7 +29,7 @@ const Signup = ({addFirstName, addLastName, addEmail, addPassword, postSignup, u
       <form>
         <h3>Or sign up with email</h3>
         <input type='email' placeholder='Your Email' onBlur={(e) => {addEmail(e.target.value)}} />
-        <input type='password' placeholder='Password' onBlue={(e) => {addPassword(e.target.value)}} />
+        <input type='password' placeholder='Password' onBlur={(e) => {addPassword(e.target.value)}} />
         <button className='btn btn-primary btn-block'
           onClick={handleSubmit.bind(this)}>Sign Up</button>
       </form>
