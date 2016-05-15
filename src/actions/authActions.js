@@ -3,14 +3,14 @@ import {browserHistory} from 'react-router';
 
 export const addEmail = (email) => {
   return {
-    type: actions.LOGIN_EMAIL,
+    type: actions.ADD_EMAIL,
     email
   }
 };
 
 export const addPassword = (password) => {
   return {
-    type: actions.LOGIN_PASSWORD,
+    type: actions.ADD_PASSWORD,
     password
   }
 };
