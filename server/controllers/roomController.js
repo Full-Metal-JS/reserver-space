@@ -1,3 +1,5 @@
+'use strict';
+
 const { getAllRoomsAtLocation, createRoom,
   updateRoom, deleteRoom
 } = require('../db/models/roomModel');
