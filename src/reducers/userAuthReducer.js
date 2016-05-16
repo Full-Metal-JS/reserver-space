@@ -15,9 +15,9 @@ const initialState = {
   postingLogout: false,
   logoutErrorMsg: '',
   userAuthenticated: false
-}
+};
 
-export default  (state = initialState, action) => {
+const userAuthReducer = (state = initialState, action) => {
   switch (action.type) {
     case actions.ADD_EMAIL:
       return Object.assign({}, state, {
@@ -96,6 +96,8 @@ export default  (state = initialState, action) => {
         logoutErrorMsg: action.error
       });
     default:
-      return state
+      return state;
   }
-}
+};
+
+export default userAuthReducer;
