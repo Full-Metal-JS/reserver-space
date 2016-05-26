@@ -3,7 +3,7 @@
 const { getAllReservationsForUser, getAllReservationsAtRoom,
   createReservation, updateReservation,
   deleteReservation
-} = require('../db/models/reservationMode');
+} = require('../db/models/reservationModel');
 const { isEmpty } = require('lodash');
 
 const reservationController = {
