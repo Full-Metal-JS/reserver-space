@@ -2,7 +2,7 @@
 
 const express = require('express');
 const applyMiddleware = require('./middleware');
-const createServer = require('http').createServer;
+const { createServer } = require('http');
 
 let server = createServer();
 
