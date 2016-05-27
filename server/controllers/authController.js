@@ -13,25 +13,26 @@ const authController = {
   signup: passport.authenticate('local-signup', {
     failureFlash: true
   }),
-  
+
   login: passport.authenticate('local-login', {
     failureFlash: true
   }),
-  
+
   updateSession: (req, res) => {
     console.log('session', req.session);
     console.log('passport', req.passport);
     console.log('user', req.user);
+    
     res.send('success');
   },
-  
+
   validateGoogle: (req, res, next) => {
     let googleId = req.user.id;
-    
+
     req.session.googleId = googleId;
     req.session.picture = req.user._json.image.url + '0';
     req.session.email = req.user.emails[0].value;
-    
+
     User.getUserByParameter('googleId', googleId)
       .then(user => {
         res.json(user);
@@ -46,7 +47,7 @@ const authController = {
           });
       });
   },
-  
+
   validateFacebook: ({ user: { displayName, id, emails}, session }, res, next) => {
     session.name = displayName;
     session.facebookId = id;
@@ -71,7 +72,7 @@ const authController = {
         });
       });
   },
-  
+
   facebook: passport.authenticate('facebook', {
     scope: ['email']
   }),

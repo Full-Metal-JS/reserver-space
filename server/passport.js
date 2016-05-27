@@ -27,33 +27,9 @@ const applyPassportMiddleware = (app, passport) => {
         if (!isEmpty(user)) {
           return done(null, false, req.flash('signupMessage', 'That email is already taken'));  
         }
-        
-        //  else {
-        //   bcrypt.genSalt(10)
-        //     .then(salt => {
-        //       bcrypt.hash(password, salt)
-        //         .then(hash => {
-        //           User.createUser('local', {
-        //             email: email,
-        //             password: hash
-        //           })
-        //           .then(newUser => {
-        //             return done(null, newUser);
-        //           })
-        //           .catch(err => {
-        //             return done(err);
-        //           });
-        //         })
-        //         .catch(err => {
-        //           return done(err);
-        //         });
-        //     })
-        //     .catch(err => {
-        //       return done(err);
-        //     });
-        // }
+
       })
-      .catch(err => {
+      .catch(() => {
         bcrypt.genSalt(10)
           .then(salt => {
             bcrypt.hash(password, salt, null)
@@ -116,17 +92,17 @@ const applyPassportMiddleware = (app, passport) => {
     }
   ));
   
-  // passport.use(new GoogleStrategy({
-  //   clientID: process.env.GOOGLE_APP_ID,
-  //   clientSecret: process.env.GOOGLE_APP_SECRET,
-  //   callbackURL: process.env.GOOGLE_CALLBACK_URL
-  // }, 
-  //   (token, refreshToken, profile, done) => {
-  //     process.nextTick(() => {
-  //       done(null, profile);
-  //     });
-  //   }
-  // ));
+  passport.use(new GoogleStrategy({
+    clientID: process.env.GOOGLE_APP_ID,
+    clientSecret: process.env.GOOGLE_APP_SECRET,
+    callbackURL: process.env.GOOGLE_CALLBACK_URL
+  }, 
+    (token, refreshToken, profile, done) => {
+      process.nextTick(() => {
+        done(null, profile);
+      });
+    }
+  ));
 
   app.use(passport.initialize());
   app.use(passport.session());
