@@ -12,6 +12,15 @@ const flash = require('flash');
 const history = require('connect-history-api-fallback');
 
 module.exports = function(app, express) {
+  if (process.env.NODE_ENV !== 'production') {
+    const webpack = require('webpack');
+    const webpackConfig = require('./../../webpack.config');
+    const compiler = webpack(webpackConfig);
+    const { webpackDevMiddleware, webpackHotMiddleware } = require('./webpackDev');
+    app.use(webpackDevMiddleware(webpackConfig, compiler));
+    app.use(webpackHotMiddleware(compiler));  
+  }
+  
   const { Router } = express;
   let authRouter = Router();
   let router = Router();
