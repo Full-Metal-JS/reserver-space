@@ -1,5 +1,3 @@
-import * as actions from '../actions/authActions';
-
 const initialState = {
   id: '',
   firstName: '',
@@ -19,20 +17,14 @@ const initialState = {
 
 const userAuthReducer = (state = initialState, action) => {
   switch (action.type) {
-    case actions.ADD_EMAIL:
-      return Object.assign({}, state, {
-        email: action.email
-      });
-    case actions.ADD_PASSWORD:
-      return Object.assign({}, state, {
-        password: action.password
-      });
-    case actions.LOGIN_SUBMIT:
-      return Object.assign({}, state, {
-        postingLogin: true,
-      });
-    case actions.LOGIN_SUCCESS:
-      return Object.assign({}, state, {
+    case 'ADD_EMAIL':
+      return {...state, email: action.email};
+    case 'ADD_PASSWORD':
+      return {...state, password: action.password};
+    case 'LOGIN_SUBMIT':
+      return {...state, postingLogin: true};
+    case 'LOGIN_SUCCESS':
+      return {...state,
         id: action.user.id,
         firstName: action.user.firstName,
         lastName: action.user.lastName,
@@ -40,43 +32,35 @@ const userAuthReducer = (state = initialState, action) => {
         postingLogin: false,
         loginSuccess: true,
         userAuthenticated: true
-      });
-    case actions.LOGIN_FAILURE:
-      return Object.assign({}, state, {
+      };
+    case 'LOGIN_FAILURE':
+      return {...state,
         postingLogin: false,
         loginErrorMsg: action.error
-      });
-    case actions.SIGNUP_FIRST_NAME:
-      return Object.assign({}, state, {
-        firstName: action.firstName
-      });
-    case actions.SIGNUP_LAST_NAME:
-      return Object.assign({}, state, {
-        lastName: action.lastName
-      });
-    case actions.SIGNUP_SUBMIT:
-      return Object.assign({}, state, {
-        postingSignup: true
-      });
-    case actions.SIGNUP_SUCCESS:
-      return Object.assign({}, state, {
+      };
+    case 'SIGNUP_FIRST_NAME':
+      return {...state, firstName: action.firstName};
+    case 'SIGNUP_LAST_NAME':
+      return {...state, lastName: action.lastName};
+    case 'SIGNUP_SUBMIT':
+      return {...state, postingSignup: true};
+    case 'SIGNUP_SUCCESS':
+      return {...state,
         id: action.user.id,
         password: '',
         postingSignup: false,
         signupSuccess: true,
         userAuthenticated: true
-      });
-    case actions.SIGNUP_FAILURE:
-      return Object.assign({}, state, {
+      };
+    case 'SIGNUP_FAILURE':
+      return {...state,
         postingSignup: false,
         signupErrorMsg: action.error
-      });
-    case actions.LOGOUT_SUBMIT:
-      return Object.assign({}, state, {
-        postingLogout: true
-      });
-    case actions.LOGOUT_SUCCESS:
-      return Object.assign({}, state, {
+      };
+    case 'LOGOUT_SUBMIT':
+      return {...state, postingLogout: true};
+    case 'LOGOUT_SUCCESS':
+      return {...state,
         firstName: '',
         lastName: '',
         email: '',
@@ -90,11 +74,9 @@ const userAuthReducer = (state = initialState, action) => {
         postingLogout: false,
         logoutErrorMsg: '',
         userAuthenticated: false
-      });
-    case actions.LOGOUT_FAILURE:
-      return Object.assign({}, state, {
-        logoutErrorMsg: action.error
-      });
+      };
+    case 'LOGOUT_FAILURE':
+      return {...state, logoutErrorMsg: action.error};
     default:
       return state;
   }
