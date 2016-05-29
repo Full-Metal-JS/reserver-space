@@ -9,19 +9,23 @@ function mapStateToProps(state) {
   }
 };
 
-function mapDispatchToProps(dispatch) {
-  return {
-    addEmail: (email) => {
-      dispatch(addEmail(email));
-    },
-    addPassword: (password) => {
-      dispatch(addPassword(password));
-    },
-    postLogin: (user) => {
-      dispatch(postLogin(user));
-    }
-  }
-};
+// function mapDispatchToProps(dispatch) {
+//   return {
+//     addEmail: (email) => {
+//       dispatch(addEmail(email));
+//     },
+//     addPassword: (password) => {
+//       dispatch(addPassword(password));
+//     },
+//     postLogin: (user) => {
+//       dispatch(postLogin(user));
+//     }
+//   }
+// };
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, {
+  addEmail,
+  addPassword,
+  postLogin
+})(Login);

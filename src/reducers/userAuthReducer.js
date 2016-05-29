@@ -1,3 +1,5 @@
+import * as actions from './../actions/actionConstants'
+
 const initialState = {
   id: '',
   firstName: '',
@@ -17,13 +19,13 @@ const initialState = {
 
 const userAuthReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'ADD_EMAIL':
+    case actions.ADD_EMAIL:
       return {...state, email: action.email};
-    case 'ADD_PASSWORD':
+    case actions.ADD_PASSWORD:
       return {...state, password: action.password};
-    case 'LOGIN_SUBMIT':
+    case actions.LOGIN_SUBMIT:
       return {...state, postingLogin: true};
-    case 'LOGIN_SUCCESS':
+    case actions.LOGIN_SUCCESS:
       return {...state,
         id: action.user.id,
         firstName: action.user.firstName,
@@ -33,18 +35,18 @@ const userAuthReducer = (state = initialState, action) => {
         loginSuccess: true,
         userAuthenticated: true
       };
-    case 'LOGIN_FAILURE':
+    case actions.LOGIN_FAILURE:
       return {...state,
         postingLogin: false,
         loginErrorMsg: action.error
       };
-    case 'SIGNUP_FIRST_NAME':
+    case actions.SIGNUP_FIRST_NAME:
       return {...state, firstName: action.firstName};
-    case 'SIGNUP_LAST_NAME':
+    case actions.SIGNUP_LAST_NAME:
       return {...state, lastName: action.lastName};
-    case 'SIGNUP_SUBMIT':
+    case actions.SIGNUP_SUBMIT:
       return {...state, postingSignup: true};
-    case 'SIGNUP_SUCCESS':
+    case actions.SIGNUP_SUCCESS:
       return {...state,
         id: action.user.id,
         password: '',
@@ -52,14 +54,14 @@ const userAuthReducer = (state = initialState, action) => {
         signupSuccess: true,
         userAuthenticated: true
       };
-    case 'SIGNUP_FAILURE':
+    case actions.SIGNUP_FAILURE:
       return {...state,
         postingSignup: false,
         signupErrorMsg: action.error
       };
-    case 'LOGOUT_SUBMIT':
+    case actions.LOGOUT_SUBMIT:
       return {...state, postingLogout: true};
-    case 'LOGOUT_SUCCESS':
+    case actions.LOGOUT_SUCCESS:
       return {...state,
         firstName: '',
         lastName: '',
@@ -75,7 +77,7 @@ const userAuthReducer = (state = initialState, action) => {
         logoutErrorMsg: '',
         userAuthenticated: false
       };
-    case 'LOGOUT_FAILURE':
+    case actions.LOGOUT_FAILURE:
       return {...state, logoutErrorMsg: action.error};
     default:
       return state;
