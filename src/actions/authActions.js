@@ -49,15 +49,11 @@ export const postLogin = (user) => {
         },
         body: JSON.stringify(user)
       })
-      .then((response) => {
-        if (response.status >= 200 && response.status < 300){
-          dispatch(loginSuccess(response.user));
-        }
-        else {
-          let error = new Error(response.statusText);
-          dispatch(loginFailure(error));
-        }
+      .then(response => {
+        return response.json();
       })
+      .then(data => dispatch(loginSuccess(data)))
+      .catch(err => dispatch(loginFailure(err)));
     }
   }
 }
@@ -110,15 +106,11 @@ export const postSignup = (user) => {
         },
         body: JSON.stringify(user)
       })
-      .then((response) => {
-        if (response.status >= 200 && response.status < 300){
-          dispatch(signupSuccess(response.user));
-        }
-        else {
-          let error = new Error(response.statusText);
-          dispatch(signupFailure(error));
-        }
+      .then(response => {
+        return response.json();
       })
+      .then(data => dispatch(signupSuccess(data)))
+      .catch(err => dispatch(signupFailure(err)));
     }
   }
 }
@@ -146,20 +138,22 @@ export const postLogout = () => {
   return (dispatch) => {
     dispatch(submitLogout());
     fetch('/auth/logout', {
-      method: 'post',
+      method: 'get',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       }
     })
-    .then((response) => {
-      if (response.status >= 200 && response.status < 300){
-        dispatch(logoutSuccess());
-      }
-      else {
-        let error = new Error(response.statusText);
-        dispatch(logoutFailure(error));
-      }
+    .then(response => {
+      dispatch(logoutSuccess());
+      // if (response.status >= 200 && response.status < 300){
+      //   dispatch(logoutSuccess());
+      // }
+      // else {
+      //   let error = new Error(response.statusText);
+      //   dispatch(logoutFailure(error));
+      // }
     })
+    .catch(err => dispatch(logoutFailure(err)));
   }
 }
