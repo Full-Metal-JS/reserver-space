@@ -4,7 +4,8 @@ const User = require('./../db/models/userModel');
 // const utils = require('./../config/utils');
 
 const authController = {
-  logout: (req, res, next) => {
+  logout: (req, res) => {
+    req.session.destroy();
     req.logout();
     res.clearCookie('reserver-space');
     res.redirect('/');
@@ -23,7 +24,7 @@ const authController = {
     console.log('passport', req.passport);
     console.log('user', req.user);
     
-    res.send('success');
+    res.json(req.user);
   },
 
   validateGoogle: (req, res, next) => {
