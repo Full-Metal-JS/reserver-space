@@ -13,6 +13,7 @@ import HomeContainer from './containers/homeContainer';
 import LoginContainer from './containers/loginContainer';
 import SignupContainer from './containers/signupContainer';
 import DashContainer from './containers/dashboardContainer';
+require('./public/css/style.css');
 
 const store = configureStore(browserHistory);
 const history = syncHistoryWithStore(browserHistory, store);
