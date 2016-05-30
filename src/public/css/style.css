@@ -55,6 +55,7 @@ body {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  padding-top: 50px;
 }
 
 a {
@@ -105,7 +106,8 @@ h3 {
 /* Jumbotron
 /* -------------------------------------------------- */
 
-.landing .jumbotron {
+/*.landing*/
+.jumbotron {
   background: transparent;
   padding-top: 130px;
   padding-bottom: 60px;
@@ -152,6 +154,24 @@ fieldset[disabled] .btn-primary.active {
 .btn-xlg {
   font-size: 2em;
   padding: 10px 40px;
+}
+
+/*
+/* Auth
+/*--------------------------------------------------- */
+.authContainer {
+  width: 350px;
+  background-color: rgba(255,255,255,0.9);
+  padding: 20px 10px 20px 10px;
+  border-radius: 4px;
+}
+
+.facebook-auth {
+  margin: 10px auto 10px auto;
+}
+
+.google-auth {
+  margin: 10px auto 10px auto;
 }
 
 /*

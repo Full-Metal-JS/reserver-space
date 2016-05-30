@@ -13,23 +13,27 @@ const Signup = ({addFirstName, addLastName, addEmail, addPassword, postSignup, u
     });
   }
   return(
-    <div className='container'>
-        <div>
+    <div className='container authContainer'>
+        <div className='text-center'>
           <h2>Sign Up</h2>
           <h3><Link to={'/login'}>Log in here</Link></h3>
         </div>
         <div>
           <div className='facebook-auth'>
-            <a href='/auth/facebook' className='btn btn-facebook'>Sign up with Facebook</a>
+            <a href='/auth/facebook' className='btn btn-primary btn-facebook'>Sign up with Facebook</a>
           </div>
           <div className='google-auth'>
-            <a href='/auth/google' className='btn btn-google'>Sign up with Google</a>
+            <a href='/auth/google' className='btn btn-primary btn-google'>Sign up with Google</a>
           </div>
         </div>
       <form>
         <h3>Or sign up with email</h3>
-        <input type='email' placeholder='Your Email' onBlur={(e) => {addEmail(e.target.value)}} />
-        <input type='password' placeholder='Password' onBlur={(e) => {addPassword(e.target.value)}} />
+        <div className='col-sm-12'>
+          <input type='email' placeholder='Your Email' onBlur={(e) => {addEmail(e.target.value)}} />
+        </div>
+        <div className='col-sm-12'>
+          <input type='password' placeholder='Password' onBlur={(e) => {addPassword(e.target.value)}} />
+        </div>
         <button className='btn btn-primary btn-block'
           onClick={handleSubmit.bind(this)}>Sign Up</button>
       </form>
