@@ -37,7 +37,8 @@ const base = {
   module: {
     loaders: [
       {test: /\.(js|jsx)?$/, exclude: /node_modules/, loader: 'babel-loader'},
-      {test: /\.css$/, loader: 'style!css?sourceMap&modules&localIdentName=[name]__[local]___[hash:base64:5]'}
+      {test: /\.css$/, exclude: /node_modules/, loader: 'style!css'},
+      {test: /\.png$/, exclude: /node_modules/, loader: 'url'}
     ]
   },
   resolve: {
