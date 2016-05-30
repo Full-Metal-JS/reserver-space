@@ -3,7 +3,7 @@ import {Link} from 'react-router';
 import Navbar from './navbar';
 import LoginContainer from '../containers/loginContainer';
 
-const Home = ({childern, userAuthenticated, submitLogout}) => {
+const Home = ({children, userAuthenticated, submitLogout}) => {
   return (
     <div>
       <Navbar userAuthenticated={userAuthenticated} submitLogout={submitLogout}/>
