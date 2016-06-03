@@ -5,7 +5,9 @@ const { dbQuery, createUpdateString } = require('./../../config/utils');
 const userModel = {
   // DRY code to create new user for all 3 different types of users
   createUser: (type, { email, password, id, photo}) => new Promise((resolve, reject) => {
-    let queryString = (type === 'local') ? `insert into users (email, password, registered) values ('${email}', '${password}', true) returning *;`: `insert into users(${type}id, email, photo, registered) values ('${id}', '${email}', '${photo}', true) returning *;`;
+    let queryString = (type === 'local') ? 
+    `insert into users (email, password, registered) values ('${email}', '${password}', true) returning *;` : 
+    `insert into users(${type}id, email, photo, registered) values ('${id}', '${email}', '${photo}', true) returning *;`;
 
     dbQuery(db, queryString, 'user could not be created', resolve, reject);
   }),

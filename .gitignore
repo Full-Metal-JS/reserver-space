@@ -46,3 +46,5 @@ sendGrid-config.js
 dist/
 
 .env
+
+.vscode

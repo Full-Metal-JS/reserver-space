@@ -18,21 +18,21 @@ const locations = (state = initialLocationState, action) => {
   }
 };
 
-const initialRoomState = {
+// const initialRoomState = {
   
-}
+// }
 
-const rooms = (state = initialRoomState, action) => {
+// const rooms = (state = initialRoomState, action) => {
   
-};
+// };
 
-const initialReservationState = {
+// const initialReservationState = {
   
-};
+// };
 
-const reservations = (state = initialReservationState, action) => {
+// const reservations = (state = initialReservationState, action) => {
   
-};
+// };
 
 const initialState = {
   isFetching: false,

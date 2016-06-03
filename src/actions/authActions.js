@@ -1,159 +1,105 @@
 import * as actions from './actionConstants';
-import {browserHistory} from 'react-router';
+import { browserHistory } from 'react-router';
+import { login, signup } from '../helpers/api';
 
-export const addEmail = (email) => {
-  return {
-    type: actions.ADD_EMAIL,
-    email
-  }
-};
+export const addEmail = email => ({
+  type: actions.ADD_EMAIL,
+  email
+});
 
-export const addPassword = (password) => {
-  return {
-    type: actions.ADD_PASSWORD,
-    password
-  }
-};
+export const addPassword = (password) => ({
+  type: actions.ADD_PASSWORD,
+  password
+});
 
-export const submitLogin = () => {
-  return {
-    type: actions.LOGIN_SUBMIT
-  }
-}
+export const submitLogin = () => ({
+  type: actions.LOGIN_SUBMIT
+});
 
 export const loginSuccess = (user) => {
   browserHistory.push('/dashboard');
   return {
     type: actions.LOGIN_SUCCESS,
     user
+  };
+};
+
+export const loginFailure = (error) => ({
+  type: actions.LOGIN_FAILURE,
+  error
+});
+
+export const postLogin = (user) => (dispatch, getState) => {
+  let state = getState();
+  if(!state.postingLogin){
+    dispatch(submitLogin());
+    login(user)
+    .then(data => dispatch(loginSuccess(data)))
+    .catch(err => dispatch(loginFailure(err)));
   }
 };
 
-export const loginFailure = (error) => {
-  return {
-    type: actions.LOGIN_FAILURE,
-    error
-  }
-};
+export const addSignupFirstName = (firstName) => ({
+  type: actions.SIGNUP_FIRST_NAME,
+  firstName
+});
 
-export const postLogin = (user) => {
-  return (dispatch, getState) => {
-    let state = getState();
-    if(!state.postingLogin){
-      dispatch(submitLogin());
-      fetch('/auth/login', {
-        method: 'post',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(user)
-      })
-      .then(response => {
-        return response.json();
-      })
-      .then(data => dispatch(loginSuccess(data)))
-      .catch(err => dispatch(loginFailure(err)));
-    }
-  }
-}
+export const addSignupLastName = (lastName) => ({
+  type: actions.SIGNUP_LAST_NAME,
+  lastName
+});
 
-export const addSignupFirstName = (firstName) => {
-  return {
-    type: actions.SIGNUP_FIRST_NAME,
-    firstName
-  }
-};
-
-export const addSignupLastName = (lastName) => {
-  return {
-    type: actions.SIGNUP_LAST_NAME,
-    lastName
-  }
-};
-
-export const submitSignup = () => {
-  return {
-    type: actions.SIGNUP_SUBMIT
-  }
-};
+export const submitSignup = () => ({
+  type: actions.SIGNUP_SUBMIT
+});
 
 export const signupSuccess = (user) => {
   browserHistory.push('/dashboard');
   return {
     type: actions.SIGNUP_SUCCESS,
     user
+  };
+};
+
+export const signupFailure = (error) => ({
+  type: actions.SIGNUP_FAILURE,
+  error
+});
+
+export const postSignup = (user) => (dispatch, getState) => {
+  let state = getState();
+  if(!state.postingSignup){
+    dispatch(submitSignup());
+    signup(user)
+    .then(data => dispatch(signupSuccess(data)))
+    .catch(err => dispatch(signupFailure(err)));
   }
 };
 
-export const signupFailure = (error) => {
-  return {
-    type: actions.SIGNUP_FAILURE,
-    error
-  }
-};
+export const submitLogout = () => ({
+  type: actions.LOGOUT_SUBMIT
+});
 
-export const postSignup = (user) => {
-  return (dispatch, getState) => {
-    let state = getState();
-    if(!state.postingSignup){
-      dispatch(submitSignup());
-      fetch('/auth/signup', {
-        method: 'post',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(user)
-      })
-      .then(response => {
-        return response.json();
-      })
-      .then(data => dispatch(signupSuccess(data)))
-      .catch(err => dispatch(signupFailure(err)));
+export const logoutSuccess = () => ({
+  type: actions.LOGOUT_SUCCESS
+});
+
+export const logoutFailure = (error) => ({
+  type: actions.LOGOUT_FAILURE,
+  error
+});
+
+export const postLogout = () => (dispatch) => {
+  dispatch(submitLogout());
+  fetch('/auth/logout', {
+    method: 'get',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
     }
-  }
-}
-
-export const submitLogout = () => {
-  return {
-    type: actions.LOGOUT_SUBMIT
-  }
+  })
+  .then(response => {
+    dispatch(logoutSuccess());
+  })
+  .catch(err => dispatch(logoutFailure(err)));
 };
-
-export const logoutSuccess = () => {
-  return {
-    type: actions.LOGOUT_SUCCESS
-  }
-};
-
-export const logoutFailure = (error) => {
-  return {
-    type: actions.LOGOUT_FAILURE,
-    error
-  }
-}
-
-export const postLogout = () => {
-  return (dispatch) => {
-    dispatch(submitLogout());
-    fetch('/auth/logout', {
-      method: 'get',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    })
-    .then(response => {
-      dispatch(logoutSuccess());
-      // if (response.status >= 200 && response.status < 300){
-      //   dispatch(logoutSuccess());
-      // }
-      // else {
-      //   let error = new Error(response.statusText);
-      //   dispatch(logoutFailure(error));
-      // }
-    })
-    .catch(err => dispatch(logoutFailure(err)));
-  }
-}
