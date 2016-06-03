@@ -98,7 +98,7 @@ export const postLogout = () => (dispatch) => {
       'Content-Type': 'application/json'
     }
   })
-  .then(response => {
+  .then(() => {
     dispatch(logoutSuccess());
   })
   .catch(err => dispatch(logoutFailure(err)));

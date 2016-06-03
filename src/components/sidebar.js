@@ -11,7 +11,7 @@ const Sidebar = ({locationsList, roomsList}) => {
         {locations}
       </ul>
     </div>
-  )
+  );
 };
 
 export default Sidebar;
