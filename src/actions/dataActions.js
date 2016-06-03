@@ -21,4 +21,16 @@ export const getUsersLocationsError = error => (
   }
 );
 
-export const 
+export const getLocationsUsers = locationId => (
+  {
+    type: actions.GET_LOCATIONS_USERS,
+    locationId
+  }
+);
+
+export const getLocationsUsersSuccess = users => (
+  {
+    type: actions.GET_LOCATIONS_USERS_SUCCESS,
+    users
+  }
+);
