@@ -28,6 +28,7 @@ const productionPlugin = new webpack.DefinePlugin({
 
 const base = {
   entry: [
+    'whatwg-fetch',
     PATHS.app
   ],
   output: {
