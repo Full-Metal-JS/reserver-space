@@ -59,7 +59,7 @@ module.exports = function(app, express) {
   require('./../routes/routes')(router);
 
   // catch all
-  app.use('*', function(req, res) {
+  app.use('*', (req, res) => {
     res.status(200).sendFile(joinPaths(__dirname, '../../dist/index.html')); //responds with index.html on browser refresh
   });
 

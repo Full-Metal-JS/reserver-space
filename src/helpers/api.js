@@ -1,4 +1,4 @@
-export const getUsersReservations = (userId) => {
+export const getUsersReservations = (userId) =>
   fetch(`/api/reservations?userID=${userId}`, {
     method: 'get',
     headers: {
@@ -7,9 +7,8 @@ export const getUsersReservations = (userId) => {
     }
   })
   .then(response => response.json());
-};
 
-export const login = user => {
+export const login = user => 
   fetch('/auth/login', {
     method: 'post',
     headers: {
@@ -19,9 +18,8 @@ export const login = user => {
     body: JSON.stringify(user)
   })
   .then(response => response.json());
-};
 
-export const signup = user => {
+export const signup = user =>
   fetch('/auth/signup', {
     method: 'post',
     headers: {
@@ -31,4 +29,3 @@ export const signup = user => {
     body: JSON.stringify(user)
   })
   .then(response => response.json());
-};
