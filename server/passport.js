@@ -27,7 +27,6 @@ const applyPassportMiddleware = (app, passport) => {
         if (!isEmpty(user)) {
           return done(null, false, req.flash('signupMessage', 'That email is already taken'));  
         }
-
       })
       .catch(() => {
         bcrypt.genSalt(10)
@@ -66,16 +65,10 @@ const applyPassportMiddleware = (app, passport) => {
       User.getUserByParameter('email', email)
         .then(user => {
           bcrypt.compare(password, user.password)
-            .then(isMatch => {
-              return (isMatch) ? done(null, user) : done(null, false, req.flash('loginMessage', 'Wrong Password'));
-            })
-            .catch(err => {
-              return done(err);
-            });
+            .then(isMatch => (isMatch) ? done(null, user) : done(null, false, req.flash('loginMessage', 'Wrong Password')))
+        .catch(err => done(err));
         })
-        .catch(err => {
-          return done(err);
-        });
+        .catch(err => done(err));
     });
   }));
   

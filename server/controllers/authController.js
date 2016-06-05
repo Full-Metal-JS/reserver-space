@@ -20,33 +20,33 @@ const authController = {
   }),
 
   updateSession: (req, res) => {
-    console.log('session', req.session);
-    console.log('passport', req.passport);
-    console.log('user', req.user);
-    
-    res.json(req.user);
+    res.send(JSON.stringify(req.user));
   },
 
   validateGoogle: (req, res, next) => {
     let googleId = req.user.id;
+    let photo = req.user._json.image.url + '0';
+    let email = req.user.emails[0].value;
 
+    req.session.name = req.user.displayName;
     req.session.googleId = googleId;
-    req.session.picture = req.user._json.image.url + '0';
-    req.session.email = req.user.emails[0].value;
+    req.session.picture = photo;
+    req.session.email = email;
 
-    User.getUserByParameter('googleId', googleId)
+    User.getUserByParameter('googleid', googleId)
       .then(user => {
         res.json(user);
       })
-      .catch(() => {
-        User.createUser('google', googleId)
-          .then(createdUser => {
-            res.json(createdUser);
-          })
-          .catch(err => {
-            next(err);
-          });
-      });
+      .catch(() => User.createUser('google', {
+        email,
+        id: googleId,
+        photo
+      }))
+      .then(createdUser => {
+        res.json(createdUser);
+      })
+      .catch(err => next(err));
+        
   },
 
   validateFacebook: ({ user: { displayName, id, emails}, session }, res, next) => {
@@ -59,19 +59,13 @@ const authController = {
       .then(user => {
         res.json(user);
       })
-      .catch(() => {
-        User.createUser('facebook', {
-          email: emails[0].value,
-          photo: `https://graph.facebook.com/${id}/picture?height=500`,
-          id
-        })
-        .then(createdUser => {
-          res.json(createdUser);
-        })
-        .catch(err => {
-          next(err);
-        });
-      });
+      .catch(() => User.createUser('facebook', {
+        email: emails[0].value,
+        photo: `https://graph.facebook.com/${id}/picture?height=500`,
+        id
+      }))
+      .then(createdUser => res.json(createdUser))
+      .catch(err => next(err));
   },
 
   facebook: passport.authenticate('facebook', {
