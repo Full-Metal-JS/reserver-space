@@ -18,7 +18,7 @@ const NavBar = ({userAuthenticated, submitLogout}) => {
         </div>
       </div>
     </navbar>
-    )
+    );
   } else {
     return(
     <navbar>
@@ -30,8 +30,8 @@ const NavBar = ({userAuthenticated, submitLogout}) => {
         </div>
       </div>
     </navbar>
-    )
+    );
   }
-}
+};
 
 export default NavBar;

@@ -11,8 +11,9 @@ const Signup = ({addFirstName, addLastName, addEmail, addPassword, postSignup, u
       email: userEmail,
       password: userPassword
     });
-  }
-  return(
+  };
+  
+  return (
     <div className='container authContainer'>
         <div className='text-center'>
           <h2>Sign Up</h2>
@@ -38,7 +39,7 @@ const Signup = ({addFirstName, addLastName, addEmail, addPassword, postSignup, u
           onClick={handleSubmit.bind(this)}>Sign Up</button>
       </form>
     </div>
-  )
-}
+  );
+};
 
 export default Signup;
