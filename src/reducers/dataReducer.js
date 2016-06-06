@@ -7,7 +7,7 @@ import * as actions from './../actions/actionConstants';
 */
 const initialLocationState = {
   
-};
+};  
 
 const locations = (state = initialLocationState, action) => {
   switch(action.type) {

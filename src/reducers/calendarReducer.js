@@ -4,7 +4,7 @@ const initialState = {
   isFetching: false,
   error: '',
   reservations: null,
-  lastUpdated: Date.now()
+  lastUpdated: null
 };
 
 export default const calendarReducer = (state = initialState, action) => {
@@ -20,7 +20,7 @@ export default const calendarReducer = (state = initialState, action) => {
        ...state,
        isFetching: false,
        reservations: action.reservations,
-       lastUpdate: Date.now()
+       lastUpdate: new Date()
      }
      
     case actions.GET_ALL_RESERVATIONS_ERROR:
