@@ -27,10 +27,7 @@ export const fetchLocationsUsers = (locationId) =>
 export const login = user => 
   fetch('/auth/login', {
     method: 'post',
-    headers: {
-  'Accept': 'application/json',
-  'Content-Type': 'application/json'
-},
+    headers,
     body: JSON.stringify(user)
   })
   .then(response => response.json());
@@ -38,10 +35,7 @@ export const login = user =>
 export const signup = user =>
   fetch('/auth/signup', {
     method: 'post',
-    headers: {
-  'Accept': 'application/json',
-  'Content-Type': 'application/json'
-},
+    headers,
     body: JSON.stringify(user)
   })
   .then(response => response.json());
