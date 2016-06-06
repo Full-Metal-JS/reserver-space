@@ -1,5 +1,5 @@
 'use strict';
-const db = './../db';
+const db = require('./../db');
 const { dbQuery } = require('./../../config/utils');
 
 const roomModel = {

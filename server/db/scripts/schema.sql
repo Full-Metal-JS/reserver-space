@@ -24,8 +24,8 @@ create table userslocations (
   userid integer,
   locationid integer,
   
-  foreign key (userid) references users(id),
-  foreign key (locationid) references locations(id)
+  foreign key (userid) references users(id) on delete cascade,
+  foreign key (locationid) references locations(id) on delete cascade
 );
 
 create table rooms (
@@ -33,7 +33,7 @@ create table rooms (
   room_name varchar(100),
   locationid integer,
   
-  foreign key (locationid) references locations(id)
+  foreign key (locationid) references locations(id) on delete cascade
 );
 
 create table reservations (
@@ -45,6 +45,6 @@ create table reservations (
   userid integer,
   roomid integer,
   
-  foreign key (userid) references users(id),
-  foreign key (roomid) references rooms(id)
+  foreign key (userid) references users(id) on delete cascade,
+  foreign key (roomid) references rooms(id) on delete cascade
 );

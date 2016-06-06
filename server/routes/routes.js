@@ -8,6 +8,7 @@ const {
   locationGet, 
   locationPost, 
   locationPut, 
+  locationPutName,
   locationDelete 
 } = require('./../controllers/locationController');
 const {
@@ -32,6 +33,7 @@ const routeConfig = (router) => {
   router.get('/location/:id', locationGet);
   router.post('/location/:userID', locationPost);
   router.put('/location/:locationID/:userID', locationPut);
+  router.put('/location/:locationID', locationPutName);
   router.delete('/location/:locationID', locationDelete);
 
   // room routes

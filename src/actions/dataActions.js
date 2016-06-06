@@ -1,4 +1,8 @@
 import * as actions from './actionConstants';
+import {
+  fetchUsersLocations,
+  fetchLocationsUsers
+} from '../helpers/api';
 
 export const getUsersLocations = userId => (
   {
@@ -34,3 +38,21 @@ export const getLocationsUsersSuccess = users => (
     users
   }
 );
+
+export const getLocationsUsersError = error => (
+  {
+    type: actions.GET_LOCATIONS_USERS_ERROR,
+    error
+  }
+);
+
+// thunk for getting location data
+export const getLocationData = userId => (dispatch, getState) => {
+  dispatch(getUsersLocations(userId));
+  
+  fetchUsersLocations(userId)
+    .then(data => {
+      dispatch(getUsersLocationsSuccess(data));
+    })
+    .catch(err => dispatch(getUsersLocationsError(err)));
+};

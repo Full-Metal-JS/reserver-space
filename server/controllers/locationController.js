@@ -1,12 +1,16 @@
 'use strict';
 
 // const db = require('./../db/db');
-const { getUsersLocations, createLocation, addUserToLocation, deleteLocation } = require('../db/models/locationModel');
+const { getUsersLocations, createLocation, addUserToLocation, deleteLocation, changeLocationName, getRoomsAndReservations } = require('../db/models/locationModel');
 
 const locationController = {
   locationGet: ({ params: {id}, query: {type} }, res, next) => {
     if (type && id) {
       getUsersLocations(type, id)
+        .then(response => res.json(response))
+        .catch(err => next(err));
+    } else if (id && !type) {
+      getRoomsAndReservations(id)
         .then(response => res.json(response))
         .catch(err => next(err));
     } else {
@@ -30,7 +34,18 @@ const locationController = {
         .then(entry => res.json(entry))
         .catch(err => next(err));
     } else {
-      next(new Error('must send user id and location id'));
+      next(new Error('must send user id and location id or location id'));
+    }
+  },
+  
+  // update location name
+  locationPutName: ({ params: { locationID }, query: { newName } }, res, next) => {
+    if (locationID && newName) {
+      changeLocationName(locationID, newName)
+        .then(updatedLocation => res.json(updatedLocation))
+        .catch(err => next(err));
+    } else {
+      next(new Error('must send location id and new Name'));
     }
   },
   // deletes location
