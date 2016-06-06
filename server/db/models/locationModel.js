@@ -12,7 +12,7 @@ const locationModel = {
   
   // get all the rooms and reservations for a location in nested objects
   getRoomsAndReservations: (locationId) => new Promise((resolve, reject) => {
-    let queryString = `select rooms.id, rooms.room_name, json_agg(reservations.*) from rooms inner join reservations on rooms.id=reservations.roomid where locationid=${locationId} group by rooms.id, rooms.room_name;`;
+    let queryString = `select rooms.id, rooms.room_name, json_agg(reservations.*) as reservations from rooms inner join reservations on rooms.id=reservations.roomid where locationid=${locationId} group by rooms.id, rooms.room_name;`;
                  
     dbQuery(db, queryString, 'could not get data for that location', resolve, reject);
   }),
