@@ -166,12 +166,57 @@ fieldset[disabled] .btn-primary.active {
   border-radius: 4px;
 }
 
+h2.auth {
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
 .facebook-auth {
   margin: 10px auto 10px auto;
 }
 
+.facebook-auth > a {
+  width: 250px;
+  background-color: #3b5998;
+  border-color: #3b5998;
+}
+
 .google-auth {
   margin: 10px auto 10px auto;
+}
+
+.google-auth > a {
+  width: 250px;
+  background-color: #4184f3;
+  border-color: #4184f3;
+}
+
+i {
+  padding-right: 15px;
+}
+
+.authInput {
+  margin: 10px auto 10px auto;
+}
+
+.authInput > input {
+  width: 250px;
+}
+
+.authInput > input::-webkit-input-placeholder {
+  padding-left: 5px;
+}
+
+.authInput > #nameInput {
+  width: 125px;
+}
+
+.btn-auth {
+  width: 250px;
+}
+
+.authLink {
+  margin-top: 20px;
 }
 
 /*
@@ -212,11 +257,14 @@ fieldset[disabled] .btn-primary.active {
   padding-left: 20px;
 }
 
-.nav-sidebar > .active > a,
-.nav-sidebar > .active > a:hover,
-.nav-sidebar > .active > a:focus {
+h3.nav-sidebar,
+h3.nav-sidebar,
+h3.nav-sidebar {
   color: #fff;
   background-color: #0047c5;
+  margin-top: 0px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .nav-sidebar > li > a {
