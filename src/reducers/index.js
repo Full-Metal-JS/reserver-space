@@ -1,10 +1,12 @@
 import {combineReducers} from 'redux';
 import {routerReducer} from 'react-router-redux';
-import userAuthReducer from './userAuthReducer';
+import userAuth from './userAuthReducer';
+import calendar from './calendarReducer';
 
 const rootReducer = combineReducers({
   routing: routerReducer,
-  userAuth: userAuthReducer
+  userAuth,
+  calendar
 });
 
 export default rootReducer;

@@ -7,7 +7,7 @@ const initialState = {
   lastUpdated: null
 };
 
-export default const calendarReducer = (state = initialState, action) => {
+export default (state = initialState, action) => {
   switch (action.type) {
     case actions.GET_ALL_RESERVATIONS:
       return {
