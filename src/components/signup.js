@@ -27,8 +27,8 @@ const Signup = ({addFirstName, addLastName, addEmail, addPassword, postSignup, u
       <form>
         <p>Or sign up with email</p>
         <div className='authInput'>
-          <input id='nameInput' type='text' placeholder='First Name' onBlur={(e) => {addSignupFirstName(e.target.value)}}/>
-          <input id='nameInput' type='text' placeholder='Last Name' onBlur={(e) => {addSignupLastName(e.target.value)}}/>
+          <input id='nameInput' type='text' placeholder='First Name' onBlur={(e) => {addFirstName(e.target.value)}}/>
+          <input id='nameInput' type='text' placeholder='Last Name' onBlur={(e) => {addLastName(e.target.value)}}/>
         </div>
         <div className='authInput'>
           <input type='email' placeholder='Email' onBlur={(e) => {addEmail(e.target.value)}} />
